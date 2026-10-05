@@ -10,6 +10,7 @@
 - 사이트 정보(전화·주소·링크)는 `src/data/site.ts`, 콘텐츠(제품·영상·소모품)는 `src/data/content.ts`에만 둔다.
 - 섹션 하나 = 컴포넌트 하나(`src/components/이름.tsx` + `이름.module.css`). 데스크톱 1440 기준으로 쓰고 `@media (max-width: 900px)`에서 모바일 390을 맞춘다.
 - 사진·영상이 없는 자리는 `src/components/placeholders/`의 SVG로 채운다. 실제 자료가 오면 교체한다.
+- 배포는 Cloudflare Workers + OpenNext 어댑터(`wrangler.jsonc`, `open-next.config.ts`). `npm run cf:build`로 번들이 만들어지는지 확인한 뒤 푸시한다. 배포 방법은 README의 "배포" 절 참고. 서버 기능(API 라우트, 폼 처리, DB)을 추가할 때는 Workers 바인딩(D1, R2, KV)을 `wrangler.jsonc`에 선언하고 `npm run cf:typegen`으로 타입을 만든다.
 
 ## 작업 전에 읽을 것
 

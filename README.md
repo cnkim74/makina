@@ -14,6 +14,36 @@ npm run lint     # ESLint
 
 Node 22 이상, Next.js 16 (App Router, TypeScript, CSS Modules). Tailwind 등 외부 UI 라이브러리는 쓰지 않습니다.
 
+## 배포 (Cloudflare Workers)
+
+[OpenNext Cloudflare 어댑터](https://opennext.js.org/cloudflare)로 Cloudflare Workers에 배포합니다. 설정 파일은 `wrangler.jsonc`, `open-next.config.ts` 입니다.
+
+```bash
+npm run cf:build     # Next 빌드 + Workers 번들 생성 (.open-next/)
+npm run cf:preview   # 빌드 후 로컬에서 Workers 런타임으로 미리보기
+npm run cf:deploy    # 빌드 후 Cloudflare에 배포 (wrangler 로그인 또는 CLOUDFLARE_API_TOKEN 필요)
+```
+
+**방법 A. Cloudflare 대시보드에서 GitHub 연결 (권장, 푸시할 때마다 자동 배포)**
+
+1. Cloudflare 대시보드 → Workers & Pages → Create → **Import a repository** → `cnkim74/makina` 선택
+2. 빌드 설정
+   - Build command: `npx opennextjs-cloudflare build`
+   - Deploy command: `npx opennextjs-cloudflare deploy`
+   - Root directory: `/`
+3. 저장하면 첫 배포가 시작되고, 이후 기본 브랜치에 푸시할 때마다 자동 배포됩니다.
+
+**방법 B. 터미널에서 직접**
+
+```bash
+npx wrangler login    # 처음 한 번, 브라우저로 Cloudflare 로그인
+npm run cf:deploy
+```
+
+CI나 Claude 세션처럼 브라우저 로그인이 안 되는 곳에서는 환경 변수 `CLOUDFLARE_API_TOKEN`(Workers Scripts 편집 권한)과 `CLOUDFLARE_ACCOUNT_ID`를 넣으면 `npm run cf:deploy`가 바로 됩니다.
+
+배포 후 커스텀 도메인은 Cloudflare 대시보드 → 해당 Worker → Settings → Domains & Routes 에서 연결합니다.
+
 ## 저장소 구조
 
 ```

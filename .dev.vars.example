@@ -1,0 +1,4 @@
+# 로컬 미리보기(npm run cf:preview)에서 쓰는 환경 변수.
+# 실제 값은 .dev.vars 에 넣는다 (git 에 올라가지 않음).
+# 배포 환경의 비밀 값은 `npx wrangler secret put 이름` 으로 등록한다.
+NEXTJS_ENV=development
