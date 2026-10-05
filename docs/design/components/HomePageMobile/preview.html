@@ -1,0 +1,208 @@
+<!-- @dsCard group="Pages" page width=390 height=5880 subtitle="메인 화면 · 모바일 390 · 하단 고정 버튼 3개" -->
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>성원마끼나 — 메인 (모바일)</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--soil:#1c1a17;--gold:#e0a526;--orange:#e4572e;--f:"Pretendard","Noto Sans KR",system-ui,sans-serif;--fd:"GmarketSans","Gmarket Sans","Noto Sans KR","Pretendard",sans-serif;--fa:"Cafe24Dongdong","Cafe24 Dongdong","GmarketSans","Noto Sans KR",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff;color:#1c1a17;font-family:var(--f);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.phone{width:390px;margin:0 auto;position:relative;overflow:hidden;padding-bottom:96px}
+.wrap{padding:0 20px}
+h1,h2,h3{font-family:var(--fd);font-weight:700;letter-spacing:-.02em}
+.photo{position:relative;overflow:hidden;background:#3b3a35}
+.photo svg{position:absolute;inset:0;width:100%;height:100%}
+.gnb{background:#1c1a17;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 16px 0 20px}
+.logo{display:flex;align-items:center;gap:8px;color:#fff}
+.logo svg{width:30px;height:30px}
+.logo b{font-size:21px;font-weight:900}.logo b em{font-style:normal;color:var(--gold)}
+.gr{display:flex;align-items:center;gap:18px}
+.gr .s{width:20px;height:20px;border:2px solid #fff;border-radius:50%;position:relative}
+.gr .s:after{content:"";position:absolute;width:2px;height:7px;background:#fff;right:-4px;bottom:-5px;transform:rotate(-45deg)}
+.gr .m{width:24px;display:flex;flex-direction:column;gap:5px}.gr .m i{display:block;height:2px;background:#fff}
+.hero{position:relative;height:560px}
+.hero .photo{position:absolute;inset:0}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,0) 35%,rgba(0,0,0,.55))}
+.hero .slogan{font-family:var(--fa);font-weight:400;position:absolute;left:20px;right:20px;bottom:120px;color:#fff;font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.2;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+.hero .slogan small{display:block;font-family:var(--f);font-size:16px;font-weight:400;margin-top:10px}
+.hero .idx{position:absolute;left:20px;bottom:84px;display:flex;gap:14px;font-size:14px;font-weight:700;color:#fff;align-items:center}
+.hero .idx span{opacity:.7}.hero .idx .on{color:var(--gold);opacity:1}
+.hero .idx .bar{width:120px;height:2px;background:rgba(255,255,255,.5);position:relative}
+.hero .idx .bar:before{content:"";position:absolute;left:0;top:0;height:2px;width:20%;background:var(--gold)}
+.hero .panel{position:absolute;left:0;right:0;bottom:0;background:#1c1a17;color:#fff;padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
+.hero .panel h3{font-family:var(--fa);font-size:19px;font-weight:400}
+.hero .panel a{color:var(--gold);font-weight:700;font-size:14px;letter-spacing:.06em}
+.sec{padding:64px 0}
+.ttl{text-align:center;font-size:28px;font-weight:700;letter-spacing:-.03em}
+.sub{text-align:center;margin-top:8px;font-size:15px;color:#555;padding:0 20px}
+.proc{margin-top:36px;padding:0 20px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;position:relative}
+.proc:before{content:"";position:absolute;left:52px;right:52px;top:26px;height:3px;background:#eee}
+.proc .st{text-align:center;position:relative}
+.proc .st i{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:#f2f2f2;margin:0 auto;font-size:20px;font-weight:700;font-style:normal}
+.proc .st.on i{background:var(--orange);color:#fff}
+.proc .st b{display:block;margin-top:10px;font-size:15px}
+.proc .st:not(.on) b{color:#999}
+.proc-note{margin:20px 20px 0;background:#f7f5ef;padding:16px 18px;font-size:15px;border-radius:8px}
+.proc-note b{color:var(--orange)}
+.tabs{display:flex;gap:8px;padding:0 20px;overflow:hidden;margin-top:48px}
+.tabs a{font-family:var(--fd);flex:0 0 auto;height:48px;padding:0 20px;border-radius:999px;background:#f5f5f5;display:flex;align-items:center;font-size:15px;font-weight:700;white-space:nowrap}
+.tabs a.on{background:#1c1a17;color:#fff}
+.cat-h{font-size:26px;margin:36px 20px 0}
+.card{margin:20px 20px 0}
+.card .img{height:260px;border:1px solid #e5e5e5;position:relative;overflow:hidden;background:#fff}
+.card .img svg{position:absolute;inset:0;width:100%;height:100%}
+.card .new{font-family:var(--fa);position:absolute;left:0;top:0;width:90px;height:90px;background:linear-gradient(135deg,var(--orange) 50%,transparent 50%);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em}
+.card .new span{position:absolute;left:10px;top:20px;transform:rotate(-45deg)}
+.card h3{font-size:24px;margin-top:14px}
+.card .c{color:var(--orange);font-weight:700;font-size:14px;margin-top:2px}
+.card p .catch{font-family:var(--fa);font-style:normal;font-size:1.2em;color:#1c1a17;display:block;margin-bottom:4px}
+.card p{font-size:15px;color:#555;margin-top:6px}
+.more{display:flex;justify-content:center;margin-top:32px}
+.more a{height:52px;padding:0 32px;border:1.5px solid #1c1a17;border-radius:999px;display:flex;align-items:center;font-size:15px;font-weight:700}
+.band{position:relative;color:#fff;padding:56px 20px;text-align:center;margin-top:64px}
+.band .photo{position:absolute;inset:0}
+.band .shade{position:absolute;inset:0;background:rgba(28,26,23,.65)}
+.band .in{position:relative}
+.band h2{font-family:var(--fa);font-weight:400;font-size:26px}
+.band p{font-size:15px;margin-top:8px;opacity:.9}
+.band .hp{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
+.band .hp a{height:48px;padding:0 18px;border-radius:999px;border:1.5px solid rgba(255,255,255,.7);display:flex;align-items:center;font-size:15px;font-weight:700}
+.band .hp a.on{background:var(--gold);border-color:var(--gold);color:#1c1a17}
+.band .res{margin-top:20px;font-size:14px}.band .res b{color:var(--gold)}
+.sort{display:flex;gap:8px;justify-content:center;margin-top:24px}
+.sort a{height:44px;padding:0 18px;border-radius:999px;background:#f5f5f5;display:flex;align-items:center;font-size:14px;font-weight:700}
+.sort a.on{background:#1c1a17;color:#fff}
+.v{margin:24px 20px 0}
+.v .thumb{height:200px}
+.v .play{position:absolute;left:50%;top:50%;width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.85);transform:translate(-50%,-50%)}
+.v .play:after{content:"";position:absolute;left:27px;top:22px;border-left:20px solid var(--orange);border-top:12px solid transparent;border-bottom:12px solid transparent}
+.v .cap{font-family:var(--fa);font-weight:400;position:absolute;left:0;right:0;bottom:0;padding:12px 14px;color:#fff;font-size:20px;font-weight:900;line-height:1.25;background:linear-gradient(180deg,transparent,rgba(0,0,0,.6))}
+.v .cap em{color:#ffd166;font-style:normal}
+.v h3{font-size:19px;margin-top:12px;line-height:1.35}
+.v .meta{font-size:14px;color:#666;margin-top:6px}
+.ccard{margin:16px 20px 0;border:1px solid #e5e5e5;display:grid;grid-template-columns:110px 1fr}
+.ccard .pic{border-right:1px solid #e5e5e5;position:relative}
+.ccard .pic svg{position:absolute;inset:0;width:100%;height:100%}
+.ccard .b{padding:18px}
+.ccard h3{font-size:20px}.ccard .s{font-size:13px;color:#666}
+.ccard .row{display:flex;gap:8px;margin-top:14px;align-items:center}
+.qty{display:flex;border:1.5px solid #1c1a17;height:44px;border-radius:999px;overflow:hidden}
+.qty b,.qty span{display:flex;align-items:center;justify-content:center;width:38px;font-size:17px;font-weight:700}
+.qty span{width:44px;border-left:1.5px solid #1c1a17;border-right:1.5px solid #1c1a17}
+.ccard .btn{height:44px;padding:0 18px;border-radius:999px;background:#1c1a17;color:#fff;display:flex;align-items:center;font-weight:700;font-size:14px;white-space:nowrap}
+.notice{margin:20px 20px 0;background:#f7f5ef;border:1px solid #ebe6d8;padding:16px 18px;font-size:14px;line-height:1.5}
+.notice .tag{font-family:var(--fa);display:inline-block;background:var(--orange);color:#fff;font-size:12px;font-weight:700;padding:4px 8px;border-radius:4px;margin-bottom:8px}
+.help{position:relative;color:#fff;padding:56px 20px}
+.help .photo{position:absolute;inset:0}
+.help .shade{position:absolute;inset:0;background:rgba(40,38,34,.75)}
+.help .in{position:relative}
+.help .ttl,.help .sub{color:#fff}
+.help .it{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.6);font-size:19px;font-weight:700}
+.help .it:after{content:"+";font-size:32px;font-weight:300}
+.help .list{margin-top:28px}
+.way{margin:24px 20px 0;border:1px solid #e5e5e5}
+.way .map{height:180px;position:relative;background:#eceae4}
+.way .map svg{position:absolute;inset:0;width:100%;height:100%}
+.way .pin{position:absolute;left:52%;top:46%;width:18px;height:18px;background:var(--orange);border-radius:50%;border:3px solid #fff;transform:translate(-50%,-50%);box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.way .info{padding:20px}
+.way h3{font-size:20px}
+.way p{font-size:14px;color:#555;margin-top:6px}
+.way .tel{font-size:30px;font-weight:900;margin-top:10px;letter-spacing:-.02em}
+.foot{background:#1c1a17;color:#999;padding:28px 20px 36px;font-size:12px;line-height:1.7}
+.foot .fm{display:flex;flex-wrap:wrap;gap:8px 18px;color:#ddd;font-size:13px;font-weight:500;padding-bottom:18px;border-bottom:1px solid #333;margin-bottom:16px}
+/* 하단 고정 버튼 3개 */
+.dock{position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e5e5e5;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px;padding:10px 12px 18px;box-shadow:0 -6px 20px rgba(0,0,0,.08)}
+.dock a{height:54px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.dock .tel{background:var(--orange);color:#fff}
+.dock .kakao{background:#fae100;color:#1c1a17}
+.dock .order{background:#1c1a17;color:#fff}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="gnb"><a class="logo" href="#"><svg viewBox="0 0 44 44"><path id="lg" fill="none" stroke="#e0a526" stroke-width="3.6" stroke-linecap="square"/></svg><b>성원마<em>끼</em>나</b></a><div class="gr"><div class="s"></div><div class="m"><i></i><i></i><i></i></div></div></div>
+
+  <section class="hero">
+    <div class="photo"><svg viewBox="0 0 390 560" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fb4c4"/><stop offset="1" stop-color="#d9d6c6"/></linearGradient><linearGradient id="fld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a8c5a"/><stop offset="1" stop-color="#5a5a34"/></linearGradient></defs><rect width="390" height="560" fill="url(#sky)"/><rect y="230" width="390" height="330" fill="url(#fld)"/><g id="rows" stroke="#4a4a2a" stroke-width="2" fill="none" opacity=".5"></g><g id="bales" fill="#c9a85a" stroke="#8a6f2e" stroke-width="2"></g></svg></div>
+    <div class="shade"></div>
+    <div class="slogan">베고, 모으고,<br>묶고, 감싸다.<small>조사료의 처음부터 끝까지,<br>안동에서 만든 기계가 함께합니다.</small></div>
+    <div class="idx"><span class="on">01</span><span>02</span><span>03</span><span>04</span><span>05</span><div class="bar"></div></div>
+    <div class="panel"><h3>이름처럼 일하는 기계</h3><a href="#">작업기 보기 ⟶</a></div>
+  </section>
+
+  <section class="sec" style="padding-bottom:0">
+    <h2 class="ttl">조사료 작업 흐름</h2>
+    <p class="sub">베기부터 감싸기, 소모품까지 한 세트로</p>
+    <div class="proc">
+      <div class="st on"><i>1</i><b>베기</b></div><div class="st"><i>2</i><b>모으기</b></div><div class="st"><i>3</i><b>묶기</b></div><div class="st"><i>4</i><b>감싸기</b></div><div class="st"><i>5</i><b>소모품</b></div>
+    </div>
+    <div class="proc-note"><b>1 베기</b> — 남김없이 벱니다. 어떤 작물이든 드럼이 끌어들입니다. <span style="color:#888">블랙홀 드럼모우어</span></div>
+  </section>
+
+  <div class="tabs"><a class="on" href="#">전체</a><a href="#">베일러</a><a href="#">모우어</a><a href="#">레이크 · 래퍼</a><a href="#">제초 · 파쇄</a></div>
+  <h2 class="cat-h">대표 작업기</h2>
+  <article class="card"><div class="img"><svg viewBox="0 0 350 260"><rect width="350" height="260" fill="#fff"/><g id="m1"></g></svg><div class="new"><span>NEW</span></div></div><h3>비무꼬</h3><div class="c">일체형 원형베일러</div><p><i class="catch">한 번에, 세 가지.</i>베고, 부수고, 묶는 일을 한 대가 끝냅니다.</p></article>
+  <article class="card"><div class="img"><svg viewBox="0 0 350 260"><rect width="350" height="260" fill="#fff"/><g id="m2"></g></svg></div><h3>블랙홀</h3><div class="c">드럼모우어</div><p><i class="catch">거부할 수 없는 흡입력.</i>들어간 풀은 돌아 나오지 않습니다.</p></article>
+  <article class="card"><div class="img"><svg viewBox="0 0 350 260"><rect width="350" height="260" fill="#fff"/><g id="m3"></g></svg></div><h3>모조리</h3><div class="c">제초 파쇄기</div><p><i class="catch">이름 그대로.</i>리모컨 하나로 풀을 모조리 정리합니다.</p></article>
+  <div class="more"><a href="#">작업기 전체 보기</a></div>
+
+  <section class="band">
+    <div class="photo"><svg viewBox="0 0 390 400" preserveAspectRatio="xMidYMid slice"><rect width="390" height="400" fill="#6b6a4a"/><g id="rows2" stroke="#4e4c32" stroke-width="2" fill="none"></g></svg></div>
+    <div class="shade"></div>
+    <div class="in"><h2>내 트랙터 마력으로 찾기</h2><p>마력만 고르시면 연결 가능한 작업기를 알려 드립니다</p>
+      <div class="hp"><a href="#">35 이하</a><a href="#">36~50</a><a class="on" href="#">51~70</a><a href="#">71~90</a><a href="#">91 이상</a></div>
+      <div class="res">51~70마력 → <b>비무꼬 · 블랙홀 · 레이크 · 래퍼</b> 연결 가능</div></div>
+  </section>
+
+  <section class="sec" style="padding-bottom:0">
+    <h2 class="ttl">작업 영상</h2>
+    <div class="sort"><a class="on" href="#">최신순</a><a href="#">조회수순</a><a href="#">좋아요순</a></div>
+    <article class="v"><div class="photo thumb"><svg viewBox="0 0 350 200" preserveAspectRatio="xMidYMid slice"><rect width="350" height="200" fill="#7c7a52"/><g id="v1" stroke="#5a5834" stroke-width="2" fill="none"></g></svg><div class="play"></div><div class="cap">무른 논에서<br><em>한 번에</em> 베고 묶기</div></div><h3>비무꼬 일체형 베일러 — 안동 서후면 수확 현장</h3><div class="meta">작업 영상 | 2026.09.24</div></article>
+    <article class="v"><div class="photo thumb"><svg viewBox="0 0 350 200" preserveAspectRatio="xMidYMid slice"><rect width="350" height="200" fill="#5f6a44"/><g id="v2" stroke="#454f30" stroke-width="2" fill="none"></g></svg><div class="play"></div><div class="cap">들어간 풀은<br><em>돌아 나오지</em> 않습니다</div></div><h3>블랙홀 드럼모우어 흡입 장면</h3><div class="meta">작업 영상 | 2026.09.12</div></article>
+    <div class="more"><a href="#">영상 더 보기</a></div>
+  </section>
+
+  <section class="sec" style="padding-bottom:0">
+    <h2 class="ttl">소모품 빠른 주문</h2>
+    <p class="sub">수량만 고르시면 됩니다</p>
+    <div class="ccard"><div class="pic"><svg viewBox="0 0 110 160"><rect width="110" height="160" fill="#fff"/><rect x="28" y="30" width="54" height="100" rx="5" fill="#f1efe8" stroke="#1c1a17" stroke-width="1.5"/></svg></div><div class="b"><h3>베일 네트</h3><div class="s">1.23m × 3,000m · 1롤</div><div class="row"><div class="qty"><b>−</b><span>2</span><b>+</b></div><a class="btn" href="#">주문</a></div></div></div>
+    <div class="ccard"><div class="pic"><svg viewBox="0 0 110 160"><rect width="110" height="160" fill="#fff"/><circle cx="55" cy="80" r="38" fill="#f1efe8" stroke="#1c1a17" stroke-width="1.5"/><circle cx="55" cy="80" r="11" fill="#fff" stroke="#1c1a17" stroke-width="1.5"/></svg></div><div class="b"><h3>베일 랩 필름</h3><div class="s">750mm × 1,500m · 1롤</div><div class="row"><div class="qty"><b>−</b><span>10</span><b>+</b></div><a class="btn" href="#">주문</a></div></div></div>
+    <div class="notice"><span class="tag">수확철 당일 출고</span><br>평일 <b>오후 3시 이전</b> 주문 시 다음 날 도착. 전화 한 통이면 바로 출발합니다.</div>
+  </section>
+
+  <section class="help" style="margin-top:64px">
+    <div class="photo"><svg viewBox="0 0 390 600" preserveAspectRatio="xMidYMid slice"><rect width="390" height="600" fill="#5e5a50"/></svg></div>
+    <div class="shade"></div>
+    <div class="in"><h2 class="ttl">무엇을 도와드릴까요?</h2><p class="sub">원하시는 서비스를 눌러 주세요</p>
+      <div class="list"><div class="it">작업기를 구매하고 싶어요</div><div class="it">사용법·점검 방법을 알고 싶어요</div><div class="it">작업기에 이상이 있어요</div><div class="it">네트·랩을 주문하고 싶어요</div><div class="it">공장에 직접 가보고 싶어요</div></div></div>
+  </section>
+
+  <section class="sec">
+    <h2 class="ttl">오시는 길</h2>
+    <div class="way"><div class="map"><svg viewBox="0 0 350 180" preserveAspectRatio="xMidYMid slice"><rect width="350" height="180" fill="#eceae4"/><g stroke="#fff" stroke-width="8" fill="none"><path d="M0 120 C80 110 140 70 220 60 S320 30 350 20"/><path d="M60 0 C80 80 150 120 180 180"/></g></svg><div class="pin"></div></div>
+      <div class="info"><h3>성원마끼나 본사 · 공장</h3><p>경북 안동시 서후면 (상세 주소 입력)<br>평일 08:30 – 18:00 · 토요일 오전</p><div class="tel">054-843-4000</div></div></div>
+  </section>
+
+  <footer class="foot"><div class="fm"><span>회사소개</span><span>작업기</span><span>소모품</span><span>고객지원</span><span>대리점 안내</span></div>성원마끼나 · 경북 안동시 서후면 · 사업자등록번호 000-00-00000<br>Copyright © 성원마끼나. All rights reserved.</footer>
+
+  <div class="dock"><a class="tel" href="tel:0548434000">☏ 전화 상담</a><a class="kakao" href="#">카톡 문의</a><a class="order" href="#">소모품 주문</a></div>
+</div>
+<script>
+(function(){
+  function sp(cx,cy,r0,r1,t,n){var d=[];for(var i=0;i<=n;i++){var k=i/n,a=k*t*6.2832,r=r0+(r1-r0)*k;d.push((i?'L':'M')+(cx+Math.cos(a)*r).toFixed(1)+' '+(cy+Math.sin(a)*r).toFixed(1));}return d.join(' ');}
+  var lg=document.getElementById('lg');if(lg)lg.setAttribute('d',sp(20,26,2,14,3.25,120)+' L8 42 L8 8 L20 24 L32 8 L32 42');
+  function rows(id,n,top,w,h,k){var g=document.getElementById(id);if(!g)return;var s='';for(var i=0;i<=n;i++){var x=i/n*w,xt=w/2+(x-w/2)*k;s+='<path d="M'+xt.toFixed(0)+' '+top+' L'+x.toFixed(0)+' '+h+'"/>';}g.innerHTML=s;}
+  rows('rows',14,230,390,560,.15);rows('rows2',12,0,390,400,.2);rows('v1',12,0,350,200,.3);rows('v2',12,0,350,200,.3);
+  var b=document.getElementById('bales');if(b){var s='';[[80,400,24],[200,430,30],[320,390,22]].forEach(function(p){s+='<ellipse cx="'+p[0]+'" cy="'+p[1]+'" rx="'+(p[2]*1.1)+'" ry="'+p[2]+'"/>';});b.innerHTML=s;}
+  function sil(id,html){var g=document.getElementById(id);if(g)g.innerHTML=html;}
+  sil('m1','<rect x="60" y="100" width="180" height="90" rx="6" fill="#d9d4c7"/><rect x="60" y="84" width="180" height="20" fill="#1c1a17"/><circle cx="105" cy="200" r="26" fill="#2a2724"/><circle cx="200" cy="200" r="26" fill="#2a2724"/><circle cx="105" cy="200" r="10" fill="#8c9196"/><circle cx="200" cy="200" r="10" fill="#8c9196"/><rect x="240" y="120" width="70" height="12" fill="#8c9196"/><circle cx="275" cy="160" r="20" fill="#e0a526"/>');
+  sil('m2','<rect x="40" y="110" width="270" height="56" rx="4" fill="#1c1a17"/><rect x="40" y="166" width="270" height="20" fill="#d9d4c7"/><circle cx="100" cy="138" r="14" fill="#e0a526"/><circle cx="175" cy="138" r="14" fill="#e0a526"/><circle cx="250" cy="138" r="14" fill="#e0a526"/>');
+  sil('m3','<rect x="80" y="90" width="190" height="80" rx="6" fill="#d9d4c7"/><rect x="80" y="74" width="190" height="18" fill="#e0a526"/><rect x="55" y="170" width="240" height="24" fill="#1c1a17"/><circle cx="115" cy="208" r="22" fill="#2a2724"/><circle cx="235" cy="208" r="22" fill="#2a2724"/>');
+})();
+</script>
+</body>
+</html>

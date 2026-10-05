@@ -1,0 +1,44 @@
+<!-- @dsCard height=320 -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:var(--surface,#1c1a17)}
+.cover{position:relative;width:960px;height:320px;overflow:hidden;background:var(--surface,#1c1a17)}
+.cover svg{position:absolute;inset:0}
+.b-gold{fill:var(--hay-gold,#e0a526)}.b-brown{fill:var(--field-brown,#4a3a2c)}.b-cream{fill:var(--straw-cream,#f4eddc)}.b-green{fill:var(--silage-green,#5b7340)}.b-orange{fill:var(--signal-orange,#e4572e)}
+.sp{fill:none;stroke:var(--soil-black,#1c1a17);stroke-width:3}
+.sp2{fill:none;stroke:var(--hay-gold,#e0a526);stroke-width:3}
+.name{position:absolute;left:48px;bottom:56px;max-width:440px;font-family:"Paperlogy","Noto Sans KR",sans-serif;font-weight:900;font-size:96px;line-height:.95;letter-spacing:-.03em;color:var(--ink,#f4eddc)}
+.tag{position:absolute;left:50px;bottom:28px;font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;color:var(--ink-muted,#8c9196)}
+</style>
+</head>
+<body>
+<div class="cover">
+<!-- 파생: 블록 — hay-gold 240×320(우측 끝, 상단 bleed), field-brown 160×200, straw-cream 120×120, silage-green 80×80(작은 상태색이 아닌 작물색이라 중간), signal-orange 24×24(전화 전용 → 가장 작게)
+     배치: 오른쪽 x=480 부터 어긋난 스택 — 베일을 쌓아 둔 창고처럼
+     패턴: 문자 그대로의 모티프(원형 베일 단면) → 나선 3개, 블록 안에서 블록 색의 대비색으로. "베일러는 감고, 블랙홀은 빨아들이고, 드럼은 회전한다" 세 의미 = 나선 셋
+     스케일: 간격 space-4(40)·space-5(64), 모서리 radius-0 -->
+<svg viewBox="0 0 960 320" width="960" height="320" aria-hidden="true">
+  <rect class="b-gold" x="720" y="0" width="240" height="320"/>
+  <rect class="b-brown" x="520" y="120" width="200" height="200"/>
+  <rect class="b-cream" x="600" y="0" width="120" height="120"/>
+  <rect class="b-green" x="520" y="40" width="80" height="80"/>
+  <rect class="b-orange" x="496" y="296" width="24" height="24"/>
+  <path id="s1" class="sp"/>
+  <path id="s2" class="sp2"/>
+  <path id="s3" class="sp"/>
+</svg>
+<div class="name">성원마끼나</div>
+<div class="tag">FORAGE MACHINERY · ANDONG — 이름처럼 일하는 기계</div>
+<script>
+(function(){function sp(cx,cy,r0,r1,t,n){var d=[];for(var i=0;i<=n;i++){var k=i/n,a=k*t*6.2832,r=r0+(r1-r0)*k;d.push((i?'L':'M')+(cx+Math.cos(a)*r).toFixed(1)+' '+(cy+Math.sin(a)*r).toFixed(1));}return d.join(' ');}
+document.getElementById('s1').setAttribute('d',sp(840,160,4,100,3.5,200));
+document.getElementById('s2').setAttribute('d',sp(620,220,3,80,3.5,180));
+document.getElementById('s3').setAttribute('d',sp(660,60,2,46,3,120));})();
+</script>
+</div>
+</body>
+</html>

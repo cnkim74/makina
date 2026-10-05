@@ -1,0 +1,363 @@
+<!-- @dsCard group="Pages" page width=1440 height=7040 subtitle="메인 화면 · 데스크톱 1440" -->
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>성원마끼나 — 메인</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--soil:#1c1a17;--gold:#e0a526;--cream:#f4eddc;--brown:#4a3a2c;--green:#5b7340;--steel:#8c9196;--wrap:#fafaf6;--orange:#e4572e;--line:#d9cfb8;
+--f:"Pretendard","Noto Sans KR",system-ui,-apple-system,sans-serif;--fd:"GmarketSans","Gmarket Sans","Noto Sans KR","Pretendard",sans-serif;--fa:"Cafe24Dongdong","Cafe24 Dongdong","GmarketSans","Noto Sans KR",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff;color:#1c1a17;font-family:var(--f);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.page{width:1440px;margin:0 auto;position:relative;overflow:hidden}
+.wrap{width:1240px;margin:0 auto}
+h1,h2,h3{font-family:var(--fd);font-weight:700;letter-spacing:-.02em}
+.photo{position:relative;overflow:hidden;background:#3b3a35}
+.photo svg{position:absolute;inset:0;width:100%;height:100%}
+.photo .lab{position:absolute;left:12px;bottom:10px;font-size:11px;letter-spacing:.08em;color:rgba(255,255,255,.55)}
+
+/* 유틸 바 + GNB */
+.util{background:#000;height:44px;display:flex;align-items:center;justify-content:flex-end;gap:36px;padding:0 48px;font-size:14px;color:#bbb}
+.util .ico{display:flex;gap:18px;margin-left:12px}
+.util .ico i{width:20px;height:20px;border:1.5px solid #bbb;border-radius:4px;display:block}
+.gnb{background:#1c1a17;height:88px;display:flex;align-items:center;justify-content:space-between;padding:0 48px}
+.logo{display:flex;align-items:center;gap:12px;color:#fff}
+.logo svg{width:40px;height:40px}
+.logo b{font-size:28px;font-weight:900;letter-spacing:-.01em;color:#fff}
+.logo b em{font-style:normal;color:var(--gold)}
+.gnb .menu{font-family:var(--fd);display:flex;gap:72px;font-size:19px;font-weight:500;color:#fff}
+.gnb .menu .on{color:var(--gold)}
+.gnb .search{display:flex;align-items:center;gap:8px;color:#fff;font-size:18px}
+.gnb .search i{width:20px;height:20px;border:2px solid #fff;border-radius:50%;position:relative;display:block}
+.gnb .search i:after{content:"";position:absolute;width:2px;height:8px;background:#fff;right:-4px;bottom:-6px;transform:rotate(-45deg)}
+
+/* 히어로 */
+.hero{position:relative;height:860px}
+.hero .photo{position:absolute;inset:0}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,0) 40%,rgba(0,0,0,.45))}
+.hero .slogan{font-family:var(--fa);font-weight:400;position:absolute;left:120px;bottom:150px;color:#fff;font-size:60px;font-weight:700;letter-spacing:-.03em;line-height:1.15;text-shadow:0 2px 12px rgba(0,0,0,.3)}
+.hero .slogan small{display:block;font-family:var(--f);font-size:22px;font-weight:400;margin-top:14px;letter-spacing:-.01em;opacity:.95}
+.hero .idx{position:absolute;left:120px;bottom:90px;display:flex;gap:28px;font-size:17px;font-weight:700;color:#fff;align-items:center}
+.hero .idx span{opacity:.75}.hero .idx .on{color:var(--gold);opacity:1}
+.hero .idx .bar{width:520px;height:2px;background:rgba(255,255,255,.5);position:relative;margin-left:8px}
+.hero .idx .bar:before{content:"";position:absolute;left:0;top:0;height:2px;width:20%;background:var(--gold)}
+.hero .idx .pause{width:14px;height:14px;border-left:3px solid #fff;border-right:3px solid #fff;margin-left:8px}
+.hero .panel{position:absolute;right:120px;bottom:0;width:520px;background:#1c1a17;color:#fff;padding:56px 56px 48px}
+.hero .panel h3{font-family:var(--fa);font-size:38px;font-weight:400;letter-spacing:-.02em}
+.hero .panel a{display:inline-block;margin-top:28px;color:var(--gold);font-weight:700;letter-spacing:.1em;font-size:16px}
+.hero .panel a:after{content:"  ⟶";font-weight:400}
+
+/* 플로팅 버튼 */
+.float{position:absolute;right:28px;top:700px;display:flex;flex-direction:column;gap:14px;z-index:9}
+.float a{width:88px;height:88px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-size:15px;font-weight:700;line-height:1.25;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.float a.black{background:#1c1a17}
+.float .bub{position:absolute;right:104px;top:8px;background:#fff;color:#1c1a17;font-size:14px;line-height:1.45;padding:12px 32px 12px 16px;border-radius:12px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.float .bub:after{content:"X";position:absolute;right:12px;top:10px;font-weight:700;font-size:12px}
+.float .bub:before{content:"";position:absolute;right:-8px;top:18px;border-left:8px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent}
+
+/* 공통 섹션 */
+.sec{padding:110px 0}
+.sec .ttl{text-align:center;font-size:44px;font-weight:700;letter-spacing:-.03em}
+.sec .sub{text-align:center;margin-top:14px;font-size:19px;color:#555}
+.sec .ttl-l{font-size:44px;font-weight:700;letter-spacing:-.03em}
+
+/* 작업 흐름 절차 */
+.proc{display:flex;align-items:flex-start;justify-content:space-between;margin-top:72px;position:relative;padding:0 40px}
+.proc:before{content:"";position:absolute;left:100px;right:100px;top:40px;height:4px;background:#eee}
+.proc .st{position:relative;width:200px;text-align:center}
+.proc .st i{display:flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:50%;background:#f2f2f2;margin:0 auto;font-size:30px;font-weight:700;color:#1c1a17;font-style:normal}
+.proc .st.on i{background:var(--orange);color:#fff}
+.proc .st.first i{background:#1c1a17;color:#fff;font-size:26px}
+.proc .st b{display:block;margin-top:22px;font-size:21px}
+.proc .st.on b{color:#1c1a17}
+.proc .st:not(.on):not(.first) b{color:#999}
+.proc .st span{display:block;font-size:15px;color:#888;margin-top:6px;line-height:1.4}
+.proc .st.on span{color:#555}
+
+/* 작업기 탭 + 카드 */
+.tabs{display:flex;justify-content:center;gap:16px;margin-top:0}
+.tabs a{font-family:var(--fd);height:72px;padding:0 44px;border-radius:999px;background:#f5f5f5;display:flex;align-items:center;font-size:19px;font-weight:700;color:#1c1a17}
+.tabs a.on{background:#1c1a17;color:#fff}
+.tabs a.hv{background:#fff;border:1.5px solid #1c1a17}
+.cat-h{font-size:40px;font-weight:700;letter-spacing:-.03em;margin-top:96px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:40px}
+.card .img{height:420px;border:1px solid #e5e5e5;background:#fff;position:relative;overflow:hidden}
+.card .img svg{position:absolute;inset:0;width:100%;height:100%}
+.card .new{font-family:var(--fa);position:absolute;left:0;top:0;width:120px;height:120px;background:linear-gradient(135deg,var(--orange) 50%,transparent 50%);color:#fff;font-size:13px;font-weight:700;letter-spacing:.1em}
+.card .new span{position:absolute;left:14px;top:26px;transform:rotate(-45deg)}
+.card h3{font-size:30px;margin-top:22px;letter-spacing:-.02em}
+.card .c{color:var(--orange);font-weight:700;font-size:16px;margin-top:4px}
+.card p .catch{font-family:var(--fa);font-style:normal;font-size:1.2em;color:#1c1a17;display:block;margin-bottom:4px}
+.card p{margin-top:10px;font-size:17px;color:#555;line-height:1.55}
+.more{display:flex;justify-content:center;margin-top:64px}
+.more a{height:64px;padding:0 48px;border:1.5px solid #1c1a17;border-radius:999px;display:flex;align-items:center;font-size:18px;font-weight:700}
+
+/* 마력 찾기 띠 */
+.band{position:relative;height:560px;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center}
+.band .photo{position:absolute;inset:0}
+.band .shade{position:absolute;inset:0;background:rgba(28,26,23,.62)}
+.band .in{position:relative}
+.band h2{font-family:var(--fa);font-weight:400;font-size:48px;font-weight:700;letter-spacing:-.03em}
+.band p{margin-top:16px;font-size:20px;opacity:.9}
+.band .hp{display:flex;gap:14px;justify-content:center;margin-top:44px}
+.band .hp a{height:68px;padding:0 36px;border-radius:999px;border:1.5px solid rgba(255,255,255,.7);display:flex;align-items:center;font-size:20px;font-weight:700}
+.band .hp a.on{background:var(--gold);border-color:var(--gold);color:#1c1a17}
+.band .res{margin-top:32px;font-size:18px;opacity:.95}
+.band .res b{color:var(--gold)}
+
+/* 작업 영상 */
+.vsearch{width:740px;height:72px;margin:56px auto 0;border:2px solid #1c1a17;border-radius:999px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;color:#999;font-size:18px}
+.vsearch i{width:22px;height:22px;border:2.5px solid #1c1a17;border-radius:50%;position:relative;display:block}
+.vsearch i:after{content:"";position:absolute;width:2.5px;height:9px;background:#1c1a17;right:-5px;bottom:-7px;transform:rotate(-45deg)}
+.tags{display:flex;justify-content:center;gap:28px;margin-top:28px;font-size:16px;font-weight:500}
+.sort{display:flex;justify-content:center;gap:16px;margin-top:64px}
+.sort a{height:72px;padding:0 40px;border-radius:999px;background:#f5f5f5;display:flex;align-items:center;font-size:19px;font-weight:700}
+.sort a.on{background:#1c1a17;color:#fff}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:64px}
+.v .thumb{height:290px}
+.v .thumb .play{position:absolute;left:50%;top:50%;width:104px;height:104px;border-radius:50%;background:rgba(255,255,255,.85);transform:translate(-50%,-50%)}
+.v .thumb .play:after{content:"";position:absolute;left:42px;top:34px;border-left:28px solid var(--orange);border-top:18px solid transparent;border-bottom:18px solid transparent}
+.v .thumb .cap{font-family:var(--fa);font-weight:400;position:absolute;left:0;right:0;bottom:0;padding:18px 22px;color:#fff;font-size:26px;font-weight:900;line-height:1.25;background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.v .thumb .cap em{color:#ffd166;font-style:normal}
+.v h3{font-size:26px;margin-top:22px;line-height:1.35;letter-spacing:-.02em}
+.v .meta{margin-top:12px;font-size:16px;color:#666}
+.v .meta b{font-weight:500;color:#333;margin-right:14px;padding-right:14px;border-right:1px solid #ccc}
+
+/* 소모품 */
+.cons{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:56px}
+.ccard{border:1px solid #e5e5e5;display:grid;grid-template-columns:260px 1fr;min-height:260px}
+.ccard .pic{border-right:1px solid #e5e5e5;background:#fff;position:relative}
+.ccard .pic svg{position:absolute;inset:0;width:100%;height:100%}
+.ccard .b{padding:40px}
+.ccard h3{font-size:28px}
+.ccard .s{font-size:16px;color:#666;margin-top:4px}
+.ccard .row{display:flex;align-items:center;gap:12px;margin-top:32px}
+.qty{display:flex;border:1.5px solid #1c1a17;height:56px;border-radius:999px;overflow:hidden}
+.qty b,.qty span{display:flex;align-items:center;justify-content:center;width:52px;font-size:20px;font-weight:700}
+.qty span{width:64px;border-left:1.5px solid #1c1a17;border-right:1.5px solid #1c1a17}
+.ccard .btn{height:56px;padding:0 32px;white-space:nowrap;border-radius:999px;background:#1c1a17;color:#fff;display:flex;align-items:center;font-weight:700;font-size:17px}
+.notice{margin-top:40px;background:#f7f5ef;border:1px solid #ebe6d8;padding:28px 36px;display:flex;align-items:center;gap:20px;font-size:18px}
+.notice .tag{font-family:var(--fa);background:var(--orange);color:#fff;font-size:14px;font-weight:700;padding:6px 12px;border-radius:4px;white-space:nowrap}
+.notice b{font-weight:700}
+
+/* 고객지원 */
+.help{position:relative;height:760px;color:#fff}
+.help .photo{position:absolute;inset:0}
+.help .shade{position:absolute;inset:0;background:rgba(40,38,34,.72)}
+.help .in{position:relative;padding-top:120px}
+.help .ttl{color:#fff;text-align:center;font-size:44px;font-weight:700;letter-spacing:-.03em}
+.help .sub{color:#eee;text-align:center;margin-top:14px;font-size:19px}
+.help .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 72px;margin-top:96px}
+.help .it{display:flex;justify-content:space-between;align-items:flex-start;padding:0 0 32px;border-bottom:1px solid rgba(255,255,255,.8);margin-bottom:64px;font-size:30px;font-weight:700;line-height:1.3;letter-spacing:-.02em}
+.help .it:after{content:"+";font-size:52px;font-weight:300;line-height:.9}
+.help .it small{display:block;font-size:17px;font-weight:400;margin-top:10px;opacity:.85}
+
+/* 오시는 길 */
+.way{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #e5e5e5;margin-top:56px}
+.way .map{height:420px;position:relative;background:#eceae4}
+.way .map svg{position:absolute;inset:0;width:100%;height:100%}
+.way .map .pin{position:absolute;left:52%;top:46%;width:22px;height:22px;background:var(--orange);border-radius:50%;border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3);transform:translate(-50%,-50%)}
+.way .info{padding:48px 56px;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.way .info h3{font-size:30px}
+.way dl{display:grid;grid-template-columns:96px 1fr;gap:12px 0;font-size:18px}
+.way dt{color:#888;font-weight:500}
+.way .tel{font-size:40px;font-weight:900;letter-spacing:-.02em;color:#1c1a17}
+.way .acts{display:flex;gap:12px;margin-top:8px}
+.way .acts a{height:56px;padding:0 28px;border-radius:999px;display:flex;align-items:center;font-weight:700;font-size:17px}
+.way .acts .o{background:var(--orange);color:#fff}.way .acts .k{background:#fae100;color:#1c1a17}.way .acts .l{border:1.5px solid #1c1a17}
+
+/* 푸터 */
+.foot{background:#1c1a17;color:#aaa;padding:56px 48px 64px;font-size:15px}
+.foot .top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #333;padding-bottom:36px}
+.foot .fm{display:flex;gap:40px;color:#ddd;font-weight:500;font-size:16px}
+.foot .fam{display:flex;gap:12px}
+.foot .fam span{border:1px solid #444;padding:10px 18px;border-radius:999px;color:#ccc}
+.foot .bot{display:flex;justify-content:space-between;margin-top:32px;line-height:1.9}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="util">
+  <span>회사소개</span><span>대리점 안내</span><span>카탈로그 다운로드</span><span>채용</span>
+  <span class="ico"><i title="YouTube"></i><i title="Instagram"></i><i title="Blog"></i></span>
+</div>
+<div class="gnb">
+  <a class="logo" href="#"><svg viewBox="0 0 44 44" aria-hidden="true"><path id="lg" fill="none" stroke="#e0a526" stroke-width="3.6" stroke-linecap="square"/></svg><b>성원마<em>끼</em>나</b></a>
+  <div class="menu"><a href="#">회사소개</a><a href="#" class="on">작업기</a><a href="#">소모품</a><a href="#">고객지원</a><a href="#">마끼나 스토리</a></div>
+  <div class="search"><i></i>검색</div>
+</div>
+
+<!-- 히어로 -->
+<section class="hero">
+  <div class="photo"><svg viewBox="0 0 1440 860" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fb4c4"/><stop offset="1" stop-color="#d9d6c6"/></linearGradient>
+    <linearGradient id="fld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a8c5a"/><stop offset="1" stop-color="#5a5a34"/></linearGradient></defs>
+    <rect width="1440" height="860" fill="url(#sky)"/><rect y="380" width="1440" height="480" fill="url(#fld)"/>
+    <g id="rows" stroke="#4a4a2a" stroke-width="2" fill="none" opacity=".5"></g>
+    <g id="bales" fill="#c9a85a" stroke="#8a6f2e" stroke-width="2"></g>
+  </svg><span class="lab">현장 영상 루프 — 안동 서후면 들판, 비무꼬 작업 중 (교체)</span></div>
+  <div class="shade"></div>
+  <div class="slogan">베고, 모으고, 묶고, 감싸다.<small>조사료의 처음부터 끝까지, 안동에서 만든 기계가 함께합니다.</small></div>
+  <div class="idx"><span class="on">01</span><span>02</span><span>03</span><span>04</span><span>05</span><div class="bar"></div><div class="pause"></div></div>
+  <div class="panel"><h3>이름처럼 일하는 기계</h3><a href="#">작업기 보기</a></div>
+</section>
+
+<div class="float">
+  <div class="bub">작업기가 궁금하신가요?<br>구매 상담을 받아보세요!</div>
+  <a href="#">구매<br>상담</a><a href="#">소모품<br>주문</a><a href="#">작업<br>영상<br>보기</a><a href="tel:0548434000" class="black">전화상담</a>
+</div>
+
+<!-- 작업 흐름 -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="ttl">조사료 작업 흐름</h2>
+    <p class="sub">베기부터 감싸기, 소모품까지 — 성원마끼나 작업기 한 세트로 끝납니다</p>
+    <div class="proc">
+      <div class="st first"><i>▦</i><b>들판</b><span>논·밭, 어떤 작물이든</span></div>
+      <div class="st on"><i>1</i><b>베기</b><span>남김없이 벱니다<br>블랙홀 드럼모우어</span></div>
+      <div class="st"><i>2</i><b>모으기</b><span>고르게 모읍니다<br>LKHR 레이크</span></div>
+      <div class="st"><i>3</i><b>묶기</b><span>단단히 묶습니다<br>비무꼬 원형베일러</span></div>
+      <div class="st"><i>4</i><b>감싸기</b><span>오래 지킵니다<br>S350H 자동 접철 래퍼</span></div>
+      <div class="st"><i>5</i><b>소모품</b><span>멈추지 않게<br>네트 · 랩 익일 출고</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 작업기 -->
+<section class="sec" style="padding-top:40px">
+  <div class="wrap">
+    <div class="tabs"><a class="on" href="#">전체</a><a href="#">베일러</a><a href="#">모우어</a><a class="hv" href="#">레이크 · 래퍼</a><a href="#">제초 · 파쇄</a><a href="#">소모품</a></div>
+    <h2 class="cat-h">대표 작업기</h2>
+    <div class="cards">
+      <article class="card">
+        <div class="img"><svg viewBox="0 0 400 420" aria-hidden="true"><rect width="400" height="420" fill="#fff"/><g id="m1"></g></svg><div class="new"><span>NEW</span></div></div>
+        <h3>비무꼬</h3><div class="c">일체형 원형베일러</div>
+        <p><i class="catch">한 번에, 세 가지.</i>베고, 부수고, 묶는 일을 한 대가 끝냅니다.</p>
+      </article>
+      <article class="card">
+        <div class="img"><svg viewBox="0 0 400 420" aria-hidden="true"><rect width="400" height="420" fill="#fff"/><g id="m2"></g></svg></div>
+        <h3>블랙홀</h3><div class="c">드럼모우어</div>
+        <p><i class="catch">거부할 수 없는 흡입력.</i>들어간 풀은 돌아 나오지 않습니다.</p>
+      </article>
+      <article class="card">
+        <div class="img"><svg viewBox="0 0 400 420" aria-hidden="true"><rect width="400" height="420" fill="#fff"/><g id="m3"></g></svg></div>
+        <h3>모조리</h3><div class="c">제초 파쇄기</div>
+        <p><i class="catch">이름 그대로.</i>리모컨 하나로 풀을 모조리 정리합니다.</p>
+      </article>
+    </div>
+    <div class="more"><a href="#">작업기 전체 보기</a></div>
+  </div>
+</section>
+
+<!-- 내 트랙터 마력으로 찾기 -->
+<section class="band">
+  <div class="photo"><svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="1440" height="560" fill="#6b6a4a"/><g id="rows2" stroke="#4e4c32" stroke-width="2" fill="none"></g></svg><span class="lab">사진 — 트랙터 + 비무꼬 연결 장면 (교체)</span></div>
+  <div class="shade"></div>
+  <div class="in">
+    <h2>내 트랙터 마력으로 찾기</h2>
+    <p>트랙터 마력만 고르시면 연결 가능한 작업기를 바로 알려 드립니다</p>
+    <div class="hp"><a href="#">35마력 이하</a><a href="#">36 ~ 50마력</a><a class="on" href="#">51 ~ 70마력</a><a href="#">71 ~ 90마력</a><a href="#">91마력 이상</a></div>
+    <div class="res">51~70마력 트랙터 → <b>비무꼬 · 블랙홀 · LKHR 레이크 · S350H 래퍼</b> 연결 가능 (PTO 540rpm 기준)</div>
+  </div>
+</section>
+
+<!-- 작업 영상 -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="ttl">작업 영상</h2>
+    <div class="vsearch"><span>영상 검색</span><i></i></div>
+    <div class="tags"><span>#비무꼬</span><span>#블랙홀</span><span>#모조리</span><span>#무른논</span><span>#사용법</span><span>#수확철</span></div>
+    <div class="sort"><a class="on" href="#">최신순</a><a href="#">조회수 높은 순</a><a href="#">좋아요 많은 순</a></div>
+    <div class="vgrid">
+      <article class="v"><div class="photo thumb"><svg viewBox="0 0 400 290" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="290" fill="#7c7a52"/><g id="v1" stroke="#5a5834" stroke-width="2" fill="none"></g></svg><div class="play"></div><div class="cap">무른 논에서<br><em>한 번에</em> 베고 묶기</div></div>
+        <h3>비무꼬 일체형 베일러 — 안동 서후면 수확 현장</h3><div class="meta"><b>작업 영상</b>2026.09.24</div></article>
+      <article class="v"><div class="photo thumb"><svg viewBox="0 0 400 290" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="290" fill="#5f6a44"/><g id="v2" stroke="#454f30" stroke-width="2" fill="none"></g></svg><div class="play"></div><div class="cap">들어간 풀은<br><em>돌아 나오지</em> 않습니다</div></div>
+        <h3>블랙홀 드럼모우어 흡입 장면 (슬로모션)</h3><div class="meta"><b>작업 영상</b>2026.09.12</div></article>
+      <article class="v"><div class="photo thumb"><svg viewBox="0 0 400 290" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="290" fill="#8a7d5a"/><g id="v3" stroke="#6a5e3e" stroke-width="2" fill="none"></g></svg><div class="play"></div><div class="cap">네트 교체,<br><em>3분이면</em> 끝</div></div>
+        <h3>비무꼬 네트 교체 방법 — 사용 설명 영상</h3><div class="meta"><b>사용법</b>2026.08.30</div></article>
+    </div>
+    <div class="more"><a href="#">영상 더 보기</a></div>
+  </div>
+</section>
+
+<!-- 소모품 -->
+<section class="sec" style="padding-top:20px">
+  <div class="wrap">
+    <h2 class="ttl">소모품 빠른 주문</h2>
+    <p class="sub">수확철엔 네트 한 롤이 하루를 좌우합니다. 수량만 고르시면 됩니다</p>
+    <div class="cons">
+      <div class="ccard"><div class="pic"><svg viewBox="0 0 260 260" aria-hidden="true"><rect width="260" height="260" fill="#fff"/><rect x="70" y="40" width="120" height="180" rx="8" fill="#f1efe8" stroke="#1c1a17" stroke-width="2"/><g id="net" stroke="#1c1a17" stroke-width="1" fill="none" opacity=".6"></g></svg></div>
+        <div class="b"><h3>베일 네트</h3><div class="s">폭 1.23m · 길이 3,000m · 1롤</div><div class="row"><div class="qty"><b>−</b><span>2</span><b>+</b></div><a class="btn" href="#">주문하기</a></div></div></div>
+      <div class="ccard"><div class="pic"><svg viewBox="0 0 260 260" aria-hidden="true"><rect width="260" height="260" fill="#fff"/><circle cx="130" cy="130" r="80" fill="#f1efe8" stroke="#1c1a17" stroke-width="2"/><circle cx="130" cy="130" r="22" fill="#fff" stroke="#1c1a17" stroke-width="2"/><circle cx="130" cy="130" r="55" fill="none" stroke="#1c1a17" stroke-width="1" opacity=".4"/></svg></div>
+        <div class="b"><h3>베일 랩 필름</h3><div class="s">폭 750mm · 길이 1,500m · 1롤</div><div class="row"><div class="qty"><b>−</b><span>10</span><b>+</b></div><a class="btn" href="#">주문하기</a></div></div></div>
+    </div>
+    <div class="notice"><span class="tag">수확철 당일 출고</span><span>평일 <b>오후 3시 이전</b> 주문 시 다음 날 도착합니다. 전화 한 통이면 바로 출발합니다 — <b>054-843-4000</b></span></div>
+  </div>
+</section>
+
+<!-- 고객지원 -->
+<section class="help">
+  <div class="photo"><svg viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="1440" height="760" fill="#5e5a50"/><rect y="500" width="1440" height="260" fill="#4a463e"/></svg><span class="lab">사진 — 공장 내부 / 작업기 정비 장면 (교체)</span></div>
+  <div class="shade"></div>
+  <div class="wrap in">
+    <h2 class="ttl">무엇을 도와드릴까요?</h2>
+    <p class="sub">원하시는 서비스를 눌러 주세요</p>
+    <div class="grid">
+      <div class="it"><div>작업기를<br>구매하고 싶어요<small>구매 상담 · 견적 · 지원사업 안내</small></div></div>
+      <div class="it"><div>사용법과 점검<br>방법을 알고 싶어요<small>사용 설명서 · 점검 영상</small></div></div>
+      <div class="it"><div>작업기에<br>이상이 있어요<small>A/S 접수 · 출장 정비</small></div></div>
+      <div class="it"><div>네트·랩을<br>주문하고 싶어요<small>소모품 주문 · 배송 조회</small></div></div>
+      <div class="it"><div>공장에<br>직접 가보고 싶어요<small>오시는 길 · 시연 예약</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 오시는 길 -->
+<section class="sec">
+  <div class="wrap">
+    <h2 class="ttl-l">오시는 길</h2>
+    <div class="way">
+      <div class="map"><svg viewBox="0 0 620 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="620" height="420" fill="#eceae4"/><g stroke="#fff" stroke-width="10" fill="none"><path d="M0 290 C150 270 230 200 390 190 S590 120 620 90"/><path d="M80 0 C120 150 250 230 320 420"/><path d="M0 400 L620 360"/></g><g stroke="#d6d2c6" stroke-width="2" fill="none"><path d="M0 290 C150 270 230 200 390 190 S590 120 620 90"/><path d="M80 0 C120 150 250 230 320 420"/></g><text x="330" y="150" font-size="14" fill="#777" font-family="sans-serif">서후면</text><text x="60" y="380" font-size="13" fill="#999" font-family="sans-serif">안동 시내 방면</text></svg><div class="pin"></div></div>
+      <div class="info">
+        <h3>성원마끼나 본사 · 공장</h3>
+        <dl><dt>주소</dt><dd>경북 안동시 서후면 (상세 주소 입력)</dd><dt>운영시간</dt><dd>평일 08:30 – 18:00 · 토요일 오전 · 수확철 연장</dd><dt>전화</dt><dd class="tel">054-843-4000</dd></dl>
+        <div class="acts"><a class="o" href="tel:0548434000">전화 상담</a><a class="k" href="#">카카오톡 문의</a><a class="l" href="#">길찾기</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="top">
+    <div class="fm"><span>회사소개</span><span>작업기</span><span>소모품</span><span>고객지원</span><span>대리점 안내</span><span>개인정보처리방침</span></div>
+    <div class="fam"><span>카탈로그 다운로드</span><span>유튜브 채널</span></div>
+  </div>
+  <div class="bot">
+    <div>성원마끼나 · 대표 ○○○ · 사업자등록번호 000-00-00000<br>경북 안동시 서후면 (상세 주소) · 전화 054-843-4000 · 팩스 054-000-0000<br>Copyright © 성원마끼나. All rights reserved.</div>
+    <div style="text-align:right;color:#ddd;font-weight:700;font-size:16px">이름처럼 일하는 기계</div>
+  </div>
+</footer>
+
+</div>
+<script>
+(function(){
+  function sp(cx,cy,r0,r1,t,n){var d=[];for(var i=0;i<=n;i++){var k=i/n,a=k*t*6.2832,r=r0+(r1-r0)*k;d.push((i?'L':'M')+(cx+Math.cos(a)*r).toFixed(1)+' '+(cy+Math.sin(a)*r).toFixed(1));}return d.join(' ');}
+  var lg=document.getElementById('lg');if(lg)lg.setAttribute('d',sp(20,26,2,14,3.25,120)+' L8 42 L8 8 L20 24 L32 8 L32 42');
+  function rows(id,n,top,w,h,k,g2){var g=document.getElementById(id);if(!g)return;var s='';for(var i=0;i<=n;i++){var x=i/n*w,xt=w/2+(x-w/2)*k;s+='<path d="M'+xt.toFixed(0)+' '+top+' L'+x.toFixed(0)+' '+h+'"/>';}g.innerHTML=s;}
+  rows('rows',30,380,1440,860,.12);rows('rows2',24,0,1440,560,.2);rows('v1',14,0,400,290,.3);rows('v2',14,0,400,290,.3);rows('v3',14,0,400,290,.3);
+  var b=document.getElementById('bales');if(b){var s='';[[300,600,38],[520,640,46],[760,590,34],[1000,660,50],[1200,610,40]].forEach(function(p){s+='<ellipse cx="'+p[0]+'" cy="'+p[1]+'" rx="'+(p[2]*1.1)+'" ry="'+p[2]+'"/>';});b.innerHTML=s;}
+  // 제품 자리표시(단순 실루엣)
+  function sil(id,html){var g=document.getElementById(id);if(g)g.innerHTML=html;}
+  sil('m1','<rect x="60" y="180" width="200" height="120" rx="6" fill="#d9d4c7"/><rect x="60" y="160" width="200" height="24" fill="#1c1a17"/><circle cx="110" cy="320" r="34" fill="#2a2724"/><circle cx="230" cy="320" r="34" fill="#2a2724"/><circle cx="110" cy="320" r="14" fill="#8c9196"/><circle cx="230" cy="320" r="14" fill="#8c9196"/><rect x="260" y="200" width="90" height="16" fill="#8c9196"/><circle cx="300" cy="250" r="26" fill="#e0a526"/><text x="200" y="395" text-anchor="middle" font-size="12" fill="#aaa" font-family="sans-serif">제품 사진 (누끼, 흰 배경) 교체</text>');
+  sil('m2','<rect x="50" y="200" width="300" height="70" rx="4" fill="#1c1a17"/><rect x="50" y="270" width="300" height="24" fill="#d9d4c7"/><rect x="330" y="150" width="20" height="60" fill="#8c9196"/><circle cx="120" cy="235" r="18" fill="#e0a526"/><circle cx="200" cy="235" r="18" fill="#e0a526"/><circle cx="280" cy="235" r="18" fill="#e0a526"/><text x="200" y="395" text-anchor="middle" font-size="12" fill="#aaa" font-family="sans-serif">제품 사진 (누끼, 흰 배경) 교체</text>');
+  sil('m3','<rect x="90" y="150" width="220" height="110" rx="6" fill="#d9d4c7"/><rect x="90" y="130" width="220" height="24" fill="#e0a526"/><rect x="60" y="260" width="280" height="30" fill="#1c1a17"/><circle cx="130" cy="320" r="30" fill="#2a2724"/><circle cx="270" cy="320" r="30" fill="#2a2724"/><rect x="180" y="80" width="40" height="50" fill="#8c9196"/><text x="200" y="395" text-anchor="middle" font-size="12" fill="#aaa" font-family="sans-serif">제품 사진 (누끼, 흰 배경) 교체</text>');
+  var net=document.getElementById('net');if(net){var sn='';for(var i=1;i<8;i++)sn+='<line x1="'+(70+i*15)+'" y1="40" x2="'+(70+i*15)+'" y2="220"/>';for(var j=1;j<12;j++)sn+='<line x1="70" y1="'+(40+j*15)+'" x2="190" y2="'+(40+j*15)+'"/>';net.innerHTML=sn;}
+})();
+</script>
+</body>
+</html>

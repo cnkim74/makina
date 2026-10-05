@@ -1,0 +1,25 @@
+{
+  "v": 3,
+  "assetGroups": {},
+  "blobs": {},
+  "createdOnFiles": {
+    "at": "2026-10-05T08:50:00Z",
+    "v": 1
+  },
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "groups": [],
+  "lastChange": {
+    "by": "ChanNyeon Kim",
+    "at": "2026-10-05T09:20:00Z",
+    "via": "Claude",
+    "note": "폰트 컨셉 반영 — 지마켓 산스(제목)·카페24 동동(슬로건/캐치카피)·프리텐다드(본문)"
+  },
+  "layout": "files",
+  "libraries": [],
+  "namespace": "Makkina",
+  "sections": {},
+  "title": "성원마끼나 MAKKINA"
+}
