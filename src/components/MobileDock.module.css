@@ -1,0 +1,47 @@
+.dock {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .dock {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    background: #fff;
+    border-top: 1px solid #e5e5e5;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 8px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 8px));
+    box-shadow: var(--shadow-float);
+  }
+
+  .dock a {
+    height: 54px;
+    border-radius: var(--radius-pill);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .tel {
+    background: var(--signal-orange);
+    color: var(--wrap-white);
+  }
+
+  .kakao {
+    background: var(--kakao-yellow);
+    color: var(--soil-black);
+  }
+
+  .order {
+    background: var(--soil-black);
+    color: #fff;
+  }
+}

@@ -1,0 +1,201 @@
+.hero {
+  position: relative;
+  height: 860px;
+  color: #fff;
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.45));
+}
+
+.slogan {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  position: absolute;
+  left: max(120px, calc((100% - var(--container)) / 2));
+  bottom: 150px;
+  max-width: min(680px, calc(100% - 760px));
+  font-size: 64px;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.sloganLine {
+  display: inline;
+}
+
+.sloganLine + .sloganLine::before {
+  content: " ";
+}
+
+.slogan small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 400;
+  margin-top: 14px;
+  letter-spacing: -0.01em;
+  opacity: 0.95;
+}
+
+.idx {
+  position: absolute;
+  left: max(120px, calc((100% - var(--container)) / 2));
+  bottom: 90px;
+  display: flex;
+  gap: 28px;
+  font-size: 17px;
+  font-weight: 700;
+  align-items: center;
+}
+
+.idx span {
+  opacity: 0.75;
+}
+
+.idx .on {
+  color: var(--hay-gold);
+  opacity: 1;
+}
+
+.bar {
+  width: 520px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.5);
+  position: relative;
+  margin-left: 8px;
+}
+
+.bar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2px;
+  width: 20%;
+  background: var(--hay-gold);
+}
+
+.pause {
+  width: 14px;
+  height: 14px;
+  border-left: 3px solid #fff;
+  border-right: 3px solid #fff;
+  margin-left: 8px;
+}
+
+.panel {
+  position: absolute;
+  right: max(120px, calc((100% - var(--container)) / 2));
+  bottom: 0;
+  width: 520px;
+  background: var(--soil-black);
+  padding: 56px 56px 48px;
+}
+
+.panel h2 {
+  font-family: var(--font-accent);
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.panel a {
+  display: inline-block;
+  margin-top: 28px;
+  color: var(--hay-gold);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-size: 16px;
+  min-height: 48px;
+}
+
+.panel a::after {
+  content: "  ⟶";
+  font-weight: 400;
+}
+
+@media (max-width: 1300px) {
+  .slogan,
+  .idx {
+    left: 64px;
+  }
+
+  .panel {
+    right: 64px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    height: 560px;
+  }
+
+  .shade {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.55));
+  }
+
+  .slogan {
+    left: var(--gutter-mobile);
+    right: var(--gutter-mobile);
+    bottom: 120px;
+    max-width: none;
+    font-size: 36px;
+    line-height: 1.2;
+  }
+
+  .sloganLine {
+    display: block;
+  }
+
+  .slogan small {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .idx {
+    left: var(--gutter-mobile);
+    bottom: 84px;
+    gap: 14px;
+    font-size: 14px;
+  }
+
+  .bar {
+    width: 120px;
+    margin-left: 0;
+  }
+
+  .pause {
+    display: none;
+  }
+
+  .panel {
+    left: 0;
+    right: 0;
+    width: auto;
+    padding: 18px var(--gutter-mobile);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .panel h2 {
+    font-size: 19px;
+  }
+
+  .panel a {
+    margin-top: 0;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+  }
+}

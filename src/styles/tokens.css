@@ -1,0 +1,75 @@
+/*
+ * 디자인 토큰 — docs/design/tokens.json 의 값을 CSS 변수로 옮긴 것.
+ * 값을 바꿀 때는 tokens.json 을 먼저 고치고 여기에 반영한다.
+ */
+:root {
+  /* 메인 */
+  --soil-black: #1c1a17;
+  --hay-gold: #e0a526;
+  --straw-cream: #f4eddc;
+
+  /* 서브 */
+  --field-brown: #4a3a2c;
+  --silage-green: #5b7340;
+  --steel-gray: #8c9196;
+  --wrap-white: #fafaf6;
+
+  /* 기능 */
+  --signal-orange: #e4572e;
+  --line: #d9cfb8;
+  --hay-gold-deep: #b8841a;
+  --signal-orange-deep: #c4451f;
+
+  /* 역할 (라이트 기본) */
+  --surface: var(--straw-cream);
+  --surface-raised: var(--wrap-white);
+  --ink: var(--soil-black);
+  --ink-muted: #6b6459;
+  --hairline: var(--line);
+  --brand: var(--hay-gold);
+  --cta: var(--signal-orange);
+
+  /* 외부 브랜드 */
+  --kakao-yellow: #fae100;
+
+  /* 서체 */
+  --font-display: "GmarketSans", "Gmarket Sans", "Noto Sans KR", "Pretendard", system-ui, sans-serif;
+  --font-accent: "Cafe24Dongdong", "Cafe24 Dongdong", "GmarketSans", "Noto Sans KR", sans-serif;
+  --font-body: "Pretendard", "Noto Sans KR", system-ui, -apple-system, sans-serif;
+
+  /* 간격 (8px 그리드) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+  --space-5: 64px;
+  --space-6: 120px;
+  --space-7: 160px;
+
+  /* 모서리 */
+  --radius-0: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+
+  /* 그림자 */
+  --shadow-float: 0 12px 32px rgba(28, 26, 23, 0.18);
+
+  /* 모션 */
+  --duration-base: 480ms;
+  --duration-signature: 1200ms;
+  --ease-machine: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* 레이아웃 */
+  --container: 1240px;
+  --gutter-mobile: 20px;
+}
+
+[data-theme="dark"] {
+  --surface: var(--soil-black);
+  --surface-raised: var(--field-brown);
+  --ink: var(--straw-cream);
+  --ink-muted: var(--steel-gray);
+  --hairline: #3a342c;
+  --shadow-float: 0 12px 32px rgba(0, 0, 0, 0.45);
+}

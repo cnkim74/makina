@@ -2,6 +2,15 @@
 
 이 저장소는 성원마끼나(MAKKINA) 브랜드 웹사이트 프로젝트입니다. 대화는 한국어로 합니다.
 
+## 기술 스택과 명령
+
+- Next.js 16 App Router + TypeScript + CSS Modules. Tailwind나 UI 라이브러리는 쓰지 않는다.
+- `npm run dev` 개발 서버, `npm run build` 빌드, `npm run lint` 린트. 푸시 전에 `npx tsc --noEmit`, `npm run lint`, `npm run build`를 통과시킨다.
+- 색·서체·간격은 `src/styles/tokens.css`의 CSS 변수를 쓴다. 하드코딩 금지.
+- 사이트 정보(전화·주소·링크)는 `src/data/site.ts`, 콘텐츠(제품·영상·소모품)는 `src/data/content.ts`에만 둔다.
+- 섹션 하나 = 컴포넌트 하나(`src/components/이름.tsx` + `이름.module.css`). 데스크톱 1440 기준으로 쓰고 `@media (max-width: 900px)`에서 모바일 390을 맞춘다.
+- 사진·영상이 없는 자리는 `src/components/placeholders/`의 SVG로 채운다. 실제 자료가 오면 교체한다.
+
 ## 작업 전에 읽을 것
 
 - `docs/design/brand-guide.md`: 브랜드북. 컬러·타이포·레이아웃·모션·접근성 규칙의 원본.
