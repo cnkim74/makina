@@ -66,7 +66,7 @@ CI나 Claude 세션처럼 브라우저 로그인이 안 되는 곳에서는 환�
 
 1. Cloudflare 대시보드 → Storage & Databases → **D1** → Create → 이름 `makina-db` → 만든 뒤 **Database ID** 복사
 2. 대시보드 → **R2** → Create bucket → 이름 `makina-media`
-3. `wrangler.jsonc` 의 “운영 연결” 주석 블록을 풀고 `database_id` 에 1번 ID 를 넣어 커밋·푸시
+3. `wrangler.jsonc` 의 “운영 연결”에 1번 ID 를 넣어 커밋·푸시 (완료: `090ea305-…`)
 4. Workers 빌드 설정의 Deploy command 를 아래로 바꿉니다 (배포할 때마다 스키마를 맞춤)
 
    ```

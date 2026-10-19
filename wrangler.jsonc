@@ -4,9 +4,8 @@
  * 문서: https://opennext.js.org/cloudflare
  *
  * CMS(관리자 화면)는 D1 데이터베이스(DB)와 R2 저장소(MEDIA)를 쓴다.
- * - 운영: Cloudflare 에서 D1 "makina-db" 와 R2 "makina-media" 를 만든 뒤,
- *   아래 "운영 연결" 주석을 풀고 database_id 를 넣는다. (README "CMS 설정")
- *   연결 전에도 사이트는 지금 내용 그대로 정상 동작하고, 관리자 화면은 설정 안내를 보여 준다.
+ * - 운영: Cloudflare 의 D1 "makina-db" 와 R2 "makina-media" 에 연결되어 있다. (README "관리자(CMS)")
+ *   배포 명령에서 `wrangler d1 migrations apply makina-db --remote` 로 스키마를 먼저 맞춘다.
  * - 개발: env.dev 의 로컬 D1·R2 를 쓴다. `npm run db:migrate:local` 후 `npm run dev`.
  */
 {
@@ -29,13 +28,16 @@
     }
   ],
 
-  // ── 운영 연결 (D1·R2 를 만든 뒤 주석 해제) ──
-  // "d1_databases": [
-  //   { "binding": "DB", "database_name": "makina-db", "database_id": "여기에-D1-데이터베이스-ID", "migrations_dir": "migrations" }
-  // ],
-  // "r2_buckets": [
-  //   { "binding": "MEDIA", "bucket_name": "makina-media" }
-  // ],
+  // ── 운영 연결 ──
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "makina-db",
+      "database_id": "090ea305-2361-4bd7-bf42-31740e08d43e",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "makina-media" }],
 
   "env": {
     // 로컬 개발용 — 실제 Cloudflare 자원 없이 .wrangler/state 에 저장된다
