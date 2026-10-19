@@ -16,7 +16,7 @@
 
 - `/admin` 관리자. 데이터는 D1(`DB` 바인딩), 파일은 R2(`MEDIA`). 스키마는 `migrations/`, 바꿀 때는 새 번호 파일을 추가한다.
 - `wrangler.jsonc` 최상위 바인딩이 운영 D1 `makina-db`·R2 `makina-media` 다. 로컬은 `env.dev` 를 쓴다(`npm run dev` 가 `NEXT_DEV_WRANGLER_ENV=dev` 로 실행). 운영 DB를 건드리는 명령(`--remote`)은 사용자 확인 없이 실행하지 않는다.
-- D1이 없거나 스키마가 없어도 홈페이지는 `src/data/` 기본값으로 떠야 한다. 공개 화면 데이터는 `src/lib/public-data.ts` → `SiteDataProvider` → `useSite()`/`useSiteData()` 로 받는다.
+- 표가 하나도 없으면 `dbState()` 가 `src/lib/schema.generated.ts`(migrations 에서 자동 생성, 직접 고치지 않음)로 만든다. D1이 없어도 홈페이지는 `src/data/` 기본값으로 떠야 한다. 공개 화면 데이터는 `src/lib/public-data.ts` → `SiteDataProvider` → `useSite()`/`useSiteData()` 로 받는다.
 - 연락처·연동 키·히어로 설정은 D1 `settings` 테이블(JSON)에 둔다. 비밀 값을 코드나 저장소에 넣지 않는다.
 - 관리자 화면은 사내용이라 `src/app/admin/admin.module.css` 한 파일을 쓴다. 공개 화면 규칙(리퀴드 글래스·모듈 문법)은 적용하지 않지만 토큰과 접근성 규칙은 지킨다.
 

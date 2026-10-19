@@ -13,7 +13,7 @@ const ROLE_LABEL = { owner: "대표", admin: "관리자", editor: "편집자" } 
 
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {
   const st = await dbState();
-  if (!st.ok) return <SetupGuide reason={st.reason} />;
+  if (!st.ok) return <SetupGuide reason={st.reason} detail={st.detail} />;
   const user = await requireUser();
 
   const [inq, pending] = await Promise.all([

@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/gen-schema.mjs",
     "dev": "NEXT_DEV_WRANGLER_ENV=dev next dev",
     "db:migrate:local": "wrangler d1 migrations apply makina-db --local --env dev",
     "db:migrate:remote": "wrangler d1 migrations apply makina-db --remote",
+    "prebuild": "node scripts/gen-schema.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

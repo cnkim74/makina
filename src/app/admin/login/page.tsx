@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 export default async function LoginPage() {
   const st = await dbState();
-  if (!st.ok) return <SetupGuide reason={st.reason} />;
+  if (!st.ok) return <SetupGuide reason={st.reason} detail={st.detail} />;
   if (await currentUser()) redirect("/admin");
 
   return (

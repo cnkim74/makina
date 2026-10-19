@@ -1,20 +1,30 @@
 import "server-only";
 import { getDb, type D1Database } from "./cf";
+import { SCHEMA_STATEMENTS } from "./schema.generated";
 
 /** DB 가 연결되어 있고 스키마(마이그레이션)까지 적용되어 있는지 */
-export type DbState = { ok: true; db: D1Database } | { ok: false; reason: "no-binding" | "no-schema" };
+export type DbState =
+  | { ok: true; db: D1Database }
+  | { ok: false; reason: "no-binding" | "no-schema"; detail?: string };
+
+async function hasSchema(db: D1Database) {
+  const row = await db
+    .prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'users'")
+    .first<{ name: string }>();
+  return !!row;
+}
 
 export async function dbState(): Promise<DbState> {
   const db = await getDb();
   if (!db) return { ok: false, reason: "no-binding" };
   try {
-    const row = await db
-      .prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'users'")
-      .first<{ name: string }>();
-    if (!row) return { ok: false, reason: "no-schema" };
-    return { ok: true, db };
-  } catch {
+    if (await hasSchema(db)) return { ok: true, db };
+    // 배포 명령에서 마이그레이션이 빠졌어도 첫 실행에 표를 만든다 (모두 IF NOT EXISTS 라 여러 번 돌아도 안전)
+    await db.batch(SCHEMA_STATEMENTS.map((sql) => db.prepare(sql)));
+    if (await hasSchema(db)) return { ok: true, db };
     return { ok: false, reason: "no-schema" };
+  } catch (e) {
+    return { ok: false, reason: "no-schema", detail: e instanceof Error ? e.message : String(e) };
   }
 }
 

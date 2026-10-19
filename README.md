@@ -67,7 +67,7 @@ CI나 Claude 세션처럼 브라우저 로그인이 안 되는 곳에서는 환�
 1. Cloudflare 대시보드 → Storage & Databases → **D1** → Create → 이름 `makina-db` → 만든 뒤 **Database ID** 복사
 2. 대시보드 → **R2** → Create bucket → 이름 `makina-media`
 3. `wrangler.jsonc` 의 “운영 연결”에 1번 ID 를 넣어 커밋·푸시 (완료: `090ea305-…`)
-4. Workers 빌드 설정의 Deploy command 를 아래로 바꿉니다 (배포할 때마다 스키마를 맞춤)
+4. (권장) Workers 빌드 설정의 Deploy command 를 아래로 바꿉니다 (배포할 때마다 스키마를 맞춤). 빠뜨려도 사이트가 첫 실행에 `migrations/` 와 같은 표를 만듭니다
 
    ```
    npx wrangler d1 migrations apply makina-db --remote && npx opennextjs-cloudflare deploy
@@ -93,7 +93,7 @@ npm run db:migrate:local   # 로컬 D1(.wrangler/)에 스키마 적용
 npm run dev                # env.dev 바인딩(로컬 D1·R2)으로 실행 → http://localhost:3000/admin/signup
 ```
 
-스키마를 바꿀 때는 `migrations/0002_….sql` 처럼 새 파일을 추가합니다. 이미 적용된 파일은 고치지 않습니다.
+스키마를 바꿀 때는 `migrations/0002_….sql` 처럼 새 파일을 추가합니다. 이미 적용된 파일은 고치지 않습니다. 빌드·개발 서버가 시작될 때 `scripts/gen-schema.mjs` 가 `src/lib/schema.generated.ts` 를 다시 만듭니다(표가 하나도 없을 때 사이트가 스스로 만드는 데 씀). 그 뒤의 변경은 배포 명령의 마이그레이션으로 적용됩니다.
 
 ## 저장소 구조
 
