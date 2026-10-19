@@ -3,32 +3,24 @@
 import { useState } from "react";
 import { supportItems } from "@/data/content";
 import { site } from "@/data/site";
-import { FactoryScene } from "./placeholders";
 import s from "./Support.module.css";
 
-/** 고객지원 — "무엇을 도와드릴까요?" 사진 띠 + 아코디언 5개 */
+/** 고객지원 — 애플식 펼침 목록 */
 export default function Support() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className={s.help} id="support" aria-labelledby="support-title">
-      <div className={`photo ${s.photo}`}>
-        <FactoryScene />
-        <span className="photo-label">사진 — 공장 내부 / 작업기 정비 장면 (교체)</span>
-      </div>
-      <div className={s.shade} />
+    <section className="mod" id="support" aria-labelledby="support-title">
+      <div className="mod-in">
+        <span className="lab-k">고객지원</span>
+        <h2 id="support-title">무엇을 도와드릴까요?</h2>
+        <p className="tag">원하시는 서비스를 눌러 주세요. 어느 것이든 전화 한 통으로 시작됩니다.</p>
 
-      <div className={`wrap ${s.in}`}>
-        <h2 className={s.ttl} id="support-title">
-          무엇을 도와드릴까요?
-        </h2>
-        <p className={s.sub}>원하시는 서비스를 눌러 주세요</p>
-
-        <div className={s.grid}>
+        <div className={s.list}>
           {supportItems.map((it, i) => {
             const isOpen = open === i;
             return (
-              <div key={i} className={`${s.it} ${isOpen ? s.open : ""}`}>
+              <div key={i} className={`${s.item} ${isOpen ? s.open : ""}`}>
                 <button
                   type="button"
                   aria-expanded={isOpen}
@@ -36,29 +28,17 @@ export default function Support() {
                   onClick={() => setOpen(isOpen ? null : i)}
                 >
                   <span className={s.title}>
-                    {it.title.split("\n").map((line, li) => (
-                      <span key={li}>
-                        {li > 0 && (
-                          <>
-                            <br className={s.br} />{" "}
-                          </>
-                        )}
-                        {line}
-                      </span>
-                    ))}
+                    {it.short}
                     <small>{it.sub}</small>
                   </span>
-                  <span className={s.plus} aria-hidden="true">
-                    +
-                  </span>
+                  <span className={s.plus} aria-hidden="true" />
                 </button>
                 <div id={`support-panel-${i}`} className={s.panel} hidden={!isOpen}>
-                  <p>{it.sub}</p>
                   <div className={s.acts}>
-                    <a className="pill pill--cta" href={site.phoneHref}>
+                    <a className="btn btn--cta" href={site.phoneHref}>
                       ☏ 전화 상담 {site.phone}
                     </a>
-                    <a className="pill pill--kakao" href={site.kakaoHref}>
+                    <a className="btn btn--kakao" href={site.kakaoHref}>
                       카카오톡 문의
                     </a>
                   </div>

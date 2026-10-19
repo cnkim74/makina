@@ -1,38 +1,51 @@
-.dock {
+.wrap {
   display: none;
 }
 
 @media (max-width: 900px) {
-  .dock {
+  .wrap {
+    display: block;
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 30;
-    background: #fff;
-    border-top: 1px solid #e5e5e5;
+    padding: 0 10px calc(10px + env(safe-area-inset-bottom, 0px));
+    pointer-events: none;
+  }
+
+  .dock {
+    pointer-events: auto;
     display: grid;
     grid-template-columns: 1.3fr 1fr 1fr;
-    gap: 8px;
-    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 8px));
-    box-shadow: var(--shadow-float);
+    gap: 6px;
+    padding: 6px;
+    border-radius: 34px;
+    max-width: 520px;
+    margin: 0 auto;
   }
 
   .dock a {
-    height: 54px;
-    border-radius: var(--radius-pill);
+    position: relative;
+    z-index: 1;
+    height: 56px;
+    border-radius: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-display);
     font-weight: 700;
     font-size: 15px;
     white-space: nowrap;
+    transition: transform 0.35s var(--ease-spring);
+  }
+
+  .dock a:active {
+    transform: scale(0.96);
   }
 
   .tel {
     background: var(--signal-orange);
-    color: var(--wrap-white);
+    color: #fff;
   }
 
   .kakao {
@@ -41,7 +54,7 @@
   }
 
   .order {
-    background: var(--soil-black);
+    background: var(--fg);
     color: #fff;
   }
 }

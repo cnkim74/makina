@@ -2,58 +2,60 @@
 
 import { useState } from "react";
 import { workflow } from "@/data/content";
+import Segmented from "./Segmented";
+import { FieldRows } from "./placeholders";
 import s from "./WorkFlow.module.css";
 
-/** 조사료 작업 흐름 — 번호 원형 절차도. 활성 단계만 오렌지. */
+type StepId = `${number}`;
+
+/** 조사료 작업 흐름 — 유리 세그먼트로 단계를 고르면 아래 카드가 바뀐다 */
 export default function WorkFlow() {
-  const [active, setActive] = useState(1);
-  const current = workflow.find((w) => w.step === active) ?? workflow[1];
+  const [step, setStep] = useState<StepId>("1");
+  const cur = workflow.find((w) => String(w.step) === step) ?? workflow[0];
+  const next = workflow.find((w) => w.step === cur.step + 1);
 
   return (
-    <section className="sec" id="workflow" aria-labelledby="workflow-title">
-      <div className="wrap">
-        <h2 className="sec-title" id="workflow-title">
-          조사료 작업 흐름
-        </h2>
-        <p className="sec-sub">베기부터 감싸기, 소모품까지 — 성원마끼나 작업기 한 세트로 끝납니다</p>
+    <section className="mod mod--alt" id="workflow" aria-labelledby="workflow-title">
+      <div className="mod-in">
+        <span className="lab-k">작업 흐름</span>
+        <h2 id="workflow-title">베기부터 감싸기까지, 한 세트로.</h2>
+        <p className="tag">조사료의 처음부터 끝까지, 성원마끼나 작업기가 단계마다 함께합니다.</p>
 
-        <ol className={s.proc}>
-          {workflow.map((w) => {
-            const isField = w.step === 0;
-            const isOn = w.step === active;
-            return (
-              <li
-                key={w.step}
-                className={`${s.st} ${isOn ? s.on : ""} ${isField ? s.first : ""}`}
-              >
-                <button
-                  type="button"
-                  onClick={() => !isField && setActive(w.step)}
-                  aria-current={isOn ? "step" : undefined}
-                  disabled={isField}
-                >
-                  <i>{isField ? "▦" : w.step}</i>
-                  <b>{w.title}</b>
-                  <span>
-                    {w.desc}
-                    {w.machine && (
-                      <>
-                        <br />
-                        {w.machine}
-                      </>
-                    )}
-                  </span>
+        <Segmented<StepId>
+          className={s.seg}
+          label="작업 단계"
+          kind="tablist"
+          value={step}
+          onChange={setStep}
+          options={workflow.map((w) => ({ id: String(w.step) as StepId, label: `${w.step} ${w.title}` }))}
+        />
+
+        <div className={s.card} role="tabpanel" aria-label={`${cur.step}단계 ${cur.title}`}>
+          <div className={s.text}>
+            <span className={s.step}>
+              {cur.step}단계 · {cur.title}
+            </span>
+            <h3>{cur.desc}.</h3>
+            <p>{cur.detail}</p>
+            <dl className={s.machine}>
+              <dt>이 단계의 작업기</dt>
+              <dd>{cur.machine}</dd>
+            </dl>
+            <div className={s.acts}>
+              <a className="lnk" href={cur.href}>
+                {cur.step === 5 ? "소모품 주문하기" : "작업기 보기"}
+              </a>
+              {next && (
+                <button type="button" className={`lnk ${s.next}`} onClick={() => setStep(String(next.step) as StepId)}>
+                  다음 단계 {next.title}
                 </button>
-              </li>
-            );
-          })}
-        </ol>
-
-        <div className={s.note}>
-          <b>
-            {current.step} {current.title}
-          </b>{" "}
-          — {current.desc}. <span>{current.machine}</span>
+              )}
+            </div>
+          </div>
+          <div className={`photo ${s.pic}`}>
+            <FieldRows w={800} h={600} fill={cur.tone} stroke="rgba(0,0,0,.22)" />
+            <span className="photo-label">작업 사진 — {cur.title} (교체)</span>
+          </div>
         </div>
       </div>
     </section>

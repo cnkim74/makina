@@ -1,75 +1,87 @@
 /*
- * 디자인 토큰 — docs/design/tokens.json 의 값을 CSS 변수로 옮긴 것.
- * 값을 바꿀 때는 tokens.json 을 먼저 고치고 여기에 반영한다.
+ * 디자인 토큰.
+ * 브랜드 색(흙먹·건초금·볏짚·신호 오렌지)은 docs/design/tokens.json 그대로 두고,
+ * 화면 문법은 2026-10 결정에 따라 ZIPLAN 컨셉(애플식 스토어프런트 + 리퀴드 글래스)을 따른다.
  */
 :root {
-  /* 메인 */
+  /* ── 브랜드 색 (tokens.json) ── */
   --soil-black: #1c1a17;
   --hay-gold: #e0a526;
   --straw-cream: #f4eddc;
-
-  /* 서브 */
   --field-brown: #4a3a2c;
   --silage-green: #5b7340;
   --steel-gray: #8c9196;
   --wrap-white: #fafaf6;
-
-  /* 기능 */
-  --signal-orange: #e4572e;
-  --line: #d9cfb8;
-  --hay-gold-deep: #b8841a;
+  --signal-orange: #e4572e; /* 전화 상담 CTA 전용 */
   --signal-orange-deep: #c4451f;
-
-  /* 역할 (라이트 기본) */
-  --surface: var(--straw-cream);
-  --surface-raised: var(--wrap-white);
-  --ink: var(--soil-black);
-  --ink-muted: #6b6459;
-  --hairline: var(--line);
-  --brand: var(--hay-gold);
-  --cta: var(--signal-orange);
-
-  /* 외부 브랜드 */
+  --hay-gold-deep: #b8841a;
   --kakao-yellow: #fae100;
 
-  /* 서체 */
-  --font-display: "GmarketSans", "Gmarket Sans", "Noto Sans KR", "Pretendard", system-ui, sans-serif;
-  --font-accent: "Cafe24Dongdong", "Cafe24 Dongdong", "GmarketSans", "Noto Sans KR", sans-serif;
-  --font-body: "Pretendard", "Noto Sans KR", system-ui, -apple-system, sans-serif;
+  /* ── 스토어프런트 바탕 (애플식 중립색) ── */
+  --bg: #ffffff;
+  --bg-alt: #f5f5f7;
+  --fg: #1d1d1f;
+  --fg-2: #6e6e73; /* 흰 바탕 5.1:1, 회색 바탕 4.7:1 */
+  --line: #d2d2d7;
+  --card-line: #e5e5ea;
+  --stage: #0b0c10; /* 히어로·어두운 띠 */
+  --stage-fg-2: #a1a1a6;
 
-  /* 간격 (8px 그리드) */
+  /* 링크·강조. 건초금을 눌러 흰 바탕에서도 읽히게 (흰 5.8:1, 회색 5.3:1) */
+  --accent: #8a5d00;
+  --accent-on-dark: var(--hay-gold); /* 어두운 바탕 8.9:1 */
+
+  /* ── 리퀴드 글래스 ── */
+  --glass-bg: rgba(255, 255, 255, 0.64);
+  --glass-line: rgba(29, 29, 31, 0.09);
+  --glass-blur: 26px;
+  --glass-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(29, 29, 31, 0.04),
+    0 10px 36px -8px rgba(0, 0, 0, 0.16),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+  --glass-dark-bg: rgba(22, 22, 26, 0.42);
+  --glass-dark-line: rgba(255, 255, 255, 0.16);
+  --glass-dark-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+    0 14px 40px -10px rgba(0, 0, 0, 0.5);
+
+  /* ── 서체 ── */
+  /* 본문·제목: 프리텐다드(SF와 같은 결) */
+  --font-body: "Pretendard", -apple-system, BlinkMacSystemFont, "SF Pro KR", "Apple SD Gothic Neo", "Noto Sans KR",
+    system-ui, sans-serif;
+  --font-display: var(--font-body);
+  /* 영문 워드마크·대형 캡션 */
+  --font-brand: "Archivo Black", "Archivo", "Helvetica Neue", Arial, sans-serif;
+  /* 국문 로고 */
+  --font-logo: "GmarketSans", "Gmarket Sans", "Pretendard", "Noto Sans KR", sans-serif;
+  /* 목소리: 슬로건·영상 자막·배지에만 */
+  --font-accent: "Cafe24Dongdong", "Cafe24 Dongdong", "Pretendard", "Noto Sans KR", sans-serif;
+
+  /* ── 간격 (8px 그리드) ── */
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;
   --space-4: 40px;
   --space-5: 64px;
-  --space-6: 120px;
-  --space-7: 160px;
+  --space-6: 96px;
+  --space-7: 140px;
 
-  /* 모서리 */
-  --radius-0: 0px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
+  /* ── 모서리 ── */
+  --radius-sm: 8px;
+  --radius-card: 18px;
+  --radius-tile: 22px;
+  --radius-stage: 28px;
   --radius-pill: 999px;
 
-  /* 그림자 */
-  --shadow-float: 0 12px 32px rgba(28, 26, 23, 0.18);
-
-  /* 모션 */
+  /* ── 모션 ── */
   --duration-base: 480ms;
-  --duration-signature: 1200ms;
   --ease-machine: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.25, 1.35, 0.35, 1);
 
-  /* 레이아웃 */
-  --container: 1240px;
-  --gutter-mobile: 20px;
-}
-
-[data-theme="dark"] {
-  --surface: var(--soil-black);
-  --surface-raised: var(--field-brown);
-  --ink: var(--straw-cream);
-  --ink-muted: var(--steel-gray);
-  --hairline: #3a342c;
-  --shadow-float: 0 12px 32px rgba(0, 0, 0, 0.45);
+  /* ── 레이아웃 ── */
+  --container: 1200px;
+  --gutter: 20px;
+  --nav-h: 72px;
 }

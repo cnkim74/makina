@@ -5,7 +5,10 @@
  * 둘 다 실패하면 Noto Sans KR / 시스템 서체로 대체된다.
  */
 
-/* 제목 — 지마켓 산스 Bold (Light/Medium 은 쓰지 않는다) */
+/* 영문 워드마크(MAKKINA)·히어로 캡션의 Archivo Black 과 대체용 Noto Sans KR 은
+   src/app/layout.tsx 에서 Google Fonts 로 불러온다. */
+
+/* 국문 로고 — 지마켓 산스 Bold (Light/Medium 은 쓰지 않는다) */
 @font-face {
   font-family: "GmarketSans";
   font-weight: 700;

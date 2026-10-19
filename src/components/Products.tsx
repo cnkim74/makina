@@ -1,71 +1,84 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { products, productTabs, type ProductCategory } from "@/data/content";
+import { site } from "@/data/site";
+import Segmented from "./Segmented";
 import { ProductSilhouette } from "./placeholders";
 import s from "./Products.module.css";
 
+type TabId = ProductCategory | "all";
+
+/** 대표 작업기 — 애플식 제품 타일. 글은 위, 누끼 사진은 아래 */
 export default function Products() {
-  const [tab, setTab] = useState<ProductCategory | "all">("all");
+  const [tab, setTab] = useState<TabId>("all");
   const list = tab === "all" ? products : products.filter((p) => p.category === tab);
 
   return (
-    <section className={`sec ${s.sec}`} id="products" aria-labelledby="products-title">
-      <div className="wrap">
-        <div className={s.tabs} role="tablist" aria-label="작업기 분류">
-          {productTabs.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              role="tab"
-              aria-selected={tab === t.id}
-              className={tab === t.id ? s.on : undefined}
-              onClick={() => setTab(t.id)}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
+    <section className="mod" id="products" aria-labelledby="products-title">
+      <div className="mod-in">
+        <span className="lab-k">작업기</span>
+        <h2 id="products-title">이름처럼 일하는 기계.</h2>
+        <p className="tag">베일러부터 제초기까지, 안동 서후면 공장에서 직접 만들고 직접 고칩니다.</p>
 
-        <h2 className={s.catH} id="products-title">
-          대표 작업기
-        </h2>
+        <Segmented<TabId>
+          className={s.seg}
+          label="작업기 분류"
+          kind="tablist"
+          value={tab}
+          onChange={setTab}
+          options={productTabs.map((t) => ({ id: t.id, label: t.label }))}
+        />
 
-        {list.length === 0 ? (
-          <p className={s.empty}>이 분류의 작업기는 준비 중입니다. 전화로 문의해 주세요.</p>
-        ) : (
-          <div className={s.cards}>
-            {list.map((p) => (
-              <article key={p.id} className={s.card}>
-                <div className={s.img}>
-                  {p.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={p.image} alt={`${p.name} ${p.categoryLabel}`} />
-                  ) : (
-                    <ProductSilhouette variant={p.category} />
-                  )}
-                  {p.isNew && (
-                    <div className={s.new}>
-                      <span>NEW</span>
-                    </div>
-                  )}
-                </div>
+        <div className={s.grid} role="tabpanel" aria-label={productTabs.find((t) => t.id === tab)?.label}>
+          {list.map((p) => (
+            <article key={p.id} className={`tile ${s.tile}`}>
+              <div className={s.top}>
+                {p.isNew ? <span className={s.new}>NEW</span> : <span className={s.newSpace} aria-hidden="true" />}
                 <h3>{p.name}</h3>
-                <div className={s.c}>{p.categoryLabel}</div>
-                <p>
-                  <i className={s.catch}>{p.catch}</i>
-                  {p.copy}
-                </p>
-              </article>
-            ))}
-          </div>
-        )}
+                <p className={s.cat}>{p.categoryLabel}</p>
+                <p className={s.catch}>{p.catch}</p>
+                <p className={s.copy}>{p.copy}</p>
+                <div className={s.links}>
+                  <a className="lnk" href="#support">
+                    상담 받기
+                  </a>
+                  <a className="lnk" href="#videos">
+                    영상 보기
+                  </a>
+                </div>
+              </div>
+              <div className={s.art}>
+                {p.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={p.image} alt={`${p.name} ${p.categoryLabel}`} />
+                ) : (
+                  <ProductSilhouette variant={p.category} />
+                )}
+              </div>
+            </article>
+          ))}
 
-        <div className={s.more}>
-          <Link href="#products" className="pill pill--line">
-            작업기 전체 보기
-          </Link>
+          {list.length === 0 && (
+            <div className={`card ${s.empty}`}>
+              {tab === "consumable" ? (
+                <>
+                  <b>네트와 랩 필름은 아래에서 바로 주문하세요.</b>
+                  <a className="lnk" href="#consumables">
+                    소모품 빠른 주문
+                  </a>
+                </>
+              ) : (
+                <>
+                  <b>이 분류의 작업기 정보를 정리하고 있습니다.</b>
+                  <p>모델과 가격은 전화로 바로 안내해 드립니다.</p>
+                  <a className="btn btn--cta" href={site.phoneHref}>
+                    ☏ 전화 상담 {site.phone}
+                  </a>
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>

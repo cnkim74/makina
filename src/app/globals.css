@@ -1,6 +1,8 @@
 @import "../styles/tokens.css";
 @import "../styles/fonts.css";
 
+/* Layout: ZIPLAN식 스토어프런트. 떠 있는 유리 알약 내비 → 스크롤 장면 히어로 → 가운데 정렬 모듈(라벨 칩 + 큰 제목 + 회색 설명) → 타일 */
+
 *,
 *::before,
 *::after {
@@ -11,23 +13,22 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
 }
 
 html,
 body {
-  background: #fff;
-  color: var(--soil-black);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-body);
   font-size: 18px;
-  line-height: 1.65;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 a {
@@ -41,6 +42,11 @@ button {
   background: none;
   border: 0;
   cursor: pointer;
+}
+
+input {
+  font: inherit;
+  color: inherit;
 }
 
 ul,
@@ -61,8 +67,9 @@ h3,
 h4 {
   font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
 :focus-visible {
@@ -70,84 +77,268 @@ h4 {
   outline-offset: 3px;
 }
 
-/* 공통 레이아웃 */
-.wrap {
-  width: 100%;
+[id] {
+  scroll-margin-top: calc(var(--nav-h) + 8px);
+}
+
+/* ── 모듈: 라벨 칩 + 큰 제목 + 회색 설명 ── */
+.mod {
+  padding: var(--space-6) var(--gutter);
+  text-align: center;
+}
+
+.mod--alt {
+  background: var(--bg-alt);
+}
+
+.mod--dark {
+  background: var(--stage);
+  color: #fff;
+}
+
+.mod-in {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--gutter-mobile);
 }
 
-@media (min-width: 1300px) {
-  .wrap {
-    padding: 0;
-  }
+.mod h2 {
+  font-size: clamp(34px, 5.2vw, 56px);
+  line-height: 1.08;
+  margin-top: 16px;
 }
 
-.sec {
-  padding: 110px 0;
+.tag {
+  font-size: clamp(19px, 2.2vw, 24px);
+  color: var(--fg-2);
+  max-width: 680px;
+  margin: 12px auto 0;
+  line-height: 1.45;
 }
 
-.sec-title {
-  text-align: center;
-  font-size: 44px;
-  letter-spacing: -0.03em;
+.mod--dark .tag {
+  color: var(--stage-fg-2);
 }
 
-.sec-sub {
-  text-align: center;
-  margin-top: 14px;
-  font-size: 19px;
-  color: #555;
+.lab-k {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--fg);
+  color: var(--bg);
+  line-height: 1.2;
 }
 
-/* 알약 버튼 */
-.pill {
+.mod--dark .lab-k {
+  background: #fff;
+  color: var(--fg);
+}
+
+/* ── 링크: 애플식 "보기 ›" ── */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 28px;
+  margin-top: 20px;
+}
+
+.lnk {
+  color: var(--accent);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 48px;
+}
+
+.lnk::after {
+  content: "›";
+  font-size: 1.15em;
+  line-height: 1;
+  transition: transform 0.2s var(--ease-machine);
+}
+
+.lnk:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lnk:hover::after {
+  transform: translateX(3px);
+}
+
+.mod--dark .lnk,
+.on-dark .lnk {
+  color: var(--accent-on-dark);
+}
+
+/* ── 버튼 ── */
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 56px;
-  padding: 0 32px;
+  gap: 8px;
+  min-height: 56px;
+  padding: 0 28px;
   border-radius: var(--radius-pill);
-  font-family: var(--font-display);
   font-weight: 700;
   font-size: 18px;
   white-space: nowrap;
   transition:
-    background-color var(--duration-base) var(--ease-machine),
-    color var(--duration-base) var(--ease-machine),
-    border-color var(--duration-base) var(--ease-machine);
+    background-color 0.25s var(--ease-machine),
+    transform 0.35s var(--ease-spring),
+    box-shadow 0.25s var(--ease-machine);
 }
 
-.pill--dark {
-  background: var(--soil-black);
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn--dark {
+  background: var(--fg);
   color: #fff;
 }
 
-.pill--line {
-  border: 1.5px solid var(--soil-black);
-  background: transparent;
+.btn--dark:hover {
+  background: #000;
 }
 
-.pill--cta {
+.btn--cta {
   background: var(--signal-orange);
-  color: var(--wrap-white);
+  color: #fff;
 }
 
-.pill--cta:hover {
+.btn--cta:hover {
   background: var(--signal-orange-deep);
 }
 
-.pill--kakao {
+.btn--kakao {
   background: var(--kakao-yellow);
-  color: var(--soil-black);
+  color: var(--fg);
 }
 
-/* 사진 자리표시 */
+.btn--ghost {
+  box-shadow: inset 0 0 0 1.5px var(--line);
+  color: var(--fg);
+}
+
+.btn--ghost:hover {
+  box-shadow: inset 0 0 0 1.5px var(--fg);
+}
+
+/* ── 리퀴드 글래스 ── */
+.glass {
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(190%);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--glass-shadow);
+}
+
+/* 테두리를 따라 도는 얇은 빛 (스펙큘러 림) */
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.2) 35%,
+    rgba(255, 255, 255, 0) 55%,
+    rgba(255, 255, 255, 0.55)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.glass--dark {
+  background: var(--glass-dark-bg);
+  border-color: var(--glass-dark-line);
+  box-shadow: var(--glass-dark-shadow);
+  color: #fff;
+}
+
+.glass--dark::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.06) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.28)
+  );
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: rgba(255, 255, 255, 0.94);
+  }
+
+  .glass--dark {
+    background: rgba(22, 22, 26, 0.9);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: rgba(255, 255, 255, 0.96);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .glass--dark {
+    background: rgba(22, 22, 26, 0.94);
+  }
+}
+
+/* ── 타일·카드 ── */
+.tile {
+  background: var(--bg);
+  border: 1px solid var(--card-line);
+  border-radius: var(--radius-tile);
+  padding: 32px 28px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  min-width: 0;
+  transition:
+    transform 0.4s var(--ease-machine),
+    box-shadow 0.4s var(--ease-machine);
+}
+
+.tile:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.card {
+  background: var(--bg-alt);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  min-width: 0;
+}
+
+.mod--alt .card {
+  background: var(--bg);
+}
+
+/* ── 사진 자리표시 ── */
 .photo {
   position: relative;
   overflow: hidden;
-  background: #3b3a35;
+  background: #2b2c2a;
 }
 
 .photo > svg,
@@ -162,11 +353,11 @@ h4 {
 
 .photo-label {
   position: absolute;
-  left: 12px;
+  left: 14px;
   bottom: 10px;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.6);
   pointer-events: none;
 }
 
@@ -189,23 +380,17 @@ h4 {
     line-height: 1.55;
   }
 
-  /* 하단 고정 버튼(MobileDock) 높이만큼 여백 */
+  :root {
+    --nav-h: 64px;
+  }
+
+  .mod {
+    padding: var(--space-5) var(--gutter);
+  }
+
+  /* 하단 고정 유리 도크(MobileDock) 높이만큼 */
   body {
     padding-bottom: 96px;
-  }
-
-  .sec {
-    padding: 64px 0;
-  }
-
-  .sec-title {
-    font-size: 28px;
-  }
-
-  .sec-sub {
-    margin-top: 8px;
-    font-size: 15px;
-    padding: 0 var(--gutter-mobile);
   }
 }
 

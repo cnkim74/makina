@@ -1,32 +1,54 @@
-import Link from "next/link";
-import { footerLinks, site } from "@/data/site";
+import { footerGroups, legalLinks, site } from "@/data/site";
+import { LogoMark } from "./placeholders";
 import s from "./Footer.module.css";
 
+/** 애플식 푸터 — 연회색 바탕, 작은 글, 링크 묶음 */
 export default function Footer() {
   return (
     <footer className={s.foot}>
-      <div className={s.top}>
-        <nav className={s.fm} aria-label="푸터 메뉴">
-          {footerLinks.map((l) => (
-            <Link key={l.label} href={l.href}>
-              {l.label}
-            </Link>
+      <div className={s.in}>
+        <p className={s.note}>
+          운영시간 · {site.hours}. 가격과 사양은 전화로 바로 안내해 드립니다.
+        </p>
+
+        <div className={s.cols}>
+          <div className={s.brand}>
+            <LogoMark size={34} />
+            <b>
+              성원마<em>끼</em>나
+            </b>
+            <span>{site.tagline}</span>
+            <a className={s.tel} href={site.phoneHref}>
+              {site.phone}
+            </a>
+          </div>
+          {footerGroups.map((g) => (
+            <nav key={g.title} className={s.col} aria-label={g.title}>
+              <h4>{g.title}</h4>
+              {g.links.map((l) => (
+                <a key={l.label} href={l.href}>
+                  {l.label}
+                </a>
+              ))}
+            </nav>
           ))}
-        </nav>
-        <div className={s.fam}>
-          <a href="#catalog">카탈로그 다운로드</a>
-          <a href={site.youtubeHref}>유튜브 채널</a>
         </div>
-      </div>
-      <div className={s.bot}>
-        <address>
-          {site.name} · 대표 {site.ceo} · 사업자등록번호 {site.bizNo}
-          <br />
-          {site.address} · 전화 <a href={site.phoneHref}>{site.phone}</a> · 팩스 {site.fax}
-          <br />
-          Copyright © {site.name}. All rights reserved.
-        </address>
-        <div className={s.tag}>{site.tagline}</div>
+
+        <div className={s.bot}>
+          <address>
+            {site.name} · 대표 {site.ceo} · 사업자등록번호 {site.bizNo}
+            <br />
+            {site.address} · 전화 {site.phone} · 팩스 {site.fax}
+          </address>
+          <div className={s.legal}>
+            {legalLinks.map((l) => (
+              <a key={l.label} href={l.href}>
+                {l.label}
+              </a>
+            ))}
+            <span>© {site.name}</span>
+          </div>
+        </div>
       </div>
     </footer>
   );

@@ -4,17 +4,17 @@ import s from "./Directions.module.css";
 
 export default function Directions() {
   return (
-    <section className="sec" id="directions" aria-labelledby="dir-title">
-      <div className="wrap">
-        <h2 className={s.ttl} id="dir-title">
-          오시는 길
-        </h2>
+    <section className="mod mod--alt" id="directions" aria-labelledby="dir-title">
+      <div className="mod-in">
+        <span className="lab-k">오시는 길</span>
+        <h2 id="dir-title">안동 서후면, 공장으로 오세요.</h2>
+        <p className="tag">작업기를 직접 보고 시연까지 받아 보실 수 있습니다. 오시기 전에 전화 한 번 주세요.</p>
 
         <div className={s.way}>
           <div className={s.map}>
             <MapPlaceholder />
-            <div className={s.pin} aria-hidden="true" />
-            <span className="photo-label" style={{ color: "#999" }}>
+            <span className={s.pin} aria-hidden="true" />
+            <span className="photo-label" style={{ color: "#8a8a8e" }}>
               지도 — 카카오맵 임베드로 교체
             </span>
           </div>
@@ -26,21 +26,18 @@ export default function Directions() {
               <dd>{site.address}</dd>
               <dt>운영시간</dt>
               <dd>{site.hours}</dd>
-              <dt>전화</dt>
-              <dd>
-                <a className={s.tel} href={site.phoneHref}>
-                  {site.phone}
-                </a>
-              </dd>
             </dl>
+            <a className={s.tel} href={site.phoneHref}>
+              {site.phone}
+            </a>
             <div className={s.acts}>
-              <a className="pill pill--cta" href={site.phoneHref}>
-                전화 상담
+              <a className="btn btn--cta" href={site.phoneHref}>
+                ☏ 전화 상담
               </a>
-              <a className="pill pill--kakao" href={site.kakaoHref}>
+              <a className="btn btn--kakao" href={site.kakaoHref}>
                 카카오톡 문의
               </a>
-              <a className="pill pill--line" href={site.mapHref}>
+              <a className="btn btn--ghost" href={site.mapHref}>
                 길찾기
               </a>
             </div>

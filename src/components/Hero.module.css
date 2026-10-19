@@ -1,201 +1,352 @@
-.hero {
+/* 표지: 떠 있는 유리 바 아래까지 올라와 바와 한 장면이 된다 */
+.photo {
   position: relative;
-  height: 860px;
+  height: 260vh;
+  margin-top: calc(-1 * var(--nav-h));
+  background: var(--stage);
+}
+
+.stage {
+  --p: 0;
+  --head: 1;
+  --lit: 0;
+  --trace: 0;
+  --zoom: 0;
+  --veil: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--stage);
   color: #fff;
 }
 
-.photo {
+/* ── 세 겹 ── 확대 중심은 기계(가운데 아래). 겹마다 다르게 다가온다 */
+.layer {
   position: absolute;
   inset: 0;
+  will-change: transform;
+}
+
+.layer svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bg {
+  transform-origin: 50% 70%;
+  transform: scale(calc(1 + var(--zoom) * 0.08));
+}
+
+.mid {
+  transform-origin: 52% 76%;
+  transform: scale(calc(1 + var(--zoom) * 0.34));
+}
+
+.fg {
+  transform-origin: 13% 90%;
+  transform: scale(calc(1 + var(--zoom) * 0.6)) translateY(calc(var(--zoom) * -2%));
+}
+
+/* 아주 느린 숨결 — 정지 화면이 아니라 살아 있는 들판 */
+.drift {
+  position: absolute;
+  inset: 0;
+  animation: drift 48s ease-in-out infinite alternate;
+}
+
+.mid .drift {
+  animation-duration: 40s;
+  animation-delay: -10s;
+}
+
+.fg .drift {
+  animation-duration: 32s;
+  animation-delay: -18s;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(-0.4%, 0.2%, 0) scale(1.015);
+  }
+  to {
+    transform: translate3d(0.4%, -0.2%, 0) scale(1.035);
+  }
+}
+
+/* ── 도면 선 ── */
+.trace {
+  position: absolute;
+  inset: 0;
+  opacity: calc(min(var(--trace) * 4, 1) * (1 - var(--zoom) * 0.9));
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
+}
+
+.trace path,
+.trace circle,
+.trace rect {
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--trace));
+}
+
+/* ── 그늘 ── */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 58% at 50% 58%,
+    rgba(11, 12, 16, 0) 52%,
+    rgba(11, 12, 16, 0.45) 80%,
+    rgba(11, 12, 16, 0.92) 100%
+  );
+  pointer-events: none;
 }
 
 .shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.45));
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 8, 14, 0.62) 0%,
+    rgba(6, 8, 14, 0.22) 38%,
+    rgba(6, 8, 14, 0) 58%,
+    rgba(6, 8, 14, 0.32) 100%
+  );
+  pointer-events: none;
+}
+
+.label {
+  bottom: 14px;
+  left: 16px;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* ── 제목 블록: 위 가운데 ── */
+.head {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--nav-h) + 7vh);
+  z-index: 2;
+  text-align: center;
+  padding: 0 var(--gutter);
+  opacity: var(--head);
+  transform: translateY(calc((1 - var(--head)) * -48px));
+  animation: headIn 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both 0.15s;
+}
+
+.head.away {
+  pointer-events: none;
+}
+
+@keyframes headIn {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+.eyebrow {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  padding-left: 0.24em;
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.term {
+  font-family: var(--font-brand);
+  font-weight: 400;
+  font-size: clamp(64px, 8.6vw, 128px);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  margin-top: 14px;
+}
+
+.kk {
+  color: var(--hay-gold);
+}
+
+.gloss {
+  font-size: 15px;
+  letter-spacing: 0.2em;
+  padding-left: 0.2em;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 16px;
 }
 
 .slogan {
   font-family: var(--font-accent);
-  font-weight: 400;
-  position: absolute;
-  left: max(120px, calc((100% - var(--container)) / 2));
-  bottom: 150px;
-  max-width: min(680px, calc(100% - 760px));
-  font-size: 64px;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  font-size: clamp(26px, 2.8vw, 38px);
+  line-height: 1.25;
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.96);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
 }
 
-.sloganLine {
-  display: inline;
-}
-
-.sloganLine + .sloganLine::before {
-  content: " ";
-}
-
-.slogan small {
-  display: block;
-  font-family: var(--font-body);
-  font-size: 22px;
-  font-weight: 400;
+.plinks {
   margin-top: 14px;
-  letter-spacing: -0.01em;
-  opacity: 0.95;
+  font-size: clamp(17px, 1.5vw, 20px);
 }
 
-.idx {
+.cta {
+  margin-top: 10px;
+  box-shadow: 0 12px 30px -10px rgba(228, 87, 46, 0.7);
+}
+
+/* ── 캡션: 오른쪽 아래 (왼쪽 아래는 큰 베일 자리) ── */
+.caps {
   position: absolute;
-  left: max(120px, calc((100% - var(--container)) / 2));
-  bottom: 90px;
-  display: flex;
-  gap: 28px;
-  font-size: 17px;
-  font-weight: 700;
-  align-items: center;
+  right: max(var(--gutter), calc(50% - 600px));
+  bottom: max(40px, 10vh);
+  z-index: 2;
+  text-align: right;
+  pointer-events: none;
 }
 
-.idx span {
-  opacity: 0.75;
-}
-
-.idx .on {
-  color: var(--hay-gold);
-  opacity: 1;
-}
-
-.bar {
-  width: 520px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.5);
-  position: relative;
-  margin-left: 8px;
-}
-
-.bar::before {
-  content: "";
+.cap {
   position: absolute;
-  left: 0;
-  top: 0;
-  height: 2px;
-  width: 20%;
-  background: var(--hay-gold);
-}
-
-.pause {
-  width: 14px;
-  height: 14px;
-  border-left: 3px solid #fff;
-  border-right: 3px solid #fff;
-  margin-left: 8px;
-}
-
-.panel {
-  position: absolute;
-  right: max(120px, calc((100% - var(--container)) / 2));
+  right: 0;
   bottom: 0;
-  width: 520px;
-  background: var(--soil-black);
-  padding: 56px 56px 48px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s var(--ease-machine),
+    transform 0.5s var(--ease-machine);
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.5);
 }
 
-.panel h2 {
-  font-family: var(--font-accent);
-  font-size: 38px;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+.capOn {
+  opacity: 1;
+  transform: none;
 }
 
-.panel a {
-  display: inline-block;
-  margin-top: 28px;
-  color: var(--hay-gold);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  font-size: 16px;
-  min-height: 48px;
+.capW {
+  font-family: var(--font-brand);
+  font-size: clamp(56px, 8.4vw, 120px);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
 }
 
-.panel a::after {
-  content: "  ⟶";
-  font-weight: 400;
+.capK {
+  font-size: clamp(15px, 1.2vw, 17px);
+  letter-spacing: 0.3em;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.82);
 }
 
-@media (max-width: 1300px) {
-  .slogan,
-  .idx {
-    left: 64px;
-  }
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.66);
+  opacity: var(--head);
+}
 
-  .panel {
-    right: 64px;
-  }
+/* 끝에서 흰 바탕으로 녹아든다 → 다음 모듈과 이어짐 */
+.veil {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: var(--bg);
+  opacity: var(--veil);
+  pointer-events: none;
 }
 
 @media (max-width: 900px) {
-  .hero {
-    height: 560px;
+  .photo {
+    height: 230vh;
   }
 
-  .shade {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.55));
+  .head {
+    top: calc(var(--nav-h) + 5vh);
   }
 
-  .slogan {
-    left: var(--gutter-mobile);
-    right: var(--gutter-mobile);
-    bottom: 120px;
-    max-width: none;
-    font-size: 36px;
-    line-height: 1.2;
-  }
-
-  .sloganLine {
-    display: block;
-  }
-
-  .slogan small {
-    font-size: 16px;
-    margin-top: 10px;
-  }
-
-  .idx {
-    left: var(--gutter-mobile);
-    bottom: 84px;
-    gap: 14px;
+  .eyebrow,
+  .gloss {
+    letter-spacing: 0.12em;
+    padding-left: 0.12em;
     font-size: 14px;
   }
 
-  .bar {
-    width: 120px;
-    margin-left: 0;
+  .plinks {
+    gap: 4px 18px;
   }
 
-  .pause {
+  /* 세로 화면: 장면을 넓게 깔고 기계(x≈850)를 가운데로 → 트랙터와 베일러가 다 보인다 */
+  .layer svg {
+    left: -32%;
+    right: auto;
+    width: 140%;
+    max-width: none;
+  }
+
+  /* 하단 유리 도크 위로 */
+  .caps {
+    right: var(--gutter);
+    bottom: 120px;
+  }
+
+  .hint {
+    bottom: 108px;
+  }
+}
+
+/* 움직임 줄이기: 불 켜진 한 장면으로 고정 */
+@media (prefers-reduced-motion: reduce) {
+  .photo {
+    height: auto;
+  }
+
+  .stage {
+    position: relative;
+    height: 88svh;
+    --lit: 1;
+  }
+
+  .layer,
+  .drift {
+    transform: none !important;
+    animation: none;
+  }
+
+  .trace,
+  .caps,
+  .hint,
+  .veil {
     display: none;
   }
 
-  .panel {
-    left: 0;
-    right: 0;
-    width: auto;
-    padding: 18px var(--gutter-mobile);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .head {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
+}
 
-  .panel h2 {
-    font-size: 19px;
-  }
+/* 실제 사진 겹 (heroImages) — 작업등 사진은 --lit 만큼 비친다 */
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 53% 62%;
+}
 
-  .panel a {
-    margin-top: 0;
-    font-size: 14px;
-    letter-spacing: 0.06em;
-    display: flex;
-    align-items: center;
-  }
+.imgLit {
+  opacity: var(--lit);
 }

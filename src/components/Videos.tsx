@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { videos, videoSorts, videoTags } from "@/data/content";
+import Segmented from "./Segmented";
 import { FieldRows } from "./placeholders";
 import s from "./Videos.module.css";
 
@@ -24,59 +24,60 @@ function Caption({ text }: { text: string }) {
 }
 
 export default function Videos() {
-  const [sort, setSort] = useState(0);
+  const [sort, setSort] = useState(videoSorts[0].label);
   const [q, setQ] = useState("");
 
-  const list = videos.filter((v) => !q || v.title.includes(q) || v.caption.includes(q));
+  // 띄어쓰기는 무시하고 찾는다 ("무른 논" = "무른논")
+  const norm = (t: string) => t.replace(/\s+/g, "").replace(/[{}]/g, "");
+  const key = norm(q.replace(/^#/, ""));
+  const list = videos
+    .filter(
+      (v) => !key || [v.title, v.caption, v.kind, ...v.tags].some((t) => norm(t).includes(key)),
+    )
+    .sort((a, b) => (sort === videoSorts[0].label ? b.date.localeCompare(a.date) : 0));
 
   return (
-    <section className="sec" id="videos" aria-labelledby="videos-title">
-      <div className="wrap">
-        <h2 className="sec-title" id="videos-title">
-          작업 영상
-        </h2>
+    <section className="mod" id="videos" aria-labelledby="videos-title">
+      <div className="mod-in">
+        <span className="lab-k">작업 영상</span>
+        <h2 id="videos-title">현장에서 직접 보세요.</h2>
+        <p className="tag">안동 서후면 들판에서 찍은 실제 작업 장면과 사용법 영상입니다.</p>
 
-        <form
-          className={s.search}
-          role="search"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
+        <form className={s.search} role="search" onSubmit={(e) => e.preventDefault()}>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" strokeWidth="2" />
+            <path d="M15.5 15.5 L21 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
           <input
+            id="video-search"
             type="search"
-            placeholder="영상 검색"
+            placeholder="영상 검색 — 예: 네트 교체"
             aria-label="영상 검색"
             value={q}
             onChange={(e) => setQ(e.target.value)}
           />
-          <button type="submit" aria-label="검색">
-            <i />
-          </button>
         </form>
 
         <div className={s.tags}>
           {videoTags.map((t) => (
-            <button key={t} type="button" onClick={() => setQ(t.slice(1))}>
+            <button
+              key={t}
+              type="button"
+              aria-pressed={q === t.slice(1)}
+              onClick={() => setQ(q === t.slice(1) ? "" : t.slice(1))}
+            >
               {t}
             </button>
           ))}
         </div>
 
-        <div className={s.sort} role="group" aria-label="정렬">
-          {videoSorts.map((o, i) => (
-            <button
-              key={o.label}
-              type="button"
-              className={sort === i ? s.on : undefined}
-              aria-pressed={sort === i}
-              onClick={() => setSort(i)}
-            >
-              <span className={s.long}>{o.label}</span>
-              <span className={s.short}>{o.short}</span>
-            </button>
-          ))}
-        </div>
+        <Segmented
+          className={s.seg}
+          label="정렬"
+          value={sort}
+          onChange={setSort}
+          options={videoSorts.map((o) => ({ id: o.label, label: o.label, short: o.short }))}
+        />
 
         <div className={s.grid}>
           {list.map((v) => (
@@ -86,26 +87,36 @@ export default function Videos() {
                 className={`photo ${s.thumb}`}
                 aria-label={`${v.title} 재생`}
               >
-                <FieldRows w={400} h={290} fill={v.tone} stroke="rgba(0,0,0,.25)" />
-                <span className={s.play} aria-hidden="true" />
+                <FieldRows w={400} h={250} fill={v.tone} stroke="rgba(0,0,0,.25)" />
+                <span className={`glass glass--dark ${s.play}`} aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5.5 L19 12 L8 18.5 Z" fill="currentColor" />
+                  </svg>
+                </span>
                 <span className={s.cap}>
                   <Caption text={v.caption} />
                 </span>
               </a>
-              <h3>{v.title}</h3>
-              <div className={s.meta}>
-                <b>{v.kind}</b>
-                {v.date}
+              <div className={s.body}>
+                <h3>{v.title}</h3>
+                <p className={s.meta}>
+                  <b>{v.kind}</b>
+                  {v.date}
+                </p>
               </div>
             </article>
           ))}
-          {list.length === 0 && <p className={s.empty}>&ldquo;{q}&rdquo; 에 맞는 영상이 아직 없습니다.</p>}
+          {list.length === 0 && (
+            <p className={s.empty}>
+              &ldquo;{q}&rdquo; 영상은 아직 없습니다. 다른 말로 찾아보시거나 전화로 물어봐 주세요.
+            </p>
+          )}
         </div>
 
-        <div className={s.more}>
-          <Link href="#videos" className="pill pill--line">
-            영상 더 보기
-          </Link>
+        <div className="links">
+          <a className="lnk" href="#videos">
+            유튜브 채널에서 더 보기
+          </a>
         </div>
       </div>
     </section>

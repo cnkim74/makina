@@ -1,0 +1,70 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+  text-align: left;
+}
+
+.door {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 32px 30px 22px;
+  color: var(--fg);
+  transition:
+    transform 0.4s var(--ease-machine),
+    box-shadow 0.4s var(--ease-machine),
+    background-color 0.3s;
+}
+
+.door:hover {
+  transform: translateY(-4px);
+  background: #efeff2;
+}
+
+.kicker {
+  font-family: var(--font-brand);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--fg-2);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.copy {
+  color: var(--fg-2);
+  font-size: 18px;
+  line-height: 1.55;
+  flex: 1;
+}
+
+.door em {
+  font-style: normal;
+  margin-top: 6px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .door {
+    padding: 24px 22px 14px;
+  }
+
+  .title {
+    font-size: 23px;
+  }
+
+  .copy {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,114 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.seg {
+  border-radius: var(--radius-pill);
+  padding: 5px;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.seg::-webkit-scrollbar {
+  display: none;
+}
+
+.track {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* 미끄러지는 유리 방울 */
+.thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  opacity: 0;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(180deg, #fff, rgba(255, 255, 255, 0.86));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -1px 0 rgba(29, 29, 31, 0.06),
+    0 3px 10px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.5s var(--ease-spring),
+    width 0.5s var(--ease-spring),
+    opacity 0.3s;
+  pointer-events: none;
+}
+
+.opt {
+  position: relative;
+  z-index: 1;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: var(--radius-pill);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--fg-2);
+  white-space: nowrap;
+  transition:
+    color 0.25s,
+    transform 0.35s var(--ease-spring);
+}
+
+.opt:hover {
+  color: var(--fg);
+}
+
+.opt:active {
+  transform: scale(0.96);
+}
+
+.on {
+  color: var(--fg);
+}
+
+/* 어두운 바탕: 고른 항목은 건초금 방울 + 흙먹 글자 */
+.dark .thumb {
+  background: linear-gradient(180deg, #f0bb45, var(--hay-gold));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 6px 18px -4px rgba(224, 165, 38, 0.55);
+}
+
+.dark .opt {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.dark .opt:hover {
+  color: #fff;
+}
+
+.dark .on,
+.dark .on:hover {
+  color: var(--soil-black);
+}
+
+.short {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .opt {
+    padding: 0 16px;
+    font-size: 15px;
+  }
+
+  .long {
+    display: none;
+  }
+
+  .short {
+    display: inline;
+  }
+}

@@ -1,5 +1,50 @@
 /** 메인 화면 콘텐츠. 제품·영상·소모품이 늘어나면 이 파일만 고친다. */
 
+/**
+ * 히어로 스크롤 장면. 새벽 들판 → 작업등이 켜지고 → 기계의 선이 그려지고 → 베일 한 덩이로 다가간다.
+ * from/to 는 히어로 구간 스크롤 진행률(0~1)에서 이 캡션이 보이는 범위.
+ */
+export const heroStory = [
+  { word: "DAWN", ko: "새벽 다섯 시, 서후면", from: 0.08, to: 0.26 },
+  { word: "LIGHT", ko: "작업등이 켜지면", from: 0.26, to: 0.44 },
+  { word: "LINE", ko: "이름처럼 일하는 기계", from: 0.44, to: 0.66 },
+  { word: "BALE", ko: "한 덩이, 단단하게", from: 0.66, to: 0.96 },
+];
+
+/**
+ * 히어로 실제 사진. 비어 있으면 SVG 자리표시 장면을 그린다.
+ * 겹마다 새벽(불 꺼짐)·작업등(불 켜짐) 두 장. 가운데·앞 겹은 투명 배경 webp.
+ * 예) bg: { dawn: "/images/hero/bg-dawn.webp", lit: "/images/hero/bg-lit.webp" }
+ * 촬영·생성 가이드는 README "히어로 이미지" 참고.
+ */
+export type HeroLayerImage = { dawn: string; lit: string };
+export const heroImages: Partial<Record<"bg" | "mid" | "fg", HeroLayerImage>> = {};
+
+/** 히어로 바로 아래 "바로 가기" 문 세 개 */
+export const quickDoors = [
+  {
+    kicker: "BUY",
+    title: "작업기 구매 상담",
+    copy: "트랙터 마력과 작업 면적만 알려 주시면 맞는 작업기와 지원사업을 안내해 드립니다.",
+    link: "구매 상담 받기",
+    href: "#support",
+  },
+  {
+    kicker: "ORDER",
+    title: "소모품 빠른 주문",
+    copy: "네트·랩 필름은 평일 오후 3시 이전 주문하시면 다음 날 받으실 수 있습니다.",
+    link: "소모품 주문하기",
+    href: "#consumables",
+  },
+  {
+    kicker: "CARE",
+    title: "A/S · 출장 정비",
+    copy: "수확철 고장은 하루가 급합니다. 접수하시면 가까운 정비 기사가 바로 연락드립니다.",
+    link: "정비 접수하기",
+    href: "#support",
+  },
+];
+
 export type ProductCategory =
   | "baler"
   | "mower"
@@ -58,12 +103,51 @@ export const products: Product[] = [
 ];
 
 export const workflow = [
-  { step: 0, title: "들판", desc: "논·밭, 어떤 작물이든", machine: "" },
-  { step: 1, title: "베기", desc: "남김없이 벱니다", machine: "블랙홀 드럼모우어" },
-  { step: 2, title: "모으기", desc: "고르게 모읍니다", machine: "LKHR 레이크" },
-  { step: 3, title: "묶기", desc: "단단히 묶습니다", machine: "비무꼬 원형베일러" },
-  { step: 4, title: "감싸기", desc: "오래 지킵니다", machine: "S350H 자동 접철 래퍼" },
-  { step: 5, title: "소모품", desc: "멈추지 않게", machine: "네트 · 랩 익일 출고" },
+  {
+    step: 1,
+    title: "베기",
+    desc: "남김없이 벱니다",
+    detail: "드럼이 풀을 끌어들여 한 번에 벱니다. 무른 논에서도 자세가 흔들리지 않습니다.",
+    machine: "블랙홀 드럼모우어",
+    href: "#products",
+    tone: "#56603d",
+  },
+  {
+    step: 2,
+    title: "모으기",
+    desc: "고르게 모읍니다",
+    detail: "벤 풀을 뒤집어 말리고, 베일러가 먹기 좋은 한 줄로 모읍니다.",
+    machine: "LKHR 레이크",
+    href: "#products",
+    tone: "#6b6a43",
+  },
+  {
+    step: 3,
+    title: "묶기",
+    desc: "단단히 묶습니다",
+    detail: "모은 풀을 둥글게 감아 네트로 단단히 묶습니다. 비무꼬는 베기까지 한 대로 끝냅니다.",
+    machine: "비무꼬 원형베일러",
+    href: "#products",
+    tone: "#7c6a3c",
+  },
+  {
+    step: 4,
+    title: "감싸기",
+    desc: "오래 지킵니다",
+    detail: "랩 필름으로 빈틈없이 감싸 공기를 막습니다. 겨울까지 사료가 상하지 않습니다.",
+    machine: "S350H 자동 접철 래퍼",
+    href: "#products",
+    tone: "#5f6670",
+  },
+  {
+    step: 5,
+    title: "소모품",
+    desc: "멈추지 않게",
+    detail: "네트와 랩이 떨어지면 작업이 멈춥니다. 평일 오후 3시 전 주문은 다음 날 도착합니다.",
+    machine: "네트 · 랩 필름",
+    href: "#consumables",
+    tone: "#8a7d5a",
+  },
 ];
 
 export type HpRange = {
@@ -100,6 +184,8 @@ export type Video = {
   date: string;
   /** 유튜브 영상 ID가 정해지면 넣는다 */
   youtubeId?: string;
+  /** 해시태그 검색용 (# 없이) */
+  tags: string[];
   tone: string;
 };
 
@@ -110,6 +196,7 @@ export const videos: Video[] = [
     caption: "무른 논에서\n{한 번에} 베고 묶기",
     kind: "작업 영상",
     date: "2026.09.24",
+    tags: ["비무꼬", "무른논", "수확철"],
     tone: "#7c7a52",
   },
   {
@@ -118,6 +205,7 @@ export const videos: Video[] = [
     caption: "들어간 풀은\n{돌아 나오지} 않습니다",
     kind: "작업 영상",
     date: "2026.09.12",
+    tags: ["블랙홀", "수확철"],
     tone: "#5f6a44",
   },
   {
@@ -126,6 +214,7 @@ export const videos: Video[] = [
     caption: "네트 교체,\n{3분이면} 끝",
     kind: "사용법",
     date: "2026.08.30",
+    tags: ["비무꼬", "사용법"],
     tone: "#8a7d5a",
   },
 ];
