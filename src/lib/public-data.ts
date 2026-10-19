@@ -1,6 +1,6 @@
 import "server-only";
 import { videos as staticVideos, type Video } from "@/data/content";
-import { site as staticSite } from "@/data/site";
+import { mapEmbedSrc, site as staticSite } from "@/data/site";
 import { all, readyDb } from "./db";
 import { getSetting } from "./settings";
 import { telHref, type PublicData, type SnsLink, type SnsPlatform } from "./types";
@@ -62,6 +62,9 @@ export async function getPublicData(): Promise<PublicData> {
   }
 
   const youtube = sns.find((s) => s.platform === "youtube");
+  // 주소를 관리자에서 바꿨으면 지도·길찾기도 새 주소로 검색한다. 그대로면 카카오맵에 등록된 공장으로 바로 간다
+  const sameAddress = contact.address === staticSite.address;
+  const searchAddress = contact.address.replace(/\s*\(.*?\)\s*/g, " ").trim();
 
   return {
     site: {
@@ -70,13 +73,26 @@ export async function getPublicData(): Promise<PublicData> {
       slogan: hero.slogan || staticSite.slogan,
       phone: contact.phone,
       phoneHref: telHref(contact.phone),
+      phone2: contact.phone2,
+      phone2Href: contact.phone2 ? telHref(contact.phone2) : "",
       hours: contact.hours,
       address: contact.address,
       fax: contact.fax,
       ceo: contact.ceo,
       bizNo: contact.bizNo,
       kakaoHref: contact.kakaoUrl || "#inquiry",
-      mapHref: contact.mapUrl || staticSite.mapHref,
+      // 예전 기본값(카카오맵 주소 검색 링크)이 저장돼 있으면 등록된 공장 페이지로 바꿔 보여 준다
+      mapHref:
+        contact.mapUrl && !(sameAddress && contact.mapUrl.startsWith("https://map.kakao.com/link/search/"))
+          ? contact.mapUrl
+          : staticSite.mapHref,
+      routeHref: sameAddress
+        ? staticSite.routeHref
+        : "https://map.kakao.com/link/search/" + encodeURIComponent(searchAddress),
+      naverMapHref: sameAddress
+        ? staticSite.naverMapHref
+        : "https://map.naver.com/p/search/" + encodeURIComponent(searchAddress),
+      mapEmbed: sameAddress ? staticSite.mapEmbed : mapEmbedSrc(contact.address),
       youtubeHref: youtube?.url ?? "#videos",
     },
     hero: { video: hero.mode === "video" ? hero.video : null, story: hero.story },

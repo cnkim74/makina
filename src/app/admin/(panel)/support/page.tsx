@@ -27,10 +27,16 @@ export default async function Support({ searchParams }: { searchParams: Promise<
           <section className={a.card}>
             <h2>연락처</h2>
             <p className={a.sub}>대표 전화는 홈페이지의 모든 “전화 상담” 버튼에 들어갑니다.</p>
-            <div className={a.row}>
+            <div className={`${a.row} ${a.row3}`}>
               <label className={a.field}>
                 <span>대표 전화</span>
                 <input name="phone" defaultValue={c.phone} required inputMode="tel" />
+              </label>
+              <label className={a.field}>
+                <span>
+                  두 번째 전화 <small>(선택)</small>
+                </span>
+                <input name="phone2" defaultValue={c.phone2} inputMode="tel" placeholder="054-843-4001" />
               </label>
               <label className={a.field}>
                 <span>상담 시간</span>
@@ -68,7 +74,7 @@ export default async function Support({ searchParams }: { searchParams: Promise<
               </label>
               <label className={a.field}>
                 <span>
-                  길찾기 지도 주소 <small>카카오맵·네이버지도 공유 링크</small>
+                  지도 크게 보기 주소 <small>카카오맵 장소 링크 · 길찾기·지도는 주소로 자동</small>
                 </span>
                 <input name="mapUrl" defaultValue={c.mapUrl} placeholder="https://map.kakao.com/..." />
               </label>

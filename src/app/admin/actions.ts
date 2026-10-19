@@ -348,8 +348,11 @@ export async function saveContact(fd: FormData) {
   if (map && !isUrl(map)) back("/admin/support", "지도 주소는 https:// 로 시작해야 합니다.");
   const phone = clean(fd.get("phone"), 30);
   if (!/^[0-9+\-\s()]{8,}$/.test(phone)) back("/admin/support", "대표 전화번호를 확인해 주세요.");
+  const phone2 = clean(fd.get("phone2"), 30);
+  if (phone2 && !/^[0-9+\-\s()]{8,}$/.test(phone2)) back("/admin/support", "두 번째 전화번호를 확인해 주세요.");
   await setSetting(d, "contact", {
     phone,
+    phone2,
     hours: clean(fd.get("hours"), 120),
     address: clean(fd.get("address"), 200),
     fax: clean(fd.get("fax"), 30),

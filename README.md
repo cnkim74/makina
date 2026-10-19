@@ -133,7 +133,7 @@ public/images/        제품 누끼·현장 사진 넣는 곳
 | 소모품 빠른 주문 | `Consumables` | 수량 스테퍼, 전화 주문 |
 | 고객지원 | `Support` | 펼침 목록 5개 |
 | 문의 남기기 | `Inquiry` | 문의 종류·이름·전화·내용 → 관리자 “문의” |
-| 오시는 길 | `Directions` | 지도 자리표시, 누르면 카카오맵 |
+| 오시는 길 | `Directions` | 구글 지도 퍼가기(키 불필요), 카카오맵 등록 장소(7941605) 크게 보기·길찾기, 네이버 지도, 주소 복사 |
 | 푸터 | `Footer` | 애플식 링크 묶음 |
 | 플로팅 캡슐 | `FloatingButtons` | 데스크톱 전용, 히어로가 끝나면 나타남 |
 | 하단 유리 도크 | `MobileDock` | 모바일 전용 |
@@ -171,7 +171,6 @@ ffmpeg -ss 7.2  -i source.mp4 -frames:v 1 -vf scale=1600:-2 public/images/hero/h
 
 - 작업 흐름 단계별 사진, 마력 찾기 띠 사진, 작업 영상 썸네일
 - 제품 누끼 사진 → `public/images/` 에 넣고 `src/data/content.ts` 의 `image` 필드에 경로 지정
-- 지도 → 카카오맵 임베드
 - 웹폰트 파일 → `public/fonts/` (없으면 CDN 사용)
 - 대표자, 사업자등록번호, 팩스, 카카오톡 채널 링크 → 관리자 “고객지원 · 연결” (기본값은 `src/data/site.ts`)
 - 유튜브·SNS 링크 → 관리자 “SNS”

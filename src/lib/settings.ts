@@ -9,6 +9,7 @@ import type { ContactSettings, HeroSettings, IntegrationSettings } from "./types
 
 export const DEFAULT_CONTACT: ContactSettings = {
   phone: staticSite.phone,
+  phone2: staticSite.phone2,
   hours: staticSite.hours,
   address: staticSite.address,
   fax: staticSite.fax,

@@ -2,7 +2,7 @@
 
 import { footerGroups, legalLinks } from "@/data/site";
 import { useSiteData } from "./SiteData";
-import { SNS_PLATFORMS } from "@/lib/types";
+import { phoneRange, SNS_PLATFORMS } from "@/lib/types";
 import { LogoMark } from "./placeholders";
 import s from "./Footer.module.css";
 
@@ -54,7 +54,7 @@ export default function Footer() {
           <address>
             {site.name} · 대표 {site.ceo} · 사업자등록번호 {site.bizNo}
             <br />
-            {site.address} · 전화 {site.phone} · 팩스 {site.fax}
+            {site.address} · 전화 {phoneRange(site.phone, site.phone2)} · 팩스 {site.fax}
           </address>
           <div className={s.legal}>
             {legalLinks.map((l) => (
