@@ -1,0 +1,183 @@
+.telInline {
+  color: var(--fg);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.form,
+.done {
+  max-width: 760px;
+  margin: 44px auto 0;
+  text-align: left;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cats {
+  border: 0;
+}
+
+.cats legend {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.catRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.catRow label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-alt);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--fg-2);
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.catRow input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.catRow label:focus-within {
+  outline: 3px solid var(--hay-gold);
+  outline-offset: 2px;
+}
+
+.catRow .catOn {
+  background: var(--fg);
+  color: #fff;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field > span {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.field small {
+  font-weight: 400;
+  color: var(--fg-2);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--fg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--fg);
+  box-shadow: 0 0 0 3px rgba(224, 165, 38, 0.35);
+}
+
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.agree {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 16px;
+  color: var(--fg-2);
+  cursor: pointer;
+}
+
+.agree input {
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  flex: none;
+  accent-color: var(--fg);
+}
+
+.error {
+  color: #b42318;
+  font-weight: 600;
+}
+
+.submit {
+  align-self: flex-start;
+  min-width: 200px;
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.done {
+  align-items: flex-start;
+}
+
+.done b {
+  font-size: 24px;
+}
+
+.done p {
+  color: var(--fg-2);
+}
+
+@media (max-width: 900px) {
+  .form,
+  .done {
+    margin-top: 28px;
+    padding: 22px 18px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .submit {
+    align-self: stretch;
+  }
+}

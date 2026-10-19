@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { videos, videoSorts, videoTags } from "@/data/content";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { videoSorts, videoTags, type Video } from "@/data/content";
+import { track } from "@/lib/track";
+import { ytEmbed, ytThumb } from "@/lib/youtube";
 import Segmented from "./Segmented";
+import { useSiteData } from "./SiteData";
 import { FieldRows } from "./placeholders";
 import s from "./Videos.module.css";
 
@@ -23,18 +26,64 @@ function Caption({ text }: { text: string }) {
   );
 }
 
+/** 유튜브 재생 창 — 사이트 안에서 바로 본다 */
+function Player({ video, onClose }: { video: Video; onClose: () => void }) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const prev = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = overflow;
+      prev?.focus();
+    };
+  }, [onClose]);
+
+  return (
+    <div className={s.modal} role="dialog" aria-modal="true" aria-label={video.title} onClick={onClose}>
+      <div className={s.player} onClick={(e) => e.stopPropagation()}>
+        <iframe
+          src={ytEmbed(video.youtubeId!)}
+          title={video.title}
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowFullScreen
+        />
+        <p className={s.playerTitle}>{video.title}</p>
+      </div>
+      <button ref={closeRef} type="button" className={`glass glass--dark ${s.close}`} onClick={onClose}>
+        닫기 ×
+      </button>
+    </div>
+  );
+}
+
 export default function Videos() {
+  const { videos, site } = useSiteData();
   const [sort, setSort] = useState(videoSorts[0].label);
   const [q, setQ] = useState("");
+  const [playing, setPlaying] = useState<Video | null>(null);
+
+  // 해시태그: 등록된 영상의 태그에서 많이 쓴 순서로 (없으면 기본 목록)
+  const tags = useMemo(() => {
+    const count = new Map<string, number>();
+    videos.forEach((v) => v.tags.forEach((t) => count.set(t, (count.get(t) ?? 0) + 1)));
+    const list = [...count.entries()].sort((a, b) => b[1] - a[1]).map(([t]) => `#${t}`);
+    return list.length ? list.slice(0, 8) : videoTags;
+  }, [videos]);
 
   // 띄어쓰기는 무시하고 찾는다 ("무른 논" = "무른논")
   const norm = (t: string) => t.replace(/\s+/g, "").replace(/[{}]/g, "");
   const key = norm(q.replace(/^#/, ""));
   const list = videos
-    .filter(
-      (v) => !key || [v.title, v.caption, v.kind, ...v.tags].some((t) => norm(t).includes(key)),
-    )
+    .filter((v) => !key || [v.title, v.caption, v.kind, ...v.tags].some((t) => norm(t).includes(key)))
     .sort((a, b) => (sort === videoSorts[0].label ? b.date.localeCompare(a.date) : 0));
+
+  const channelExternal = /^https?:/.test(site.youtubeHref);
 
   return (
     <section className="mod" id="videos" aria-labelledby="videos-title">
@@ -59,7 +108,7 @@ export default function Videos() {
         </form>
 
         <div className={s.tags}>
-          {videoTags.map((t) => (
+          {tags.map((t) => (
             <button
               key={t}
               type="button"
@@ -80,14 +129,15 @@ export default function Videos() {
         />
 
         <div className={s.grid}>
-          {list.map((v) => (
-            <article key={v.id} className={s.v}>
-              <a
-                href={v.youtubeId ? `https://www.youtube.com/watch?v=${v.youtubeId}` : "#videos"}
-                className={`photo ${s.thumb}`}
-                aria-label={`${v.title} 재생`}
-              >
-                <FieldRows w={400} h={250} fill={v.tone} stroke="rgba(0,0,0,.25)" />
+          {list.map((v) => {
+            const thumb = (
+              <>
+                {v.youtubeId ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={ytThumb(v.youtubeId)} alt="" loading="lazy" decoding="async" />
+                ) : (
+                  <FieldRows w={400} h={250} fill={v.tone} stroke="rgba(0,0,0,.25)" />
+                )}
                 <span className={`glass glass--dark ${s.play}`} aria-hidden="true">
                   <svg viewBox="0 0 24 24">
                     <path d="M8 5.5 L19 12 L8 18.5 Z" fill="currentColor" />
@@ -96,16 +146,37 @@ export default function Videos() {
                 <span className={s.cap}>
                   <Caption text={v.caption} />
                 </span>
-              </a>
-              <div className={s.body}>
-                <h3>{v.title}</h3>
-                <p className={s.meta}>
-                  <b>{v.kind}</b>
-                  {v.date}
-                </p>
-              </div>
-            </article>
-          ))}
+              </>
+            );
+            return (
+              <article key={v.id} className={s.v}>
+                {v.youtubeId ? (
+                  <button
+                    type="button"
+                    className={`photo ${s.thumb}`}
+                    aria-label={`${v.title} 재생`}
+                    onClick={() => {
+                      setPlaying(v);
+                      track("video_play", v.title);
+                    }}
+                  >
+                    {thumb}
+                  </button>
+                ) : (
+                  <div className={`photo ${s.thumb}`} aria-label={`${v.title} (영상 준비 중)`}>
+                    {thumb}
+                  </div>
+                )}
+                <div className={s.body}>
+                  <h3>{v.title}</h3>
+                  <p className={s.meta}>
+                    <b>{v.kind}</b>
+                    {v.date}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
           {list.length === 0 && (
             <p className={s.empty}>
               &ldquo;{q}&rdquo; 영상은 아직 없습니다. 다른 말로 찾아보시거나 전화로 물어봐 주세요.
@@ -114,11 +185,17 @@ export default function Videos() {
         </div>
 
         <div className="links">
-          <a className="lnk" href="#videos">
+          <a
+            className="lnk"
+            href={site.youtubeHref}
+            {...(channelExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          >
             유튜브 채널에서 더 보기
           </a>
         </div>
       </div>
+
+      {playing?.youtubeId && <Player video={playing} onClose={() => setPlaying(null)} />}
     </section>
   );
 }

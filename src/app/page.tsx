@@ -7,18 +7,28 @@ import HpFinder from "@/components/HpFinder";
 import Videos from "@/components/Videos";
 import Consumables from "@/components/Consumables";
 import Support from "@/components/Support";
+import Inquiry from "@/components/Inquiry";
 import Directions from "@/components/Directions";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import MobileDock from "@/components/MobileDock";
+import SiteAnalytics from "@/components/SiteAnalytics";
+import { SiteDataProvider } from "@/components/SiteData";
+import { getPublicData } from "@/lib/public-data";
+
+// 관리자 화면에서 고친 내용이 바로 보이도록 요청마다 그린다
+export const dynamic = "force-dynamic";
 
 /**
  * 메인 — 흰 바탕과 연회색 바탕 모듈이 번갈아 온다.
- * 히어로(어둠) → 바로 가기 → 작업 흐름(회색) → 작업기 → 마력 찾기(어둠) → 영상 → 소모품(회색) → 고객지원 → 오시는 길(회색)
+ * 히어로(어둠) → 바로 가기 → 작업 흐름(회색) → 작업기 → 마력 찾기(어둠) → 영상 → 소모품(회색)
+ * → 고객지원 → 문의 남기기(회색) → 오시는 길
  */
-export default function HomePage() {
+export default async function HomePage() {
+  const data = await getPublicData();
+
   return (
-    <>
+    <SiteDataProvider value={data}>
       <Header />
       <main>
         <Hero />
@@ -29,11 +39,13 @@ export default function HomePage() {
         <Videos />
         <Consumables />
         <Support />
+        <Inquiry />
         <Directions />
       </main>
       <Footer />
       <FloatingButtons />
       <MobileDock />
-    </>
+      <SiteAnalytics gaId={data.integrations.gaId} channelTalkKey={data.integrations.channelTalkKey} />
+    </SiteDataProvider>
   );
 }

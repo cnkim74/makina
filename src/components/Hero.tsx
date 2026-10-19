@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { heroImages, heroSketchStory, heroStory, heroVideo, type HeroLayerImage } from "@/data/content";
-import { site } from "@/data/site";
+import { heroImages, heroSketchStory, type HeroLayerImage } from "@/data/content";
+import { useSiteData } from "./SiteData";
 import { HeroField, HeroForeground, HeroSky, HeroTrace } from "./placeholders/HeroScene";
 import s from "./Hero.module.css";
 
@@ -89,7 +89,10 @@ export default function Hero() {
   const [headAway, setHeadAway] = useState(false);
   const [mode, setMode] = useState<Mode | null>(null);
 
-  const story = heroVideo ? heroStory : heroSketchStory;
+  // 관리자 "히어로" 화면에서 고친 영상·캡션 (DB 가 없으면 src/data 기본값)
+  const { site, hero } = useSiteData();
+  const heroVideo = hero.video;
+  const story = heroVideo ? hero.story : heroSketchStory;
 
   // 재생 방식 정하기 (서버 렌더 때는 포스터만 보인다)
   useEffect(() => {
@@ -114,7 +117,7 @@ export default function Hero() {
     } else {
       v.load();
     }
-  }, [mode]);
+  }, [mode, heroVideo]);
 
   // 스크롤 → CSS 변수 · 캡션 · (scrub) 재생 헤드
   useEffect(() => {
@@ -200,7 +203,7 @@ export default function Hero() {
       if (raf) cancelAnimationFrame(raf);
       if (seekRaf) cancelAnimationFrame(seekRaf);
     };
-  }, [mode, story]);
+  }, [mode, story, heroVideo]);
 
   return (
     <div ref={wrapRef} className={s.photo} id="top">

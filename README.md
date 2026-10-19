@@ -44,6 +44,57 @@ CI나 Claude 세션처럼 브라우저 로그인이 안 되는 곳에서는 환�
 
 배포 후 커스텀 도메인은 Cloudflare 대시보드 → 해당 Worker → Settings → Domains & Routes 에서 연결합니다.
 
+## 관리자(CMS)
+
+`/admin` 에서 회원가입·로그인 후 문의, 유튜브 영상, SNS, 히어로, 연락처·고객지원 연결, 분석, 회원을 관리합니다. 데이터는 Cloudflare **D1**(SQLite), 올린 사진·영상은 **R2**에 저장합니다.
+
+| 메뉴 | 하는 일 | 홈페이지 반영 위치 |
+| --- | --- | --- |
+| 문의 | 홈페이지 “문의 남기기” 접수 목록, 상태(새 문의/처리 중/완료)·메모 | — |
+| 유튜브 영상 | 주소만 넣으면 제목·썸네일 자동, 순서·공개 여부 | 작업 영상 (사이트 안에서 재생) |
+| SNS | 유튜브·인스타그램·블로그 등 채널 주소 | 푸터 버튼, “유튜브 채널에서 더 보기” |
+| 히어로 | 영상·사진 올리기(R2), 영상 주소, 장면 글자, 슬로건 | 첫 화면 |
+| 고객지원 · 연결 | 전화·주소·카카오톡 채널·지도, 새 문의 알림(웹훅), 채널톡 | 전화 버튼, 카카오톡 버튼, 오시는 길, 푸터 |
+| 분석 | 자체 집계(열람·전화·카카오톡·문의·영상 재생), GA4 측정 ID 연결 | — |
+| 회원 | 가입 승인, 권한(대표/관리자/편집자) | — |
+
+- **첫 가입자가 대표(owner)** 가 됩니다. 이후 가입자는 “승인 대기”로 들어오고, 관리자가 승인해야 로그인할 수 있습니다. 배포 직후 바로 대표 계정을 만드세요.
+- 비밀번호는 PBKDF2(SHA-256, 10만 회)로 저장하고, 로그인은 httpOnly 쿠키 세션(30일)입니다. 5번 연속 틀리면 15분 잠깁니다.
+- D1이 연결되기 전에는 홈페이지가 `src/data/` 의 기본 콘텐츠로 그대로 뜨고, `/admin` 에는 아래 설정 안내가 나옵니다.
+
+### 처음 한 번: D1·R2 만들기
+
+1. Cloudflare 대시보드 → Storage & Databases → **D1** → Create → 이름 `makina-db` → 만든 뒤 **Database ID** 복사
+2. 대시보드 → **R2** → Create bucket → 이름 `makina-media`
+3. `wrangler.jsonc` 의 “운영 연결” 주석 블록을 풀고 `database_id` 에 1번 ID 를 넣어 커밋·푸시
+4. Workers 빌드 설정의 Deploy command 를 아래로 바꿉니다 (배포할 때마다 스키마를 맞춤)
+
+   ```
+   npx wrangler d1 migrations apply makina-db --remote && npx opennextjs-cloudflare deploy
+   ```
+
+5. 배포가 끝나면 `https://<사이트>/admin/signup` 에서 대표 계정을 만듭니다.
+
+### 연결 서비스
+
+| 서비스 | 넣는 곳 | 비고 |
+| --- | --- | --- |
+| Google Analytics 4 | 관리자 → 분석 → 측정 ID (`G-…`) | 전화·카카오톡·문의·영상 재생이 GA4 이벤트로도 기록 |
+| 채널톡 | 관리자 → 고객지원 · 연결 → 플러그인 키 | 모바일에선 기본 버튼을 숨기고 도크와 겹치지 않게 배치 |
+| 새 문의 알림 | 관리자 → 고객지원 · 연결 → 웹훅 주소 | 슬랙·디스코드 웹훅, 그 밖의 주소엔 JSON POST |
+| 카카오톡 채널 | 관리자 → 고객지원 · 연결 | 비워 두면 카카오톡 버튼이 문의 양식으로 연결 |
+
+키·주소는 저장소가 아니라 D1 설정에 저장됩니다.
+
+### 로컬 개발
+
+```bash
+npm run db:migrate:local   # 로컬 D1(.wrangler/)에 스키마 적용
+npm run dev                # env.dev 바인딩(로컬 D1·R2)으로 실행 → http://localhost:3000/admin/signup
+```
+
+스키마를 바꿀 때는 `migrations/0002_….sql` 처럼 새 파일을 추가합니다. 이미 적용된 파일은 고치지 않습니다.
+
 ## 저장소 구조
 
 ```
@@ -52,8 +103,13 @@ src/app/              Next.js 라우트. layout.tsx(메타데이터), page.tsx(�
 src/styles/tokens.css 디자인 토큰 → CSS 변수 (docs/design/tokens.json 과 동기화)
 src/styles/fonts.css  웹폰트 @font-face (self-host → CDN → 시스템 폴백)
 src/data/site.ts      전화번호·주소·메뉴 등 사이트 공통 정보
-src/data/content.ts   제품·작업 흐름·마력표·영상·소모품·고객지원 콘텐츠
+src/data/content.ts   제품·작업 흐름·마력표·영상·소모품·고객지원 콘텐츠 (CMS 값이 없을 때의 기본값)
 src/components/       메인 화면 섹션 컴포넌트 (각각 .tsx + .module.css)
+src/app/admin/        관리자 화면 (로그인·가입, (panel)/ 아래 메뉴별 화면, actions.ts 서버 액션)
+src/app/api/          문의 접수, 분석 이벤트, 관리자 파일 올리기
+src/app/media/        R2에 올린 파일 내려주기 (영상 Range 지원)
+src/lib/              D1·R2 접근, 인증, 설정, 공개 데이터 조립, 유튜브·분석 도우미
+migrations/           D1 스키마 (wrangler d1 migrations)
 src/components/placeholders/  사진·누끼·지도 자리표시 SVG. 실제 자료가 오면 교체
 public/fonts/         웹폰트 파일 넣는 곳 (README 참고)
 public/images/        제품 누끼·현장 사진 넣는 곳
@@ -73,10 +129,11 @@ public/images/        제품 누끼·현장 사진 넣는 곳
 | 조사료 작업 흐름 | `WorkFlow` | 유리 세그먼트로 5단계 전환 |
 | 대표 작업기 | `Products` | 분류 탭 + 제품 타일 |
 | 내 트랙터 마력으로 찾기 | `HpFinder` | 어두운 띠 위 유리 세그먼트 |
-| 작업 영상 | `Videos` | 검색 · 해시태그 · 정렬 |
+| 작업 영상 | `Videos` | 검색 · 해시태그 · 정렬, 관리자에서 올린 유튜브를 사이트 안에서 재생 |
 | 소모품 빠른 주문 | `Consumables` | 수량 스테퍼, 전화 주문 |
 | 고객지원 | `Support` | 펼침 목록 5개 |
-| 오시는 길 | `Directions` | 지도 자리표시 |
+| 문의 남기기 | `Inquiry` | 문의 종류·이름·전화·내용 → 관리자 “문의” |
+| 오시는 길 | `Directions` | 지도 자리표시, 누르면 카카오맵 |
 | 푸터 | `Footer` | 애플식 링크 묶음 |
 | 플로팅 캡슐 | `FloatingButtons` | 데스크톱 전용, 히어로가 끝나면 나타남 |
 | 하단 유리 도크 | `MobileDock` | 모바일 전용 |
@@ -116,4 +173,5 @@ ffmpeg -ss 7.2  -i source.mp4 -frames:v 1 -vf scale=1600:-2 public/images/hero/h
 - 제품 누끼 사진 → `public/images/` 에 넣고 `src/data/content.ts` 의 `image` 필드에 경로 지정
 - 지도 → 카카오맵 임베드
 - 웹폰트 파일 → `public/fonts/` (없으면 CDN 사용)
-- 상세 주소, 대표자, 사업자등록번호, 팩스, 카카오톡 채널 링크, 유튜브 링크 → `src/data/site.ts`
+- 대표자, 사업자등록번호, 팩스, 카카오톡 채널 링크 → 관리자 “고객지원 · 연결” (기본값은 `src/data/site.ts`)
+- 유튜브·SNS 링크 → 관리자 “SNS”

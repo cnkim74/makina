@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NEXT_DEV_WRANGLER_ENV=dev next dev",
+    "db:migrate:local": "wrangler d1 migrations apply makina-db --local --env dev",
+    "db:migrate:remote": "wrangler d1 migrations apply makina-db --remote",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -15,7 +17,8 @@
   "dependencies": {
     "next": "16.3.8",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@opennextjs/cloudflare": "^1.20.8",

@@ -8,14 +8,14 @@ export const site = {
   phone: "054-843-4000",
   phoneHref: "tel:0548434000",
   fax: "054-000-0000",
-  address: "경북 안동시 서후면 (상세 주소 입력)",
+  address: "경상북도 안동시 서후면 풍산태사로 2780 (금계리 389)",
   hours: "평일 08:30 – 18:00 · 토요일 오전 · 수확철 연장",
   ceo: "○○○",
   bizNo: "000-00-00000",
   /** 카카오톡 채널 링크가 정해지면 교체 */
   kakaoHref: "#",
-  /** 카카오맵 길찾기 링크가 정해지면 교체 */
-  mapHref: "#",
+  /** 카카오맵에서 주소 검색 → 길찾기 */
+  mapHref: "https://map.kakao.com/link/search/" + encodeURIComponent("경상북도 안동시 서후면 풍산태사로 2780"),
   youtubeHref: "#",
 };
 

@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import { supportItems } from "@/data/content";
-import { site } from "@/data/site";
+import { useSite } from "./SiteData";
 import s from "./Support.module.css";
+
+/** 고객지원 목록 → 문의 분류 */
+const CATEGORY_OF = ["구매 상담", "기타", "A/S · 정비", "소모품 주문", "시연 · 방문 예약"];
 
 /** 고객지원 — 애플식 펼침 목록 */
 export default function Support() {
+  const site = useSite();
   const [open, setOpen] = useState<number | null>(null);
 
   return (
@@ -40,6 +44,15 @@ export default function Support() {
                     </a>
                     <a className="btn btn--kakao" href={site.kakaoHref}>
                       카카오톡 문의
+                    </a>
+                    <a
+                      className="btn btn--ghost"
+                      href="#inquiry"
+                      onClick={() =>
+                        window.dispatchEvent(new CustomEvent("mk:inquiry", { detail: CATEGORY_OF[i] ?? "기타" }))
+                      }
+                    >
+                      문의 남기기
                     </a>
                   </div>
                 </div>

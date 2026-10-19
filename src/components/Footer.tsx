@@ -1,9 +1,14 @@
-import { footerGroups, legalLinks, site } from "@/data/site";
+"use client";
+
+import { footerGroups, legalLinks } from "@/data/site";
+import { useSiteData } from "./SiteData";
+import { SNS_PLATFORMS } from "@/lib/types";
 import { LogoMark } from "./placeholders";
 import s from "./Footer.module.css";
 
 /** 애플식 푸터 — 연회색 바탕, 작은 글, 링크 묶음 */
 export default function Footer() {
+  const { site, sns } = useSiteData();
   return (
     <footer className={s.foot}>
       <div className={s.in}>
@@ -21,6 +26,17 @@ export default function Footer() {
             <a className={s.tel} href={site.phoneHref}>
               {site.phone}
             </a>
+            {sns.length > 0 && (
+              <ul className={s.sns} aria-label="SNS 채널">
+                {sns.map((l) => (
+                  <li key={l.id}>
+                    <a href={l.url} target="_blank" rel="noopener noreferrer">
+                      {l.label || SNS_PLATFORMS.find((p) => p.id === l.platform)?.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
           {footerGroups.map((g) => (
             <nav key={g.title} className={s.col} aria-label={g.title}>

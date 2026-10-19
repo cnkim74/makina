@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { navGroups, site, utilLinks } from "@/data/site";
+import { navGroups, utilLinks } from "@/data/site";
+import { useSite } from "./SiteData";
 import { LogoMark } from "./placeholders";
 import { useHeroPast } from "./useHeroProgress";
 import s from "./Header.module.css";
@@ -16,6 +17,7 @@ const SECTION_IDS = navGroups.flatMap((g) => g.links.map((l) => l.href.slice(1))
  * - 지금 보고 있는 섹션 메뉴 아래 점이 찍힌다
  */
 export default function Header() {
+  const site = useSite();
   const [open, setOpen] = useState(false);
   // 히어로 장면 위에서는 어두운 유리, 장면이 흰 바탕으로 녹아들면 밝은 유리
   const onLight = useHeroPast(0.9);

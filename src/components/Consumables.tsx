@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { consumables } from "@/data/content";
-import { site } from "@/data/site";
+import { useSite } from "./SiteData";
 import { NetRoll, WrapRoll } from "./placeholders";
 import s from "./Consumables.module.css";
 
 export default function Consumables() {
+  const site = useSite();
   const [qty, setQty] = useState<Record<string, number>>(
     Object.fromEntries(consumables.map((c) => [c.id, c.defaultQty])),
   );

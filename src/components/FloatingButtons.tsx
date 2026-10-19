@@ -1,6 +1,6 @@
 "use client";
 
-import { site } from "@/data/site";
+import { useSite } from "./SiteData";
 import { useHeroPast } from "./useHeroProgress";
 import s from "./FloatingButtons.module.css";
 
@@ -29,6 +29,7 @@ const ICONS = {
  * 모바일은 MobileDock 이 대신한다.
  */
 export default function FloatingButtons() {
+  const site = useSite();
   const show = useHeroPast(0.96);
 
   return (

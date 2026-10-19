@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { products, productTabs, type ProductCategory } from "@/data/content";
-import { site } from "@/data/site";
+import { useSite } from "./SiteData";
 import Segmented from "./Segmented";
 import { ProductSilhouette } from "./placeholders";
 import s from "./Products.module.css";
@@ -11,6 +11,7 @@ type TabId = ProductCategory | "all";
 
 /** 대표 작업기 — 애플식 제품 타일. 글은 위, 누끼 사진은 아래 */
 export default function Products() {
+  const site = useSite();
   const [tab, setTab] = useState<TabId>("all");
   const list = tab === "all" ? products : products.filter((p) => p.category === tab);
 

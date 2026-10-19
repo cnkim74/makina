@@ -182,10 +182,10 @@ export function MapPlaceholder() {
         <path d="M80 0 C120 150 250 230 320 420" />
       </g>
       <text x="330" y="150" fontSize="14" fill="#777" fontFamily="sans-serif">
-        서후면
+        서후면 금계리
       </text>
-      <text x="60" y="380" fontSize="13" fill="#999" fontFamily="sans-serif">
-        안동 시내 방면
+      <text x="250" y="232" fontSize="13" fill="#999" fontFamily="sans-serif">
+        풍산태사로
       </text>
     </svg>
   );

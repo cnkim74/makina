@@ -92,3 +92,8 @@
     display: none;
   }
 }
+
+/* 채널톡 버튼이 오른쪽 아래에 뜨면 그 위로 비켜선다 */
+:global(body.has-chat) .float {
+  bottom: 100px;
+}

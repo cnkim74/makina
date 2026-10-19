@@ -12,6 +12,14 @@
 - 사진·영상이 없는 자리는 `src/components/placeholders/`의 SVG로 채운다. 실제 자료가 오면 교체한다.
 - 배포는 Cloudflare Workers + OpenNext 어댑터(`wrangler.jsonc`, `open-next.config.ts`). `npm run cf:build`로 번들이 만들어지는지 확인한 뒤 푸시한다. 배포 방법은 README의 "배포" 절 참고. 서버 기능(API 라우트, 폼 처리, DB)을 추가할 때는 Workers 바인딩(D1, R2, KV)을 `wrangler.jsonc`에 선언하고 `npm run cf:typegen`으로 타입을 만든다.
 
+## CMS (관리자)
+
+- `/admin` 관리자. 데이터는 D1(`DB` 바인딩), 파일은 R2(`MEDIA`). 스키마는 `migrations/`, 바꿀 때는 새 번호 파일을 추가한다.
+- `wrangler.jsonc` 최상위의 운영 바인딩은 사용자가 D1·R2를 만들 때까지 주석으로 둔다. 로컬은 `env.dev` 를 쓴다(`npm run dev` 가 `NEXT_DEV_WRANGLER_ENV=dev` 로 실행).
+- D1이 없거나 스키마가 없어도 홈페이지는 `src/data/` 기본값으로 떠야 한다. 공개 화면 데이터는 `src/lib/public-data.ts` → `SiteDataProvider` → `useSite()`/`useSiteData()` 로 받는다.
+- 연락처·연동 키·히어로 설정은 D1 `settings` 테이블(JSON)에 둔다. 비밀 값을 코드나 저장소에 넣지 않는다.
+- 관리자 화면은 사내용이라 `src/app/admin/admin.module.css` 한 파일을 쓴다. 공개 화면 규칙(리퀴드 글래스·모듈 문법)은 적용하지 않지만 토큰과 접근성 규칙은 지킨다.
+
 ## 작업 전에 읽을 것
 
 - `docs/design/brand-guide.md`: 브랜드북. 컬러·타이포·모션·접근성 규칙의 원본. 레이아웃은 아래 "화면 문법"이 우선한다.
@@ -43,3 +51,13 @@
 - 디자인 자료: `docs/design/`
 - 대용량 영상·원본 사진: 저장소에 넣지 않는다. Google Drive 링크로 관리.
 - API 키 등 비밀 값: 저장소에 넣지 않는다. 환경 변수로 관리.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

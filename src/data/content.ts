@@ -215,7 +215,7 @@ export type Video = {
   title: string;
   /** 썸네일 위 자막. {강조} 로 감싼 부분이 노란색으로 표시된다 */
   caption: string;
-  kind: "작업 영상" | "사용법";
+  kind: string;
   date: string;
   /** 유튜브 영상 ID가 정해지면 넣는다 */
   youtubeId?: string;
