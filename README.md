@@ -68,7 +68,7 @@ public/images/        제품 누끼·현장 사진 넣는 곳
 | 섹션 | 컴포넌트 | 비고 |
 | --- | --- | --- |
 | 떠 있는 유리 내비 | `Header` | 히어로 위에선 어두운 유리, 그 아래선 밝은 유리. 커서를 따라 유리 방울이 미끄러짐 |
-| 히어로 | `Hero` | 스크롤 장면: DAWN → LIGHT → LINE → BALE |
+| 히어로 | `Hero` | 스크롤로 움직이는 영상: BALE → MACHINE → FIELD → HARVEST |
 | 바로 가기 | `QuickDoors` | 구매 상담 · 소모품 · 정비 |
 | 조사료 작업 흐름 | `WorkFlow` | 유리 세그먼트로 5단계 전환 |
 | 대표 작업기 | `Products` | 분류 탭 + 제품 타일 |
@@ -81,24 +81,38 @@ public/images/        제품 누끼·현장 사진 넣는 곳
 | 플로팅 캡슐 | `FloatingButtons` | 데스크톱 전용, 히어로가 끝나면 나타남 |
 | 하단 유리 도크 | `MobileDock` | 모바일 전용 |
 
-## 히어로 이미지
+## 히어로 영상
 
-지금은 SVG로 그린 자리표시 장면입니다. 실제 사진으로 바꾸려면 세 겹 × 두 장(새벽 / 작업등 켜짐)을 준비해 `public/images/hero/`에 넣고 `src/data/content.ts`의 `heroImages`에 경로를 적으면 됩니다.
+히어로는 영상 한 편으로 만든 스크롤 장면입니다. 베일 클로즈업에서 카메라가 물러나 트랙터·베일러, 들판 전체로 넓어지고, 캡션이 BALE → MACHINE → FIELD → HARVEST 로 바뀝니다.
 
-| 겹 | 새벽 (불 꺼짐) | 작업등 켜짐 | 내용 |
-| --- | --- | --- | --- |
-| `bg` 배경 | `bg-dawn.webp` | `bg-lit.webp` | 하늘과 안동 서후면 먼 산. 켜짐 쪽은 해 뜨기 직전 주황빛 |
-| `mid` 가운데 (투명 배경) | `mid-dawn.webp` | `mid-lit.webp` | 들판과 트랙터 + 원형 베일러. 켜짐 쪽은 작업등·캐빈 불빛 |
-| `fg` 앞 (투명 배경) | `fg-dawn.webp` | `fg-lit.webp` | 화면 아래 앞풀과 왼쪽 아래 큰 원형 베일 |
+| 환경 | 재생 방식 | 파일 |
+| --- | --- | --- |
+| 데스크톱 | 스크롤이 곧 재생 헤드 (되감기 가능) | `public/videos/hero-1600.mp4` / `.webm` |
+| 휴대폰·태블릿 | 소리 없이 자동 반복 | `public/videos/hero-960.mp4` / `.webm` |
+| 움직임 줄이기 | 한 장면 | `public/images/hero/hero-still.webp` |
+| 영상이 뜨기 전 | 첫 장면 | `public/images/hero/hero-poster.webp` |
 
-- 크기 1672 × 941 (16:9), webp. 세 겹 모두 같은 구도·같은 카메라 위치에서 찍거나 만들어야 겹쳐서 맞습니다.
-- 두 장은 빛만 다르고 구도는 같아야 합니다. 스크롤하면 새벽 사진 위로 작업등 사진이 서서히 비칩니다.
-- 기계는 화면 가운데 아래(가로 50%, 세로 60~85%)에 둡니다. 세로 화면에서 가운데만 남기 때문입니다.
-- 사진을 넣으면 흰 도면 선(`HeroTrace`)이 실제 기계 윤곽과 어긋납니다. 사진에 맞춰 `src/components/placeholders/HeroScene.tsx`의 좌표를 고칩니다.
+- 원본(4K, 61MB)은 저장소에 넣지 않고 GitHub 릴리스 [`hero-video`](https://github.com/cnkim74/makina/releases/tag/hero-video)에 있습니다.
+- 브라우저가 H.264를 틀 수 있으면 mp4, 아니면 VP9 webm을 씁니다.
+- 경로와 캡션 타이밍은 `src/data/content.ts`의 `heroVideo`, `heroStory`에서 바꿉니다. `heroVideo`를 `null`로 두면 SVG 자리표시 장면으로 돌아갑니다.
+
+영상을 바꿀 때는 원본을 받아 아래처럼 다시 만듭니다. 데스크톱판은 스크롤로 앞뒤로 자유롭게 넘길 수 있도록 4프레임마다 키프레임을 넣습니다.
+
+```bash
+# 데스크톱 (스크롤 되감기용)
+ffmpeg -i source.mp4 -an -vf "scale=1600:900,format=yuv420p" -c:v libx264 -profile:v high -preset slow -crf 25 -g 4 -keyint_min 4 -bf 0 -sc_threshold 0 -movflags +faststart public/videos/hero-1600.mp4
+ffmpeg -i source.mp4 -an -vf "scale=1600:900,format=yuv420p" -c:v libvpx-vp9 -b:v 0 -crf 38 -g 4 -keyint_min 4 -row-mt 1 public/videos/hero-1600.webm
+# 모바일 (자동 반복)
+ffmpeg -i source.mp4 -an -vf "scale=960:540,format=yuv420p" -c:v libx264 -preset slow -crf 27 -g 48 -movflags +faststart public/videos/hero-960.mp4
+ffmpeg -i source.mp4 -an -vf "scale=960:540,format=yuv420p" -c:v libvpx-vp9 -b:v 0 -crf 40 -g 48 -row-mt 1 public/videos/hero-960.webm
+# 포스터·정지 장면
+ffmpeg -ss 0.25 -i source.mp4 -frames:v 1 -vf scale=1600:-2 public/images/hero/hero-poster.webp
+ffmpeg -ss 7.2  -i source.mp4 -frames:v 1 -vf scale=1600:-2 public/images/hero/hero-still.webp
+```
 
 ## 교체가 필요한 자리표시
 
-- 히어로 장면 사진 (위 "히어로 이미지"), 작업 흐름 단계별 사진, 마력 찾기 띠 사진, 영상 썸네일
+- 작업 흐름 단계별 사진, 마력 찾기 띠 사진, 작업 영상 썸네일
 - 제품 누끼 사진 → `public/images/` 에 넣고 `src/data/content.ts` 의 `image` 필드에 경로 지정
 - 지도 → 카카오맵 임베드
 - 웹폰트 파일 → `public/fonts/` (없으면 CDN 사용)

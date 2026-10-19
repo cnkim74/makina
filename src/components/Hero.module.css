@@ -1,7 +1,7 @@
 /* 표지: 떠 있는 유리 바 아래까지 올라와 바와 한 장면이 된다 */
 .photo {
   position: relative;
-  height: 260vh;
+  height: 320vh;
   margin-top: calc(-1 * var(--nav-h));
   background: var(--stage);
 }
@@ -267,7 +267,7 @@
 
 @media (max-width: 900px) {
   .photo {
-    height: 230vh;
+    height: 210vh;
   }
 
   .head {
@@ -349,4 +349,60 @@
 
 .imgLit {
   opacity: var(--lit);
+}
+
+/* ── 영상 히어로 ── */
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  /* 베일과 트랙터가 가운데보다 조금 오른쪽에 있다 → 세로 화면에서도 남게 */
+  object-position: 60% 50%;
+  background: var(--stage);
+}
+
+/* 밝은 노을 하늘 위 흰 글씨가 읽히도록 위아래를 더 눌러 준다 */
+.withVideo .shade {
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 8, 6, 0.72) 0%,
+    rgba(10, 8, 6, 0.38) 34%,
+    rgba(10, 8, 6, 0) 56%,
+    rgba(10, 8, 6, 0.18) 76%,
+    rgba(10, 8, 6, 0.55) 100%
+  );
+}
+
+/* 링크가 밝은 들판 위에 올라가도 읽히게 */
+.withVideo .plinks :global(.lnk),
+.withVideo .gloss,
+.withVideo .eyebrow {
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.65);
+}
+
+/* 모바일(자동 반복)·움직임 줄이기(한 장면): 밝은 장면이 제목 뒤로 지나가므로 가운데까지 눌러 준다 */
+@media (max-width: 900px) {
+  .withVideo .shade {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 8, 6, 0.74) 0%,
+      rgba(10, 8, 6, 0.5) 45%,
+      rgba(10, 8, 6, 0.2) 70%,
+      rgba(10, 8, 6, 0.55) 100%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .withVideo .shade {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 8, 6, 0.74) 0%,
+      rgba(10, 8, 6, 0.58) 55%,
+      rgba(10, 8, 6, 0.42) 100%
+    );
+  }
 }

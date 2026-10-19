@@ -1,10 +1,45 @@
 /** 메인 화면 콘텐츠. 제품·영상·소모품이 늘어나면 이 파일만 고친다. */
 
 /**
- * 히어로 스크롤 장면. 새벽 들판 → 작업등이 켜지고 → 기계의 선이 그려지고 → 베일 한 덩이로 다가간다.
+ * 히어로 영상. 스크롤에 맞춰 장면이 움직인다(데스크톱).
+ * 원본 4K 영상은 저장소가 아니라 GitHub 릴리스 `hero-video` 에 있다. 다시 만드는 법은 README "히어로 영상".
+ * null 이면 SVG 자리표시 장면(heroImages / HeroScene)을 쓴다.
+ */
+export type HeroSource = { mp4: string; webm: string };
+export type HeroVideo = {
+  /** 데스크톱: 스크롤로 되감고 넘길 수 있게 키프레임을 촘촘히 넣은 판 */
+  desktop: HeroSource;
+  /** 터치 기기: 가볍게 줄여 자동 반복 재생 */
+  mobile: HeroSource;
+  /** 영상이 뜨기 전 첫 장면 */
+  poster: string;
+  /** 움직임 줄이기 설정일 때 보여 줄 한 장면 */
+  still: string;
+  /** 영상이 끝나는 스크롤 지점(0~1). 그 뒤는 흰 바탕으로 녹아드는 구간 */
+  end: number;
+};
+
+export const heroVideo: HeroVideo | null = {
+  desktop: { mp4: "/videos/hero-1600.mp4", webm: "/videos/hero-1600.webm" },
+  mobile: { mp4: "/videos/hero-960.mp4", webm: "/videos/hero-960.webm" },
+  poster: "/images/hero/hero-poster.webp",
+  still: "/images/hero/hero-still.webp",
+  end: 0.9,
+};
+
+/**
+ * 히어로 캡션. 영상의 카메라가 베일 한 덩이에서 물러나 들판 전체를 내려다볼 때까지.
  * from/to 는 히어로 구간 스크롤 진행률(0~1)에서 이 캡션이 보이는 범위.
  */
 export const heroStory = [
+  { word: "BALE", ko: "한 덩이, 단단하게", from: 0.05, to: 0.22 },
+  { word: "MACHINE", ko: "이름처럼 일하는 기계", from: 0.22, to: 0.42 },
+  { word: "FIELD", ko: "남김없이 베고, 고르게 모으고", from: 0.42, to: 0.64 },
+  { word: "HARVEST", ko: "줄지어 선 오늘의 수확", from: 0.64, to: 0.9 },
+];
+
+/** 영상이 없을 때 SVG 자리표시 장면용 캡션 */
+export const heroSketchStory = [
   { word: "DAWN", ko: "새벽 다섯 시, 서후면", from: 0.08, to: 0.26 },
   { word: "LIGHT", ko: "작업등이 켜지면", from: 0.26, to: 0.44 },
   { word: "LINE", ko: "이름처럼 일하는 기계", from: 0.44, to: 0.66 },
