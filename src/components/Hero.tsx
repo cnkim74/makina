@@ -242,8 +242,8 @@ export default function Hero() {
           <p className={s.gloss}>성원마끼나 · 조사료 작업기 · 경북 안동 서후면</p>
           <p className={s.slogan}>{site.slogan}</p>
           <div className={`links on-dark ${s.plinks}`}>
-            <a className="lnk" href="#products" tabIndex={headAway ? -1 : undefined}>
-              작업기 보기
+            <a className="lnk" href="#dragon" tabIndex={headAway ? -1 : undefined}>
+              드래곤 보기
             </a>
             <a className="lnk" href="#consumables" tabIndex={headAway ? -1 : undefined}>
               소모품 주문

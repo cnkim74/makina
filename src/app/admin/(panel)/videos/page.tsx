@@ -56,7 +56,7 @@ export default async function Videos({ searchParams }: { searchParams: Promise<{
               <span>
                 썸네일 자막 <small>{"{ }"} 로 감싼 말은 노란색 · 줄바꿈은 그대로</small>
               </span>
-              <input name="caption" maxLength={80} placeholder="무른 논에서 {한 번에} 베고 묶기" />
+              <input name="caption" maxLength={80} placeholder="키 큰 수수도 {한 번에} 베고 부수기" />
             </label>
           </div>
           <div className={`${a.row} ${a.row3}`}>
@@ -72,7 +72,7 @@ export default async function Videos({ searchParams }: { searchParams: Promise<{
               <span>
                 해시태그 <small>쉼표로 구분</small>
               </span>
-              <input name="tags" placeholder="비무꼬, 수확철" />
+              <input name="tags" placeholder="드래곤, 수확철" />
             </label>
             <label className={a.field}>
               <span>날짜</span>

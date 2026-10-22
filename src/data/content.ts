@@ -80,21 +80,52 @@ export const quickDoors = [
   },
 ];
 
-export type ProductCategory =
-  | "baler"
-  | "mower"
-  | "rake-wrapper"
-  | "weeding"
-  | "consumable";
+/**
+ * 주력 제품 DRAGON — 하이브리드 모어 컨디셔너 (트랙터 3점 부착, 베면서 줄기를 부순다).
+ * 사진 원본은 구글 드라이브 "성원마끼나 소스" 폴더. 웹용으로 줄인 파일이 public/images/dragon/ 에 있다.
+ */
+export const dragon = {
+  name: "DRAGON",
+  label: "하이브리드 모어 컨디셔너",
+  catch: "베면서 부순다.",
+  copy: "로터의 날이 풀을 베는 동시에 줄기를 두드려 부숩니다. 부순 풀은 빨리 마르고, 부드러워 소가 잘 먹습니다.",
+  heroImage: "/images/dragon/field-cut.webp",
+  heroAlt: "트랙터에 단 드래곤이 키 큰 수수밭을 베는 모습",
+  render: "/images/dragon/dr280.webp",
+  renderAlt: "DRAGON 280 하이브리드 모어 컨디셔너",
+  /** 밭에서 축사까지 — 실제 현장 사진 */
+  story: [
+    {
+      step: "벤다",
+      title: "한 번 지나가면 끝.",
+      copy: "베고 부수는 일을 한 번에 합니다. 따로 압쇄기를 걸 필요가 없습니다.",
+      image: "/images/dragon/field-rows.webp",
+      alt: "드래곤이 베고 지나간 자리에 고르게 누운 풀",
+    },
+    {
+      step: "부순다",
+      title: "줄기까지 부드럽게.",
+      copy: "딱딱한 줄기가 잘게 쪼개져, 베일을 풀었을 때 손으로 쉽게 뜯깁니다.",
+      image: "/images/dragon/forage-close.webp",
+      alt: "잘게 쪼개진 조사료 줄기를 가까이서 본 모습",
+    },
+    {
+      step: "먹인다",
+      title: "소가 남기지 않게.",
+      copy: "줄기가 부드러운 조사료는 송아지도 잘 먹습니다.",
+      image: "/images/dragon/barn-feed.webp",
+      alt: "축사에서 한우들이 드래곤으로 만든 조사료를 먹는 모습",
+    },
+  ],
+  /** 구조 — 3D 도면 */
+  parts: [
+    { name: "로터", copy: "촘촘히 박힌 날이 풀을 베고 두드립니다.", image: "/images/dragon/part-rotor.webp" },
+    { name: "파쇄부", copy: "로터와 맞물려 줄기를 한 번 더 부숩니다.", image: "/images/dragon/part-flail.webp" },
+    { name: "양쪽 동력 전달", copy: "가운데 기어박스에서 양 끝으로 힘을 나눠 넓은 폭도 고르게 돕니다.", image: "/images/dragon/part-drive.webp" },
+  ],
+};
 
-export const productTabs: { id: ProductCategory | "all"; label: string }[] = [
-  { id: "all", label: "전체" },
-  { id: "baler", label: "베일러" },
-  { id: "mower", label: "모우어" },
-  { id: "rake-wrapper", label: "레이크 · 래퍼" },
-  { id: "weeding", label: "제초 · 파쇄" },
-  { id: "consumable", label: "소모품" },
-];
+export type ProductCategory = "mower";
 
 export type Product = {
   id: string;
@@ -104,65 +135,89 @@ export type Product = {
   /** 카페24 동동으로 표시되는 한 줄 캐치카피 */
   catch: string;
   copy: string;
+  /** 작업 폭·적정 마력 등. 확정되면 채운다 (비어 있으면 "전화 안내") */
+  spec?: string;
   isNew?: boolean;
-  /** public/images 의 누끼 사진 경로. 없으면 자리표시 실루엣 */
+  /** public/images 의 사진 경로. 없으면 자리표시 실루엣 */
   image?: string;
 };
 
+/** 드래곤 라인업. 모델별 작업 폭·적정 마력은 회사 사양표를 받으면 spec 에 넣는다 */
 export const products: Product[] = [
   {
-    id: "bimukko",
-    name: "비무꼬",
-    category: "baler",
-    categoryLabel: "일체형 원형베일러",
-    catch: "한 번에, 세 가지.",
-    copy: "베고, 부수고, 묶는 일을 한 대가 끝냅니다.",
-    isNew: true,
-  },
-  {
-    id: "blackhole",
-    name: "블랙홀",
+    id: "dr210",
+    name: "DRAGON 210",
     category: "mower",
-    categoryLabel: "드럼모우어",
-    catch: "거부할 수 없는 흡입력.",
-    copy: "들어간 풀은 돌아 나오지 않습니다.",
+    categoryLabel: "하이브리드 모어 컨디셔너",
+    catch: "작은 밭도 빈틈없이.",
+    copy: "드래곤 라인업에서 가장 작은 모델입니다.",
+    image: "/images/dragon/dr210.webp",
   },
   {
-    id: "mojori",
-    name: "모조리",
-    category: "weeding",
-    categoryLabel: "제초 파쇄기",
-    catch: "이름 그대로.",
-    copy: "리모컨 하나로 풀을 모조리 정리합니다.",
+    id: "dr230",
+    name: "DRAGON 230",
+    category: "mower",
+    categoryLabel: "하이브리드 모어 컨디셔너",
+    catch: "베면서 부순다.",
+    copy: "로터와 파쇄부가 한 번에 베고 부숩니다.",
+    image: "/images/dragon/dr230.webp",
+  },
+  {
+    id: "dr250",
+    name: "DRAGON 250",
+    category: "mower",
+    categoryLabel: "하이브리드 모어 컨디셔너",
+    catch: "베면서 부순다.",
+    copy: "로터와 파쇄부가 한 번에 베고 부숩니다.",
+  },
+  {
+    id: "dr280",
+    name: "DRAGON 280",
+    category: "mower",
+    categoryLabel: "하이브리드 모어 컨디셔너",
+    catch: "넓게, 고르게.",
+    copy: "양쪽으로 동력을 나눠 넓은 폭도 고르게 돌립니다.",
+    image: "/images/dragon/dr280.webp",
+  },
+  {
+    id: "dr314",
+    name: "DRAGON 314",
+    category: "mower",
+    categoryLabel: "하이브리드 모어 컨디셔너",
+    catch: "드래곤의 맏형.",
+    copy: "드래곤 라인업에서 가장 큰 모델입니다.",
   },
 ];
 
+/** 조사료 작업 흐름. 1단계(베기)가 드래곤의 일이다 */
 export const workflow = [
   {
     step: 1,
     title: "베기",
-    desc: "남김없이 벱니다",
-    detail: "드럼이 풀을 끌어들여 한 번에 벱니다. 무른 논에서도 자세가 흔들리지 않습니다.",
-    machine: "블랙홀 드럼모우어",
-    href: "#products",
+    desc: "베면서 부숩니다",
+    detail: "드래곤의 로터가 풀을 베는 동시에 줄기를 두드려 부숩니다. 부순 풀은 빨리 마르고 소가 먹기 좋아집니다.",
+    machine: "DRAGON 하이브리드 모어 컨디셔너",
+    href: "#dragon",
     tone: "#56603d",
+    image: "/images/dragon/field-cut.webp",
   },
   {
     step: 2,
     title: "모으기",
     desc: "고르게 모읍니다",
     detail: "벤 풀을 뒤집어 말리고, 베일러가 먹기 좋은 한 줄로 모읍니다.",
-    machine: "LKHR 레이크",
-    href: "#products",
+    machine: "레이크 · 집초기",
+    href: "#support",
     tone: "#6b6a43",
+    image: "/images/dragon/field-rows.webp",
   },
   {
     step: 3,
     title: "묶기",
     desc: "단단히 묶습니다",
-    detail: "모은 풀을 둥글게 감아 네트로 단단히 묶습니다. 비무꼬는 베기까지 한 대로 끝냅니다.",
-    machine: "비무꼬 원형베일러",
-    href: "#products",
+    detail: "모은 풀을 둥글게 감아 네트로 단단히 묶습니다.",
+    machine: "원형 베일러",
+    href: "#support",
     tone: "#7c6a3c",
   },
   {
@@ -170,9 +225,10 @@ export const workflow = [
     title: "감싸기",
     desc: "오래 지킵니다",
     detail: "랩 필름으로 빈틈없이 감싸 공기를 막습니다. 겨울까지 사료가 상하지 않습니다.",
-    machine: "S350H 자동 접철 래퍼",
-    href: "#products",
+    machine: "베일 래퍼",
+    href: "#support",
     tone: "#5f6670",
+    image: "/images/dragon/bale-open.webp",
   },
   {
     step: 5,
@@ -183,7 +239,7 @@ export const workflow = [
     href: "#consumables",
     tone: "#8a7d5a",
   },
-];
+] as { step: number; title: string; desc: string; detail: string; machine: string; href: string; tone: string; image?: string }[];
 
 export type HpRange = {
   id: string;
@@ -192,22 +248,13 @@ export type HpRange = {
   machines: string[];
 };
 
+/** 마력대별 드래곤 모델. 모델별 적정 마력이 확정되면 machines 에 "DRAGON 230" 처럼 넣는다 */
 export const hpRanges: HpRange[] = [
-  { id: "le35", label: "35마력 이하", shortLabel: "35 이하", machines: ["모조리", "소형 레이크"] },
-  { id: "36-50", label: "36 ~ 50마력", shortLabel: "36~50", machines: ["블랙홀", "LKHR 레이크", "모조리"] },
-  {
-    id: "51-70",
-    label: "51 ~ 70마력",
-    shortLabel: "51~70",
-    machines: ["비무꼬", "블랙홀", "LKHR 레이크", "S350H 래퍼"],
-  },
-  {
-    id: "71-90",
-    label: "71 ~ 90마력",
-    shortLabel: "71~90",
-    machines: ["비무꼬", "블랙홀", "LKHR 레이크", "S350H 래퍼"],
-  },
-  { id: "ge91", label: "91마력 이상", shortLabel: "91 이상", machines: ["비무꼬", "블랙홀", "S350H 래퍼"] },
+  { id: "le35", label: "35마력 이하", shortLabel: "35 이하", machines: [] },
+  { id: "36-50", label: "36 ~ 50마력", shortLabel: "36~50", machines: [] },
+  { id: "51-70", label: "51 ~ 70마력", shortLabel: "51~70", machines: [] },
+  { id: "71-90", label: "71 ~ 90마력", shortLabel: "71~90", machines: [] },
+  { id: "ge91", label: "91마력 이상", shortLabel: "91 이상", machines: [] },
 ];
 
 export type Video = {
@@ -224,37 +271,38 @@ export type Video = {
   tone: string;
 };
 
+/** 관리자에서 유튜브 영상을 올리기 전까지 보이는 예시 카드 */
 export const videos: Video[] = [
   {
     id: "v1",
-    title: "비무꼬 일체형 베일러 — 안동 서후면 수확 현장",
-    caption: "무른 논에서\n{한 번에} 베고 묶기",
+    title: "DRAGON 수수 베기 — 안동 현장",
+    caption: "키 큰 수수도\n{한 번에} 베고 부수기",
     kind: "작업 영상",
-    date: "2026.09.24",
-    tags: ["비무꼬", "무른논", "수확철"],
-    tone: "#7c7a52",
-  },
-  {
-    id: "v2",
-    title: "블랙홀 드럼모우어 흡입 장면 (슬로모션)",
-    caption: "들어간 풀은\n{돌아 나오지} 않습니다",
-    kind: "작업 영상",
-    date: "2026.09.12",
-    tags: ["블랙홀", "수확철"],
+    date: "2026.09.04",
+    tags: ["드래곤", "수수", "수확철"],
     tone: "#5f6a44",
   },
   {
+    id: "v2",
+    title: "드래곤으로 만든 조사료, 축사에서 풀어 보기",
+    caption: "손으로 뜯기는\n{부드러운} 줄기",
+    kind: "작업 영상",
+    date: "2026.01.15",
+    tags: ["드래곤", "조사료", "한우"],
+    tone: "#7c7a52",
+  },
+  {
     id: "v3",
-    title: "비무꼬 네트 교체 방법 — 사용 설명 영상",
-    caption: "네트 교체,\n{3분이면} 끝",
+    title: "DRAGON 연결과 작업 전 점검 — 사용 설명",
+    caption: "작업 전에\n{이것만} 보세요",
     kind: "사용법",
-    date: "2026.08.30",
-    tags: ["비무꼬", "사용법"],
+    date: "2025.08.30",
+    tags: ["드래곤", "사용법"],
     tone: "#8a7d5a",
   },
 ];
 
-export const videoTags = ["#비무꼬", "#블랙홀", "#모조리", "#무른논", "#사용법", "#수확철"];
+export const videoTags = ["#드래곤", "#수수", "#조사료", "#한우", "#사용법", "#수확철"];
 export const videoSorts = [
   { label: "최신순", short: "최신순" },
   { label: "조회수 높은 순", short: "조회수순" },

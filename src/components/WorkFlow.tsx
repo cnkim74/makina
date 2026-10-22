@@ -15,11 +15,11 @@ export default function WorkFlow() {
   const next = workflow.find((w) => w.step === cur.step + 1);
 
   return (
-    <section className="mod mod--alt" id="workflow" aria-labelledby="workflow-title">
+    <section className="mod" id="workflow" aria-labelledby="workflow-title">
       <div className="mod-in">
         <span className="lab-k">작업 흐름</span>
-        <h2 id="workflow-title">베기부터 감싸기까지, 한 세트로.</h2>
-        <p className="tag">조사료의 처음부터 끝까지, 성원마끼나 작업기가 단계마다 함께합니다.</p>
+        <h2 id="workflow-title">조사료, 베기부터 감싸기까지.</h2>
+        <p className="tag">첫 단계 베기가 드래곤의 일입니다. 베면서 부숴 두면 말리기부터 먹이기까지 수월해집니다.</p>
 
         <Segmented<StepId>
           className={s.seg}
@@ -43,7 +43,7 @@ export default function WorkFlow() {
             </dl>
             <div className={s.acts}>
               <a className="lnk" href={cur.href}>
-                {cur.step === 5 ? "소모품 주문하기" : "작업기 보기"}
+                {cur.step === 5 ? "소모품 주문하기" : cur.step === 1 ? "드래곤 보기" : "상담 받기"}
               </a>
               {next && (
                 <button type="button" className={`lnk ${s.next}`} onClick={() => setStep(String(next.step) as StepId)}>
@@ -53,8 +53,15 @@ export default function WorkFlow() {
             </div>
           </div>
           <div className={`photo ${s.pic}`}>
-            <FieldRows w={800} h={600} fill={cur.tone} stroke="rgba(0,0,0,.22)" />
-            <span className="photo-label">작업 사진 — {cur.title} (교체)</span>
+            {cur.image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={cur.image} alt={`${cur.title} 단계 현장 사진`} loading="lazy" />
+            ) : (
+              <>
+                <FieldRows w={800} h={600} fill={cur.tone} stroke="rgba(0,0,0,.22)" />
+                <span className="photo-label">작업 사진 — {cur.title} (교체)</span>
+              </>
+            )}
           </div>
         </div>
       </div>

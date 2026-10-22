@@ -12,6 +12,13 @@
 - 사진·영상이 없는 자리는 `src/components/placeholders/`의 SVG로 채운다. 실제 자료가 오면 교체한다.
 - 배포는 Cloudflare Workers + OpenNext 어댑터(`wrangler.jsonc`, `open-next.config.ts`). `npm run cf:build`로 번들이 만들어지는지 확인한 뒤 푸시한다. 배포 방법은 README의 "배포" 절 참고. 서버 기능(API 라우트, 폼 처리, DB)을 추가할 때는 Workers 바인딩(D1, R2, KV)을 `wrangler.jsonc`에 선언하고 `npm run cf:typegen`으로 타입을 만든다.
 
+## 주력 제품
+
+- 주력 제품은 **DRAGON(드래곤) 하이브리드 모어 컨디셔너**다. 모델은 DR210 · DR230 · DR250 · DR280 · DR314. 베면서 줄기를 부수는 트랙터 부착 작업기.
+- 제품 정보는 `src/data/content.ts` 의 `dragon`, `products`. 모델별 작업 폭·적정 마력은 회사 사양표를 받기 전까지 비워 두고 "전화 안내"로 표시한다. 추측한 사양을 넣지 않는다.
+- 사진 원본은 구글 드라이브 "성원마끼나 소스" 폴더. 웹용(가로 1400~1600, webp)으로 줄여 `public/images/dragon/` 에 둔다.
+- 디자인 시안의 비무꼬·블랙홀·모조리는 실제 제품이 아니다. 다시 쓰지 않는다.
+
 ## CMS (관리자)
 
 - `/admin` 관리자. 데이터는 D1(`DB` 바인딩), 파일은 R2(`MEDIA`). 스키마는 `migrations/`, 바꿀 때는 새 번호 파일을 추가한다.

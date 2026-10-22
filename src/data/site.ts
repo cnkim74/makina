@@ -40,7 +40,8 @@ export const navGroups: { title: string; links: NavLink[] }[] = [
   {
     title: "작업기",
     links: [
-      { label: "작업기", href: "#products" },
+      { label: "드래곤", href: "#dragon" },
+      { label: "라인업", href: "#products" },
       { label: "작업 흐름", href: "#workflow" },
       { label: "마력 찾기", href: "#hp-finder" },
     ],
@@ -72,7 +73,8 @@ export const footerGroups: { title: string; links: NavLink[] }[] = [
   {
     title: "작업기",
     links: [
-      { label: "대표 작업기", href: "#products" },
+      { label: "드래곤", href: "#dragon" },
+      { label: "드래곤 라인업", href: "#products" },
       { label: "조사료 작업 흐름", href: "#workflow" },
       { label: "마력으로 찾기", href: "#hp-finder" },
       { label: "작업 영상", href: "#videos" },
