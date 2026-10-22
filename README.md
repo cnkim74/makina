@@ -127,8 +127,8 @@ public/images/        제품 누끼·현장 사진 넣는 곳
 | 히어로 | `Hero` | 스크롤로 움직이는 영상: BALE → MACHINE → FIELD → HARVEST |
 | 바로 가기 | `QuickDoors` | 구매 상담 · 소모품 · 정비 |
 | 조사료 작업 흐름 | `WorkFlow` | 유리 세그먼트로 5단계 전환 |
-| 드래곤 | `Dragon` | 주력 제품 소개: 현장 사진, 벤다 → 부순다 → 먹인다, 구조 도면 |
-| 드래곤 라인업 | `Products` | DR210 · 230 · 250 · 280 · 314 타일 |
+| 드래곤 | `Dragon` | 주력 제품: 현장 사진, 벤다 → 마른다 → 먹인다, 제품 특징 6가지, 개발 배경, 작업 광경 (DRAGON 제품소개서 기준) |
+| 드래곤 라인업 | `Products` | DR210 · 230 · 250 · 280 타일, 규격표·가격(농업기계목록집 2025.7), 다른 작업기(비무꼬·블랙홀·모조리) |
 | 내 트랙터 마력으로 찾기 | `HpFinder` | 어두운 띠 위 유리 세그먼트 |
 | 작업 영상 | `Videos` | 검색 · 해시태그 · 정렬, 관리자에서 올린 유튜브를 사이트 안에서 재생 |
 | 소모품 빠른 주문 | `Consumables` | 수량 스테퍼, 전화 주문 |
@@ -171,8 +171,8 @@ ffmpeg -ss 7.2  -i source.mp4 -frames:v 1 -vf scale=1600:-2 public/images/hero/h
 ## 교체가 필요한 자리표시
 
 - 작업 흐름 단계별 사진, 마력 찾기 띠 사진, 작업 영상 썸네일
-- DRAGON 250 · 314 제품 사진 → `public/images/dragon/` 에 넣고 `src/data/content.ts` 의 `image` 필드에 경로 지정
-- 드래곤 모델별 작업 폭 · 적정 마력 → `products` 의 `spec`, 마력 찾기 `hpRanges` 의 `machines`
+- DRAGON 250 제품 사진 → `public/images/dragon/` 에 넣고 `src/data/content.ts` 의 `image` 필드에 경로 지정
+- 비무꼬 · 블랙홀 · 모조리 사진 (지금은 글만)
 - 웹폰트 파일 → `public/fonts/` (없으면 CDN 사용)
 - 대표자, 사업자등록번호, 팩스, 카카오톡 채널 링크 → 관리자 “고객지원 · 연결” (기본값은 `src/data/site.ts`)
 - 유튜브·SNS 링크 → 관리자 “SNS”

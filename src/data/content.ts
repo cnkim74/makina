@@ -83,51 +83,86 @@ export const quickDoors: { kicker: string; title: string; copy: string; link: st
 ];
 
 /**
- * 주력 제품 DRAGON — 하이브리드 모어 컨디셔너 (트랙터 3점 부착, 베면서 줄기를 부순다).
- * 사진 원본은 구글 드라이브 "성원마끼나 소스" 폴더. 웹용으로 줄인 파일이 public/images/dragon/ 에 있다.
+ * 주력 제품 DRAGON — 하이브리드 모우어 컨디셔너 (트랙터 3점 부착, 베면서 줄기를 파쇄한다).
+ * 글과 사양은 회사 "DRAGON 제품소개서"(2026.8) 그대로. 고칠 때도 소개서를 기준으로 한다.
+ * 사진: 구글 드라이브 "성원마끼나 소스" + 소개서에서 잘라 낸 도면·작업 광경 → public/images/dragon/
  */
 export const dragon = {
   name: "DRAGON",
-  label: "하이브리드 모어 컨디셔너",
+  label: "하이브리드 모우어 컨디셔너",
+  range: "50마력부터 150마력까지 선택적으로 사용",
   catch: "베면서 부순다.",
-  copy: "로터의 날이 풀을 베는 동시에 줄기를 두드려 부숩니다. 부순 풀은 빨리 마르고, 부드러워 소가 잘 먹습니다.",
+  copy: "아래에서 치고 올라오는 칼날이 작물을 베면서 파쇄합니다. 빨리 마르고, 소가 남기지 않고 먹습니다.",
   heroImage: "/images/dragon/field-cut.webp",
   heroAlt: "트랙터에 단 드래곤이 키 큰 수수밭을 베는 모습",
   render: "/images/dragon/dr280.webp",
-  renderAlt: "DRAGON 280 하이브리드 모어 컨디셔너",
-  /** 밭에서 축사까지 — 실제 현장 사진 */
+  renderAlt: "DRAGON 280 하이브리드 모우어 컨디셔너",
+  /** 밭에서 축사까지 — 소개서 "사용 효과"·"급여효과" */
   story: [
     {
       step: "벤다",
-      title: "한 번 지나가면 끝.",
-      copy: "베고 부수는 일을 한 번에 합니다. 따로 압쇄기를 걸 필요가 없습니다.",
-      image: "/images/dragon/field-rows.webp",
-      alt: "드래곤이 베고 지나간 자리에 고르게 누운 풀",
+      title: "쓰러진 작물도 막힘없이.",
+      copy: "아래에서 치고 올라오는 칼날이 작물을 파쇄하며 내보내, 축에 감기거나 막히지 않습니다. 쓰러진 작물 예취에 가장 알맞습니다.",
+      image: "/images/dragon/work-sudan-2.webp",
+      alt: "DRAGON210 으로 수단그라스를 베는 모습",
     },
     {
-      step: "부순다",
-      title: "줄기까지 부드럽게.",
-      copy: "딱딱한 줄기가 잘게 쪼개져, 베일을 풀었을 때 손으로 쉽게 뜯깁니다.",
+      step: "마른다",
+      title: "빨리 마르니 일이 줄어듭니다.",
+      copy: "파쇄된 작물은 다른 컨디셔너보다 빨리 말라 작업 시간이 줄어듭니다. 엔진 1,500~1,800rpm, 중속 주행으로 빠르게 작업합니다.",
       image: "/images/dragon/forage-close.webp",
-      alt: "잘게 쪼개진 조사료 줄기를 가까이서 본 모습",
+      alt: "잘게 파쇄되어 마른 조사료",
     },
     {
       step: "먹인다",
-      title: "소가 남기지 않게.",
-      copy: "줄기가 부드러운 조사료는 송아지도 잘 먹습니다.",
+      title: "소가 남기지 않습니다.",
+      copy: "굵은 줄기도 파쇄되어 기호성이 좋아지고, 남기는 것이 없어 축사 청소가 수월합니다. 냄새가 적어 맨손 급여도 할 만큼 질이 좋아집니다.",
       image: "/images/dragon/barn-feed.webp",
       alt: "축사에서 한우들이 드래곤으로 만든 조사료를 먹는 모습",
     },
   ],
-  /** 구조 — 3D 도면 */
-  parts: [
-    { name: "로터", copy: "촘촘히 박힌 날이 풀을 베고 두드립니다.", image: "/images/dragon/part-rotor.webp" },
-    { name: "파쇄부", copy: "로터와 맞물려 줄기를 한 번 더 부숩니다.", image: "/images/dragon/part-flail.webp" },
-    { name: "양쪽 동력 전달", copy: "가운데 기어박스에서 양 끝으로 힘을 나눠 넓은 폭도 고르게 돕니다.", image: "/images/dragon/part-drive.webp" },
+  /** 소개서 "제품특징" — 도면은 소개서에서 잘라 냈다 */
+  features: [
+    { name: "고정밀 밸런싱 축", copy: "H.M.C 바란싱 축의 고정밀 밸런싱으로 진동 없이 안정적으로 작업합니다.", image: "/images/dragon/feat-balance.webp" },
+    { name: "더블 조인트 구동", copy: "더블 조인트 구동형으로 PTO 동력을 100% 전달합니다.", image: "/images/dragon/feat-doublejoint.webp" },
+    { name: "강력한 텐션 조절 장치", copy: "벨트가 미끄러지지 않는 작업을 보장합니다.", image: "/images/dragon/feat-tension.webp" },
+    { name: "회전 타이어", copy: "바퀴가 돌아가 선회 작업이 원활합니다.", image: "/images/dragon/feat-wheel.webp" },
+    { name: "상하 롤링 링크", copy: "울퉁불퉁한 지형에도 대비합니다.", image: "/images/dragon/feat-rolling.webp" },
+    { name: "펜듈럼(좌우 진자) 기능", copy: "좌우로 기울어 지면을 따라갑니다.", image: "/images/dragon/feat-pendulum.webp" },
+  ],
+  /** 소개서 "사용 효과"에서 위 이야기에 없는 것 */
+  more: [
+    "기존 제품보다 한 단계 높은 부품을 써서 수명과 내구성이 다릅니다.",
+    "조사료 작업뿐 아니라 주변 환경 정화 작업에도 씁니다.",
+    "질 좋은 사료는 축사 환경 개선과 바닥 상태 유지에 도움이 됩니다.",
+  ],
+  /** 소개서 "개발배경"·"국내시장의 문제점" (수입사·모델명은 홈페이지에 싣지 않는다) */
+  why: {
+    title: "수입 예취기가 못 하던 일.",
+    copy: [
+      "국내 예취기 시장은 수입 기계가 장악하고 있습니다. 하지만 우리 농지의 특성을 충분히 반영하지 못해, 쓰러진 작물은 수확조차 어렵고 좁은 땅에서 크게 키운 작물은 작업이 힘들거나 못 하는 경우가 많습니다.",
+      "드래곤은 예취와 건초 생산이라는 예취기 본연의 기능에 집중해 만들었습니다. 국내 환경의 특수성을 고려해, 예취 작업만큼은 수입 기계를 압도합니다.",
+    ],
+  },
+  /** 소개서 "작업광경" */
+  gallery: [
+    { image: "/images/dragon/work-triticale-1.webp", caption: "DRAGON210 · 트리티케일" },
+    { image: "/images/dragon/work-sudan-1.webp", caption: "DRAGON210 · 수단그라스" },
+    { image: "/images/dragon/work-sorghum-1.webp", caption: "DRAGON280 · 극동6호" },
+    { image: "/images/dragon/work-sorghum-2.webp", caption: "DRAGON280 · 극동6호" },
   ],
 };
 
 export type ProductCategory = "mower";
+
+/** 소개서 "제품규격" */
+export type ProductSpecs = {
+  pto: string;
+  hp: string;
+  blades: string;
+  weight: string;
+  width: string;
+};
 
 export type Product = {
   id: string;
@@ -137,58 +172,69 @@ export type Product = {
   /** 카페24 동동으로 표시되는 한 줄 캐치카피 */
   catch: string;
   copy: string;
-  /** 작업 폭·적정 마력 등. 확정되면 채운다 (비어 있으면 "전화 안내") */
-  spec?: string;
+  specs?: ProductSpecs;
+  /** 농업기계목록집 가격 */
+  price?: string;
   isNew?: boolean;
-  /** public/images 의 사진 경로. 없으면 자리표시 실루엣 */
+  /** public/images 의 사진 경로. 없으면 자리표시 */
   image?: string;
 };
 
-/** 드래곤 라인업. 모델별 작업 폭·적정 마력은 회사 사양표를 받으면 spec 에 넣는다 */
+/** 가격 출처 — 소개서의 농업기계목록집 기준 */
+export const priceNote = "가격은 농업기계목록집 2025년 7월 기준입니다. DRAGON210·230·280은 융자지원 한도 1,200만원.";
+
+/** 드래곤 라인업 — 소개서 "제품규격" */
 export const products: Product[] = [
   {
     id: "dr210",
     name: "DRAGON 210",
     category: "mower",
-    categoryLabel: "하이브리드 모어 컨디셔너",
-    catch: "작은 밭도 빈틈없이.",
-    copy: "드래곤 라인업에서 가장 작은 모델입니다.",
+    categoryLabel: "하이브리드 모우어 컨디셔너",
+    catch: "50마력부터.",
+    copy: "드래곤 가운데 가장 가볍습니다. 트리티케일·수단그라스 작업에 씁니다.",
+    specs: { pto: "540", hp: "50마력 이상", blades: "50개", weight: "650kg", width: "197cm" },
+    price: "2,250만원",
     image: "/images/dragon/dr210.webp",
   },
   {
     id: "dr230",
     name: "DRAGON 230",
     category: "mower",
-    categoryLabel: "하이브리드 모어 컨디셔너",
-    catch: "베면서 부순다.",
-    copy: "로터와 파쇄부가 한 번에 베고 부숩니다.",
+    categoryLabel: "하이브리드 모우어 컨디셔너",
+    catch: "더 넓게 한 번에.",
+    copy: "작업 폭 222cm, 칼날 52개로 베면서 파쇄합니다.",
+    specs: { pto: "540", hp: "80마력 이상", blades: "52개", weight: "730kg", width: "222cm" },
+    price: "2,500만원",
     image: "/images/dragon/dr230.webp",
   },
   {
     id: "dr250",
     name: "DRAGON 250",
     category: "mower",
-    categoryLabel: "하이브리드 모어 컨디셔너",
-    catch: "베면서 부순다.",
-    copy: "로터와 파쇄부가 한 번에 베고 부숩니다.",
+    categoryLabel: "하이브리드 모우어 컨디셔너",
+    catch: "같은 마력, 더 넓게.",
+    copy: "80마력 트랙터로 작업 폭 247cm를 씁니다.",
+    specs: { pto: "540", hp: "80마력 이상", blades: "56개", weight: "950kg", width: "247cm" },
+    price: "2,900만원",
   },
   {
     id: "dr280",
     name: "DRAGON 280",
     category: "mower",
-    categoryLabel: "하이브리드 모어 컨디셔너",
-    catch: "넓게, 고르게.",
-    copy: "양쪽으로 동력을 나눠 넓은 폭도 고르게 돌립니다.",
+    categoryLabel: "하이브리드 모우어 컨디셔너",
+    catch: "드래곤의 맏형.",
+    copy: "PTO 540·1000 겸용. 키 큰 수수(극동6호)도 거뜬히 벱니다.",
+    specs: { pto: "540 / 1000", hp: "100마력 이상", blades: "60개", weight: "950kg", width: "272cm" },
+    price: "3,380만원",
     image: "/images/dragon/dr280.webp",
   },
-  {
-    id: "dr314",
-    name: "DRAGON 314",
-    category: "mower",
-    categoryLabel: "하이브리드 모어 컨디셔너",
-    catch: "드래곤의 맏형.",
-    copy: "드래곤 라인업에서 가장 큰 모델입니다.",
-  },
+];
+
+/** 드래곤 말고도 만드는 작업기 — 간단히만 소개한다 */
+export const otherMachines = [
+  { name: "비무꼬", label: "일체형 원형베일러", copy: "베고, 부수고, 묶는 일을 한 대가 끝냅니다." },
+  { name: "블랙홀", label: "드럼모우어", copy: "들어간 풀은 돌아 나오지 않습니다." },
+  { name: "모조리", label: "제초 파쇄기", copy: "리모컨 하나로 풀을 모조리 정리합니다." },
 ];
 
 /** 조사료 작업 흐름. 1단계(베기)가 드래곤의 일이다 */
@@ -218,7 +264,7 @@ export const workflow = [
     title: "묶기",
     desc: "단단히 묶습니다",
     detail: "모은 풀을 둥글게 감아 네트로 단단히 묶습니다.",
-    machine: "원형 베일러",
+    machine: "비무꼬 일체형 원형베일러",
     href: "#support",
     tone: "#7c6a3c",
   },
@@ -250,13 +296,17 @@ export type HpRange = {
   machines: string[];
 };
 
-/** 마력대별 드래곤 모델. 모델별 적정 마력이 확정되면 machines 에 "DRAGON 230" 처럼 넣는다 */
+/** 마력대별 드래곤 모델 — 소개서 적용마력(210: 50HP↑, 230·250: 80HP↑, 280: 100HP↑) */
 export const hpRanges: HpRange[] = [
-  { id: "le35", label: "35마력 이하", shortLabel: "35 이하", machines: [] },
-  { id: "36-50", label: "36 ~ 50마력", shortLabel: "36~50", machines: [] },
-  { id: "51-70", label: "51 ~ 70마력", shortLabel: "51~70", machines: [] },
-  { id: "71-90", label: "71 ~ 90마력", shortLabel: "71~90", machines: [] },
-  { id: "ge91", label: "91마력 이상", shortLabel: "91 이상", machines: [] },
+  { id: "lt50", label: "50마력 미만", shortLabel: "50 미만", machines: [] },
+  { id: "50-79", label: "50 ~ 79마력", shortLabel: "50~79", machines: ["DRAGON 210"] },
+  { id: "80-99", label: "80 ~ 99마력", shortLabel: "80~99", machines: ["DRAGON 230", "DRAGON 250", "DRAGON 210"] },
+  {
+    id: "100-150",
+    label: "100 ~ 150마력",
+    shortLabel: "100~150",
+    machines: ["DRAGON 280", "DRAGON 250", "DRAGON 230", "DRAGON 210"],
+  },
 ];
 
 export type Video = {

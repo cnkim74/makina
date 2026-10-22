@@ -1,19 +1,18 @@
 "use client";
 
-import { products } from "@/data/content";
+import { otherMachines, priceNote, products } from "@/data/content";
 import { openInquiry } from "@/lib/inquiry";
 import s from "./Products.module.css";
 
 /** 드래곤 라인업 — 애플식 제품 타일. 글은 위, 사진은 아래 */
 export default function Products() {
-
   return (
     <section className="mod mod--alt" id="products" aria-labelledby="products-title">
       <div className="mod-in">
         <span className="lab-k">드래곤 라인업</span>
         <h2 id="products-title">내 밭에 맞는 드래곤.</h2>
         <p className="tag">
-          다섯 가지 크기 중에 트랙터와 밭에 맞는 모델을 고르세요. 안동 서후면 공장에서 직접 만들고 직접 고칩니다.
+          작업 폭 197cm부터 272cm까지, 트랙터 마력에 맞춰 고르세요. 안동 서후면 공장에서 직접 만들고 직접 고칩니다.
         </p>
 
         <div className={s.grid}>
@@ -25,7 +24,15 @@ export default function Products() {
                 <p className={s.cat}>{p.categoryLabel}</p>
                 <p className={s.catch}>{p.catch}</p>
                 <p className={s.copy}>{p.copy}</p>
-                <p className={s.spec}>{p.spec ?? "작업 폭 · 적정 마력 전화 안내"}</p>
+                {p.specs ? (
+                  <ul className={s.specs} aria-label={`${p.name} 주요 사양`}>
+                    <li>작업 폭 {p.specs.width}</li>
+                    <li>{p.specs.hp}</li>
+                  </ul>
+                ) : (
+                  <p className={s.spec}>작업 폭 · 적정 마력 전화 안내</p>
+                )}
+                {p.price && <p className={s.price}>{p.price}</p>}
                 <div className={s.links}>
                   <a
                     className="lnk"
@@ -52,7 +59,57 @@ export default function Products() {
               </div>
             </article>
           ))}
+        </div>
 
+        <div className={s.tableWrap}>
+          <table className={s.table}>
+            <caption>드래곤 제품 규격</caption>
+            <thead>
+              <tr>
+                <th scope="col">모델</th>
+                <th scope="col">작업 폭</th>
+                <th scope="col">적용 마력</th>
+                <th scope="col">PTO</th>
+                <th scope="col">칼날 수</th>
+                <th scope="col">무게</th>
+                <th scope="col">가격</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((p) => (
+                <tr key={p.id}>
+                  <th scope="row">{p.name}</th>
+                  <td>{p.specs?.width ?? "-"}</td>
+                  <td>{p.specs?.hp ?? "-"}</td>
+                  <td>{p.specs?.pto ?? "-"}</td>
+                  <td>{p.specs?.blades ?? "-"}</td>
+                  <td>{p.specs?.weight ?? "-"}</td>
+                  <td>{p.price ?? "문의"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={s.note}>{priceNote}</p>
+
+        <div className={s.others}>
+          <h3>다른 작업기도 만듭니다.</h3>
+          <ul>
+            {otherMachines.map((m) => (
+              <li key={m.name}>
+                <b>{m.name}</b>
+                <span className={s.otherLabel}>{m.label}</span>
+                <p>{m.copy}</p>
+                <a
+                  className="lnk"
+                  href="#inquiry"
+                  onClick={() => openInquiry("구매 상담", `${m.name}(${m.label}) 상담을 원합니다.\n트랙터 마력: `)}
+                >
+                  상담 남기기
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

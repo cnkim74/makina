@@ -10,7 +10,7 @@ import s from "./HpFinder.module.css";
 /** 내 트랙터 마력으로 찾기 — 어두운 사진 띠 위의 유리 */
 export default function HpFinder() {
   const site = useSite();
-  const [sel, setSel] = useState("51-70");
+  const [sel, setSel] = useState("80-99");
   const range = hpRanges.find((r) => r.id === sel) ?? hpRanges[2];
 
   return (
@@ -37,7 +37,7 @@ export default function HpFinder() {
 
         <div className={`glass glass--dark ${s.result}`} aria-live="polite">
           <p className={s.q}>
-            <b>{range.label.replace(" ~ ", "~")}</b> 트랙터에 맞는 드래곤
+            <b>{range.label.replace(" ~ ", "~")}</b> 트랙터에 연결할 수 있는 드래곤
           </p>
           {range.machines.length > 0 ? (
             <ul className={s.chips}>
@@ -47,22 +47,22 @@ export default function HpFinder() {
             </ul>
           ) : (
             <p className={s.ask}>
-              트랙터 기종을 알려 주시면 맞는 모델을 바로 골라 드립니다.{" "}
+              드래곤은 50마력부터 씁니다. 작은 트랙터에 맞는 작업기는 전화로 안내해 드립니다.{" "}
               <a className="btn btn--cta" href={site.phoneHref}>
                 ☏ {site.phone}
               </a>
-              <a
-                className="lnk"
-                href="#inquiry"
-                onClick={() =>
-                  openInquiry("구매 상담", `${range.label} 트랙터에 맞는 드래곤 모델이 궁금합니다.\n트랙터 기종: `)
-                }
-              >
-                문의 남기기
-              </a>
             </p>
           )}
-          <p className={s.note}>모델별 적정 마력을 정리하는 중입니다 · 정확한 궁합은 전화로 확인해 드립니다</p>
+          <a
+            className={`lnk ${s.askLink}`}
+            href="#inquiry"
+            onClick={() =>
+              openInquiry("구매 상담", `${range.label} 트랙터에 맞는 드래곤 모델이 궁금합니다.\n트랙터 기종: `)
+            }
+          >
+            이 마력으로 문의 남기기
+          </a>
+          <p className={s.note}>PTO 540 (DRAGON280은 540·1000 겸용) · 정확한 궁합은 전화로 확인해 드립니다</p>
         </div>
       </div>
     </section>

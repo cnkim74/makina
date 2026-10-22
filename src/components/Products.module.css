@@ -1,16 +1,16 @@
 /* 한 장만 남아도 가운데 서도록 flex */
+/* 데스크톱 4칸 · 태블릿 2칸 · 모바일 1칸 */
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
   margin-top: 36px;
 }
 
 .tile {
-  flex: 1 1 340px;
-  max-width: 386px;
   min-height: 600px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .top {
@@ -37,7 +37,7 @@
 }
 
 .tile h3 {
-  font-size: 34px;
+  font-size: 28px;
   letter-spacing: -0.02em;
 }
 
@@ -100,6 +100,133 @@
   background: var(--bg-alt);
 }
 
+.specs {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.specs li {
+  font-size: 15px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-alt);
+}
+
+.price {
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 규격표 — 고령 사용자도 한눈에 비교 */
+.tableWrap {
+  margin-top: var(--space-5);
+  overflow-x: auto;
+  background: var(--bg);
+  border-radius: var(--radius-tile);
+  border: 1px solid var(--card-line);
+}
+
+.table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.table caption {
+  text-align: left;
+  padding: 20px 24px 8px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.table th,
+.table td {
+  padding: 14px 16px;
+  text-align: center;
+  border-bottom: 1px solid var(--card-line);
+  white-space: nowrap;
+}
+
+.table thead th {
+  font-size: 15px;
+  color: var(--fg-2);
+  font-weight: 700;
+}
+
+.table tbody th {
+  text-align: left;
+  padding-left: 24px;
+}
+
+.table tbody tr:last-child th,
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.table td:last-child {
+  font-weight: 800;
+}
+
+.note {
+  margin-top: 12px;
+  font-size: 16px;
+  color: var(--fg-2);
+}
+
+/* 다른 작업기 — 간단히 */
+.others {
+  margin-top: var(--space-5);
+}
+
+.others h3 {
+  font-size: 24px;
+}
+
+.others ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.others li {
+  background: var(--bg);
+  border: 1px solid var(--card-line);
+  border-radius: var(--radius-card);
+  padding: 22px 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.others b {
+  font-size: 22px;
+}
+
+.otherLabel {
+  font-size: 15px;
+  color: var(--fg-2);
+}
+
+.others p {
+  font-size: 17px;
+  margin: 4px 0 6px;
+}
+
 /* 사진이 아직 없는 모델 */
 .ph {
   position: absolute;
@@ -125,10 +252,25 @@
   color: var(--fg-2);
 }
 
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 900px) {
   .grid {
+    grid-template-columns: 1fr;
     gap: 14px;
     margin-top: 24px;
+  }
+
+  .table {
+    font-size: 16px;
+  }
+
+  .others ul {
+    grid-template-columns: 1fr;
   }
 
   .tile {

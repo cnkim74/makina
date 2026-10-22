@@ -6,7 +6,7 @@ import { openInquiry } from "@/lib/inquiry";
 import { useSite } from "./SiteData";
 import s from "./Dragon.module.css";
 
-/** 주력 제품 DRAGON — 큰 현장 사진, 밭에서 축사까지의 이야기, 구조 */
+/** 주력 제품 DRAGON — 현장 사진, 밭에서 축사까지, 제품 특징, 개발 배경 (소개서 기준) */
 export default function Dragon() {
   const site = useSite();
   return (
@@ -18,6 +18,7 @@ export default function Dragon() {
         </h2>
         <p className={s.label}>{dragon.label}</p>
         <p className="tag">{dragon.copy}</p>
+        <p className={s.range}>{dragon.range}</p>
         <div className={s.models} aria-label="드래곤 모델">
           {products.map((p) => (
             <a key={p.id} href="#products">
@@ -38,7 +39,7 @@ export default function Dragon() {
                 ☏ 드래곤 상담
               </a>
               <a className="lnk" href="#products">
-                모델 보기
+                사양 · 가격 보기
               </a>
               <a
                 className="lnk"
@@ -68,16 +69,40 @@ export default function Dragon() {
           ))}
         </ol>
 
-        <div className={s.parts}>
-          {dragon.parts.map((pt) => (
-            <figure key={pt.name} className={s.part}>
-              <img src={pt.image} alt={`드래곤 ${pt.name} 3D 도면`} loading="lazy" />
+        <h3 className={s.subhead}>제품 특징.</h3>
+        <div className={s.features}>
+          {dragon.features.map((f) => (
+            <figure key={f.name} className={s.feature}>
+              <img src={f.image} alt={`${f.name} 도면`} loading="lazy" />
               <figcaption>
-                <b>{pt.name}</b>
-                {pt.copy}
+                <b>{f.name}</b>
+                {f.copy}
               </figcaption>
             </figure>
           ))}
+        </div>
+
+        <div className={s.why}>
+          <div className={s.whyText}>
+            <span className={s.step}>개발 배경</span>
+            <h3>{dragon.why.title}</h3>
+            {dragon.why.copy.map((c) => (
+              <p key={c}>{c}</p>
+            ))}
+            <ul className={s.more}>
+              {dragon.more.map((m) => (
+                <li key={m}>{m}</li>
+              ))}
+            </ul>
+          </div>
+          <div className={s.gallery}>
+            {dragon.gallery.map((g) => (
+              <figure key={g.image}>
+                <img src={g.image} alt={`${g.caption} 작업 광경`} loading="lazy" />
+                <figcaption>{g.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
     </section>
