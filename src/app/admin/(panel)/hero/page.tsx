@@ -1,6 +1,7 @@
 import { hasRole, requireUser } from "@/lib/auth";
 import { all, readyDb } from "@/lib/db";
 import { getSetting } from "@/lib/settings";
+import { kstDate } from "@/lib/time";
 import { deleteMedia, resetHero, saveHero } from "../../actions";
 import { ConfirmSubmit, CopyButton, Submit, UploadBox } from "../../_ui/client";
 import { Flash, PageHead } from "../../_ui/server";
@@ -86,7 +87,7 @@ ffmpeg -ss 7    -i 원본.mp4 -frames:v 1 -vf scale=1600:-2 hero-still.webp`}</p
                     <b>{m.filename}</b>
                     <code>{url}</code>
                     <span className={a.muted}>
-                      {(m.size / 1024 / 1024).toFixed(1)}MB · {m.created_at.slice(0, 10)}
+                      {(m.size / 1024 / 1024).toFixed(1)}MB · {kstDate(m.created_at)}
                     </span>
                     <CopyButton text={url} />
                     {hasRole(user, "admin") && (

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { hasRole, requireUser } from "@/lib/auth";
 import { all, readyDb } from "@/lib/db";
 import { INQUIRY_STATUS, telHref } from "@/lib/types";
+import { kstMinute } from "@/lib/time";
 import { deleteInquiry, updateInquiry } from "../../actions";
 import { ConfirmSubmit, Submit } from "../../_ui/client";
 import { Flash, PageHead } from "../../_ui/server";
@@ -77,7 +78,7 @@ export default async function Inquiries({ searchParams }: { searchParams: Promis
                     {r.email}
                   </a>
                 )}
-                <span className={a.muted}>접수 {r.created_at.slice(0, 16)}</span>
+                <span className={a.muted}>접수 {kstMinute(r.created_at)}</span>
               </div>
               <p className={a.message}>{r.message}</p>
               <form action={updateInquiry} className={a.form}>
@@ -102,7 +103,7 @@ export default async function Inquiries({ searchParams }: { searchParams: Promis
                 </div>
                 <div className={a.actions}>
                   <Submit>저장</Submit>
-                  <span className={a.muted}>최근 수정 {r.updated_at.slice(0, 16)}</span>
+                  <span className={a.muted}>최근 수정 {kstMinute(r.updated_at)}</span>
                 </div>
               </form>
               {hasRole(user, "admin") && (

@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { dragon, products } from "@/data/content";
+import { openInquiry } from "@/lib/inquiry";
 import { useSite } from "./SiteData";
 import s from "./Dragon.module.css";
 
@@ -38,6 +39,13 @@ export default function Dragon() {
               </a>
               <a className="lnk" href="#products">
                 모델 보기
+              </a>
+              <a
+                className="lnk"
+                href="#inquiry"
+                onClick={() => openInquiry("구매 상담", "드래곤 상담을 원합니다.\n트랙터 마력: \n작업 면적: ")}
+              >
+                문의 남기기
               </a>
             </div>
           </div>

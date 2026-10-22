@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { supportItems } from "@/data/content";
+import { openInquiry } from "@/lib/inquiry";
 import { useSite } from "./SiteData";
 import s from "./Support.module.css";
 
@@ -48,9 +49,7 @@ export default function Support() {
                     <a
                       className="btn btn--ghost"
                       href="#inquiry"
-                      onClick={() =>
-                        window.dispatchEvent(new CustomEvent("mk:inquiry", { detail: CATEGORY_OF[i] ?? "기타" }))
-                      }
+                      onClick={() => openInquiry(CATEGORY_OF[i] ?? "기타")}
                     >
                       문의 남기기
                     </a>

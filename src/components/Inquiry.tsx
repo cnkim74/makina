@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { InquiryPrefill } from "@/lib/inquiry";
 import { track } from "@/lib/track";
 import { INQUIRY_CATEGORIES } from "@/lib/types";
 import { useSite } from "./SiteData";
@@ -13,16 +14,32 @@ export default function Inquiry() {
   const site = useSite();
   const [category, setCategory] = useState<string>(INQUIRY_CATEGORIES[0]);
   const [state, setState] = useState<State>({ kind: "idle" });
+  const [prefill, setPrefill] = useState<{ text: string; n: number } | null>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const lastPrefill = useRef("");
 
-  // 고객지원 목록에서 "문의 남기기"를 누르면 분류를 미리 골라 둔다
+  // 제품·마력 찾기·소모품·고객지원의 "문의 남기기"를 누르면 종류와 내용을 미리 채운다 (lib/inquiry.ts)
   useEffect(() => {
     const on = (e: Event) => {
-      const c = (e as CustomEvent<string>).detail;
+      const d = (e as CustomEvent<InquiryPrefill | string>).detail;
+      const { category: c, message } = typeof d === "string" ? { category: d, message: undefined } : d;
       if ((INQUIRY_CATEGORIES as readonly string[]).includes(c)) setCategory(c);
+      setState((st) => (st.kind === "done" ? { kind: "idle" } : st));
+      if (message) setPrefill((p) => ({ text: message, n: (p?.n ?? 0) + 1 }));
     };
     window.addEventListener("mk:inquiry", on);
     return () => window.removeEventListener("mk:inquiry", on);
   }, []);
+
+  // 손님이 직접 쓴 내용은 덮지 않는다. 비어 있거나 앞서 채운 문구 그대로일 때만 바꾼다
+  useEffect(() => {
+    const el = messageRef.current;
+    if (!prefill || !el) return;
+    if (el.value.trim() === "" || el.value === lastPrefill.current) {
+      el.value = prefill.text;
+      lastPrefill.current = prefill.text;
+    }
+  }, [prefill, state.kind]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -50,6 +67,7 @@ export default function Inquiry() {
       }
       track("inquiry_submit", category);
       form.reset();
+      lastPrefill.current = "";
       setState({ kind: "done" });
     } catch {
       setState({ kind: "error", msg: "인터넷 연결을 확인하고 다시 보내 주세요." });
@@ -126,12 +144,13 @@ export default function Inquiry() {
             <label className={s.field}>
               <span>문의 내용</span>
               <textarea
+                ref={messageRef}
                 id="inq-message"
                 name="message"
                 required
                 maxLength={2000}
                 rows={5}
-                placeholder="예: 60마력 트랙터에 맞는 원형베일러 견적이 궁금합니다. 작업 면적은 약 2만 평입니다."
+                placeholder="예: 60마력 트랙터에 맞는 드래곤 모델과 견적이 궁금합니다. 작업 면적은 약 2만 평입니다."
               />
             </label>
 

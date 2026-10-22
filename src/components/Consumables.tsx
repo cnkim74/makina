@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { consumables } from "@/data/content";
+import { openInquiry } from "@/lib/inquiry";
 import { useSite } from "./SiteData";
 import { NetRoll, WrapRoll } from "./placeholders";
 import s from "./Consumables.module.css";
@@ -57,6 +58,18 @@ export default function Consumables() {
             </p>
             <a className={`btn btn--cta ${s.tel}`} href={site.phoneHref}>
               ☏ {site.phone}
+            </a>
+            <a
+              className="btn btn--ghost"
+              href="#inquiry"
+              onClick={() =>
+                openInquiry(
+                  "소모품 주문",
+                  `${consumables.map((c) => `${c.name} ${qty[c.id]}롤`).join(", ")} 주문합니다.\n받으실 주소: `,
+                )
+              }
+            >
+              주문 남기기
             </a>
             <a className="lnk" href={site.kakaoHref}>
               카카오톡으로 주문하기

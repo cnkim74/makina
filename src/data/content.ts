@@ -55,14 +55,15 @@ export const heroSketchStory = [
 export type HeroLayerImage = { dawn: string; lit: string };
 export const heroImages: Partial<Record<"bg" | "mid" | "fg", HeroLayerImage>> = {};
 
-/** 히어로 바로 아래 "바로 가기" 문 세 개 */
-export const quickDoors = [
+/** 히어로 아래 "바로 가기" 문. inquiry 가 있으면 문의 양식을 그 종류로 열어 관리자 "문의"로 받는다 */
+export const quickDoors: { kicker: string; title: string; copy: string; link: string; href: string; inquiry?: string }[] = [
   {
     kicker: "BUY",
     title: "작업기 구매 상담",
-    copy: "트랙터 마력과 작업 면적만 알려 주시면 맞는 작업기와 지원사업을 안내해 드립니다.",
-    link: "구매 상담 받기",
-    href: "#support",
+    copy: "트랙터 마력과 작업 면적만 알려 주시면 맞는 드래곤 모델과 지원사업을 안내해 드립니다.",
+    link: "구매 상담 남기기",
+    href: "#inquiry",
+    inquiry: "구매 상담",
   },
   {
     kicker: "ORDER",
@@ -76,7 +77,8 @@ export const quickDoors = [
     title: "A/S · 출장 정비",
     copy: "수확철 고장은 하루가 급합니다. 접수하시면 가까운 정비 기사가 바로 연락드립니다.",
     link: "정비 접수하기",
-    href: "#support",
+    href: "#inquiry",
+    inquiry: "A/S · 정비",
   },
 ];
 

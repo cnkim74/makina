@@ -3,6 +3,7 @@ import { requireUser } from "@/lib/auth";
 import { all, first, readyDb } from "@/lib/db";
 import { getSetting } from "@/lib/settings";
 import { INQUIRY_STATUS } from "@/lib/types";
+import { kstShort } from "@/lib/time";
 import { Flash, PageHead } from "../_ui/server";
 import a from "../admin.module.css";
 
@@ -85,7 +86,7 @@ export default async function Dashboard({ searchParams }: { searchParams: SP }) 
                   <Link href={`/admin/inquiries#q${r.id}`}>
                     {r.name} · {r.category}
                   </Link>
-                  <span className={a.muted}>{r.created_at.slice(5, 16)}</span>
+                  <span className={a.muted}>{kstShort(r.created_at)}</span>
                 </li>
               ))}
             </ul>

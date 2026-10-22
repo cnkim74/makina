@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { hpRanges } from "@/data/content";
 import Segmented from "./Segmented";
+import { openInquiry } from "@/lib/inquiry";
 import { useSite } from "./SiteData";
 import s from "./HpFinder.module.css";
 
@@ -49,6 +50,15 @@ export default function HpFinder() {
               트랙터 기종을 알려 주시면 맞는 모델을 바로 골라 드립니다.{" "}
               <a className="btn btn--cta" href={site.phoneHref}>
                 ☏ {site.phone}
+              </a>
+              <a
+                className="lnk"
+                href="#inquiry"
+                onClick={() =>
+                  openInquiry("구매 상담", `${range.label} 트랙터에 맞는 드래곤 모델이 궁금합니다.\n트랙터 기종: `)
+                }
+              >
+                문의 남기기
               </a>
             </p>
           )}

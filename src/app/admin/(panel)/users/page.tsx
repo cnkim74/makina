@@ -1,5 +1,6 @@
 import { requireUser, type Role } from "@/lib/auth";
 import { all, readyDb } from "@/lib/db";
+import { kstDate, kstMinute } from "@/lib/time";
 import { deleteMember, updateMember } from "../../actions";
 import { ConfirmSubmit, Submit } from "../../_ui/client";
 import { Flash, PageHead } from "../../_ui/server";
@@ -65,7 +66,7 @@ export default async function Users({ searchParams }: { searchParams: Promise<{ 
                 {r.email}
               </a>
               <span className={a.muted}>
-                가입 {r.created_at.slice(0, 10)} · 최근 로그인 {r.last_login_at ? r.last_login_at.slice(0, 16) : "없음"}
+                가입 {kstDate(r.created_at)} · 최근 로그인 {r.last_login_at ? kstMinute(r.last_login_at) : "없음"}
               </span>
             </div>
             {canManage(r) && (

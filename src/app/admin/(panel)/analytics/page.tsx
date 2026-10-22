@@ -1,6 +1,7 @@
 import { hasRole, requireUser } from "@/lib/auth";
 import { all, readyDb } from "@/lib/db";
 import { getSetting } from "@/lib/settings";
+import { kstToday } from "@/lib/time";
 import { saveIntegrations } from "../../actions";
 import { Submit } from "../../_ui/client";
 import { DailyBars, Flash, PageHead } from "../../_ui/server";
@@ -27,27 +28,27 @@ export default async function Analytics({ searchParams }: { searchParams: Promis
     getSetting(db, "integrations"),
     all<{ type: string; n: number }>(
       db,
-      "SELECT type, COUNT(*) AS n FROM events WHERE created_at >= date('now', ?) GROUP BY type",
+      "SELECT type, COUNT(*) AS n FROM events WHERE date(created_at, '+9 hours') >= date('now', '+9 hours', ?) GROUP BY type",
       since,
     ),
     all<{ day: string; n: number }>(
       db,
-      `SELECT date(created_at) AS day, COUNT(*) AS n FROM events
-        WHERE type = 'page_view' AND created_at >= date('now', ?) GROUP BY day`,
+      `SELECT date(created_at, '+9 hours') AS day, COUNT(*) AS n FROM events
+        WHERE type = 'page_view' AND date(created_at, '+9 hours') >= date('now', '+9 hours', ?) GROUP BY day`,
       since,
     ),
     all<{ type: string; label: string; n: number }>(
       db,
       `SELECT type, label, COUNT(*) AS n FROM events
-        WHERE type <> 'page_view' AND label <> '' AND created_at >= date('now', ?)
+        WHERE type <> 'page_view' AND label <> '' AND date(created_at, '+9 hours') >= date('now', '+9 hours', ?)
         GROUP BY type, label ORDER BY n DESC LIMIT 12`,
       since,
     ),
   ]);
 
-  // 기록이 없는 날도 0 으로 채워 30일을 고르게 보여 준다
+  // 기록이 없는 날도 0 으로 채워 30일을 고르게 보여 준다 (한국 날짜 기준)
   const byDay = new Map(daily.map((d) => [d.day, d.n]));
-  const today = new Date();
+  const today = new Date(kstToday() + "T00:00:00Z");
   const days = Array.from({ length: DAYS }, (_, i) => {
     const d = new Date(today);
     d.setUTCDate(d.getUTCDate() - (DAYS - 1 - i));

@@ -1,4 +1,7 @@
+"use client";
+
 import { quickDoors } from "@/data/content";
+import { openInquiry } from "@/lib/inquiry";
 import s from "./QuickDoors.module.css";
 
 /** 히어로 바로 아래 — 문 세 개. 구매 상담 · 소모품 · 정비 */
@@ -12,7 +15,12 @@ export default function QuickDoors() {
 
         <div className={s.grid}>
           {quickDoors.map((d) => (
-            <a key={d.kicker} className={`card ${s.door}`} href={d.href}>
+            <a
+              key={d.kicker}
+              className={`card ${s.door}`}
+              href={d.href}
+              onClick={d.inquiry ? () => openInquiry(d.inquiry!) : undefined}
+            >
               <span className={s.kicker}>{d.kicker}</span>
               <b className={s.title}>{d.title}</b>
               <p className={s.copy}>{d.copy}</p>

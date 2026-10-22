@@ -1,6 +1,7 @@
 "use client";
 
 import { products } from "@/data/content";
+import { openInquiry } from "@/lib/inquiry";
 import s from "./Products.module.css";
 
 /** 드래곤 라인업 — 애플식 제품 타일. 글은 위, 사진은 아래 */
@@ -26,8 +27,12 @@ export default function Products() {
                 <p className={s.copy}>{p.copy}</p>
                 <p className={s.spec}>{p.spec ?? "작업 폭 · 적정 마력 전화 안내"}</p>
                 <div className={s.links}>
-                  <a className="lnk" href="#support">
-                    상담 받기
+                  <a
+                    className="lnk"
+                    href="#inquiry"
+                    onClick={() => openInquiry("구매 상담", `${p.name} 상담을 원합니다.\n트랙터 마력: \n작업 면적: `)}
+                  >
+                    상담 남기기
                   </a>
                   <a className="lnk" href="#videos">
                     영상 보기
