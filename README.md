@@ -151,7 +151,9 @@ public/images/        제품 누끼·현장 사진 넣는 곳
 | 영상이 뜨기 전 | 첫 장면 | `public/images/hero/hero-poster.webp` |
 
 - 원본(4K, 61MB)은 저장소에 넣지 않고 GitHub 릴리스 [`hero-video`](https://github.com/cnkim74/makina/releases/tag/hero-video)에 있습니다.
-- 브라우저가 H.264를 틀 수 있으면 mp4, 아니면 VP9 webm을 씁니다.
+- 사파리는 mp4(H.264), 크롬·엣지·파이어폭스는 VP9 webm을 씁니다. 크롬은 webm 쪽이 스크롤 되감기가 안정적입니다.
+- 첫 장면 사진(poster)은 영상 위에 따로 덮었다가 실제 장면이 그려지면 걷어 냅니다. 크롬이 poster를 계속 보여 주는 문제를 피하려는 것입니다.
+- 컴퓨터의 "동작 줄이기(움직임 줄이기)" 설정이 켜져 있으면 브랜드 규칙대로 정지 장면 한 장만 보입니다. 맥은 시스템 설정 → 손쉬운 사용 → 디스플레이, 윈도우는 설정 → 접근성 → 시각 효과 → 애니메이션 효과.
 - 경로와 캡션 타이밍은 `src/data/content.ts`의 `heroVideo`, `heroStory`에서 바꿉니다. `heroVideo`를 `null`로 두면 SVG 자리표시 장면으로 돌아갑니다.
 
 영상을 바꿀 때는 원본을 받아 아래처럼 다시 만듭니다. 데스크톱판은 스크롤로 앞뒤로 자유롭게 넘길 수 있도록 4프레임마다 키프레임을 넣습니다.

@@ -6,6 +6,16 @@
   background: var(--stage);
 }
 
+/* 영상 첫 장면이 그려지기 전까지 덮어 두는 포스터 */
+.posterImg {
+  transition: opacity 0.4s var(--ease-machine);
+  pointer-events: none;
+}
+
+.posterOff {
+  opacity: 0;
+}
+
 .stage {
   --p: 0;
   --head: 1;

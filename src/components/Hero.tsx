@@ -88,6 +88,8 @@ export default function Hero() {
   const [cap, setCap] = useState(-1);
   const [headAway, setHeadAway] = useState(false);
   const [mode, setMode] = useState<Mode | null>(null);
+  // 영상의 첫 장면이 실제로 그려졌는지. 그 전까지는 포스터 사진을 위에 덮어 둔다
+  const [frameReady, setFrameReady] = useState(false);
 
   // 관리자 "히어로" 화면에서 고친 영상·캡션 (DB 가 없으면 src/data 기본값)
   const { site, hero } = useSiteData();
@@ -107,8 +109,21 @@ export default function Hero() {
     if (!heroVideo || !v || !mode || mode === "still") return;
     v.muted = true;
     const src = mode === "scrub" ? heroVideo.desktop : heroVideo.mobile;
-    // H.264 를 못 트는 브라우저(일부 오픈소스 크로미움 등)는 VP9 WebM 으로
-    v.src = v.canPlayType('video/mp4; codecs="avc1.640028"') ? src.mp4 : src.webm;
+    // 크롬·엣지·파이어폭스는 VP9 WebM 이 스크롤 되감기에 더 안정적이다. 사파리(애플)는 MP4.
+    // H.264 를 못 트는 브라우저도 WebM 으로 간다.
+    const apple = /Apple/.test(navigator.vendor);
+    const webm = v.canPlayType('video/webm; codecs="vp9"') !== "";
+    const mp4 = v.canPlayType('video/mp4; codecs="avc1.640028"') !== "";
+    v.src = (webm && !apple) || !mp4 ? src.webm : src.mp4;
+
+    // 크롬은 한 번도 재생하지 않은 영상의 시점을 옮겨도 poster 를 계속 보여 줄 수 있다.
+    // 그래서 poster 속성 대신 위에 덮은 사진을, 실제 장면이 그려지면 걷어 낸다.
+    const shown = () => {
+      if (v.readyState >= 2) setFrameReady(true);
+    };
+    v.addEventListener("loadeddata", shown);
+    v.addEventListener("seeked", shown);
+    v.addEventListener("playing", shown);
     if (mode === "loop") {
       v.loop = true;
       v.play().catch(() => {
@@ -117,6 +132,11 @@ export default function Hero() {
     } else {
       v.load();
     }
+    return () => {
+      v.removeEventListener("loadeddata", shown);
+      v.removeEventListener("seeked", shown);
+      v.removeEventListener("playing", shown);
+    };
   }, [mode, heroVideo]);
 
   // 스크롤 → CSS 변수 · 캡션 · (scrub) 재생 헤드
@@ -207,21 +227,22 @@ export default function Hero() {
 
   return (
     <div ref={wrapRef} className={s.photo} id="top">
-      <div ref={stageRef} className={`${s.stage} ${heroVideo ? s.withVideo : ""}`}>
+      <div ref={stageRef} className={`${s.stage} ${heroVideo ? s.withVideo : ""}`} data-hero-mode={mode ?? "pending"}>
         {heroVideo ? (
           mode === "still" ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img className={s.video} src={heroVideo.still} alt="" aria-hidden="true" />
           ) : (
-            <video
-              ref={videoRef}
-              className={s.video}
-              poster={heroVideo.poster}
-              muted
-              playsInline
-              preload="auto"
-              aria-hidden="true"
-            />
+            <>
+              <video ref={videoRef} className={s.video} muted playsInline preload="auto" aria-hidden="true" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className={`${s.video} ${s.posterImg} ${frameReady ? s.posterOff : ""}`}
+                src={heroVideo.poster}
+                alt=""
+                aria-hidden="true"
+              />
+            </>
           )
         ) : (
           <SketchScene />
