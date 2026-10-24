@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { currentUser } from "@/lib/auth";
 import { dbState, first } from "@/lib/db";
-import { LogoMark } from "@/components/placeholders";
+import { LogoMark, Wordmark } from "@/components/Logo";
 import { SignupForm } from "../_ui/client";
 import SetupGuide from "../_ui/SetupGuide";
 import a from "../admin.module.css";
@@ -18,7 +18,10 @@ export default async function SignupPage() {
   return (
     <div className={a.authPage}>
       <div className={a.authCard}>
-        <LogoMark size={40} />
+        <span className={a.authLogo}>
+          <LogoMark size={34} />
+          <Wordmark height={22} />
+        </span>
         <div>
           <h1>{n === 0 ? "대표 관리자 만들기" : "가입 신청"}</h1>
           <p className={a.sub}>

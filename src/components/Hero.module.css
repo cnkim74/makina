@@ -180,8 +180,17 @@
   margin-top: 14px;
 }
 
-.kk {
-  color: var(--hay-gold);
+/* 워드마크 SVG — 글자 높이로 크기를 정한다 */
+.word {
+  display: block;
+  color: #fff;
+  width: clamp(300px, 52vw, 760px);
+  margin: 0 auto;
+}
+
+.word svg {
+  width: 100%;
+  height: auto;
 }
 
 .gloss {

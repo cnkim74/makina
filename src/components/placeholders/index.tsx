@@ -3,28 +3,6 @@
  * 모두 서버에서 렌더링되는 순수 SVG라 hydration 문제가 없다.
  */
 
-/** 로고 심볼 「감기는 M」 — 원형 베일 단면처럼 안쪽으로 감기는 나선 + M 획 */
-function spiralPath(cx: number, cy: number, r0: number, r1: number, turns: number, n: number) {
-  const d: string[] = [];
-  for (let i = 0; i <= n; i++) {
-    const k = i / n;
-    const a = k * turns * Math.PI * 2;
-    const r = r0 + (r1 - r0) * k;
-    d.push(`${i ? "L" : "M"}${(cx + Math.cos(a) * r).toFixed(1)} ${(cy + Math.sin(a) * r).toFixed(1)}`);
-  }
-  return d.join(" ");
-}
-
-const LOGO_PATH = `${spiralPath(20, 26, 2, 14, 3.25, 120)} L8 42 L8 8 L20 24 L32 8 L32 42`;
-
-export function LogoMark({ size = 40, color = "var(--hay-gold)" }: { size?: number; color?: string }) {
-  return (
-    <svg viewBox="0 0 44 44" width={size} height={size} aria-hidden="true">
-      <path d={LOGO_PATH} fill="none" stroke={color} strokeWidth="3.6" strokeLinecap="square" />
-    </svg>
-  );
-}
-
 function rows(n: number, top: number, w: number, h: number, k: number) {
   const out = [];
   for (let i = 0; i <= n; i++) {

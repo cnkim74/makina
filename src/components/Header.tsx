@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { navGroups, utilLinks } from "@/data/site";
 import { useSite } from "./SiteData";
-import { LogoMark } from "./placeholders";
+import { LogoMark, Wordmark } from "./Logo";
 import { useHeroPast } from "./useHeroProgress";
 import s from "./Header.module.css";
 
@@ -96,10 +96,8 @@ export default function Header() {
         <span ref={hlRef} className={s.hl} aria-hidden="true" />
 
         <Link className={s.logo} href="/#top" aria-label={`${site.name} 처음으로`} {...hover}>
-          <LogoMark size={30} />
-          <b>
-            성원마<em>끼</em>나
-          </b>
+          <LogoMark size={24} />
+          <Wordmark height={17} />
         </Link>
 
         <nav className={s.links} aria-label="주 메뉴">

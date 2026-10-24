@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { dragon, products } from "@/data/content";
 import { openInquiry } from "@/lib/inquiry";
+import { Wordmark } from "./Logo";
 import { useSite } from "./SiteData";
 import s from "./Dragon.module.css";
 
@@ -14,7 +15,8 @@ export default function Dragon() {
       <div className="mod-in">
         <span className="lab-k">주력 제품</span>
         <h2 id="dragon-title" className={s.title}>
-          {dragon.name}
+          <span className="sr-only">{dragon.name}</span>
+          <Wordmark word="dragon" height={100} />
         </h2>
         <p className={s.label}>{dragon.label}</p>
         <p className="tag">{dragon.copy}</p>

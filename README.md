@@ -139,6 +139,24 @@ public/images/        제품 누끼·현장 사진 넣는 곳
 | 플로팅 캡슐 | `FloatingButtons` | 데스크톱 전용, 히어로가 끝나면 나타남 |
 | 하단 유리 도크 | `MobileDock` | 모바일 전용 |
 
+## 로고
+
+「발톱」 안 (2026-10 확정). 심볼은 비스듬한 칼날 세 개, 워드마크는 모서리를 깎고 10° 기울인 MAKKINA. 글자까지 도형이라 폰트가 필요 없습니다.
+
+| 파일 | 쓰임 |
+| --- | --- |
+| `public/brand/makkina-logo.svg` · `.png` | 기본 (밝은 바탕) |
+| `public/brand/makkina-logo-reverse.svg` · `.png` | 어두운 바탕 |
+| `public/brand/makkina-logo-black.svg` / `-white.svg` | 단색 — 기계 각인·스티커·빨간 기계 옆판 |
+| `public/brand/makkina-mark*.svg` · `makkina-mark.png` | 심볼만 |
+| `public/brand/makkina-wordmark.svg`, `dragon-wordmark.svg` | 글자만 |
+| `public/brand/makkina-app-icon.svg` · `.png` | 앱·SNS 프로필 |
+| `src/app/icon.svg`, `apple-icon.png`, `favicon.ico` | 브라우저 탭 아이콘 |
+
+배포된 사이트에서는 `사이트주소/brand/makkina-logo.png` 처럼 바로 내려받을 수 있습니다.
+
+모양을 고칠 때는 `scripts/logo.mjs` 만 고치고 `node scripts/logo.mjs` 를 실행합니다(사이트용 경로 데이터와 SVG 가 다시 만들어집니다). PNG·ICO 는 SVG 를 원하는 크기로 저장한 뒤 `convert icon-16.png icon-32.png icon-48.png src/app/favicon.ico` 처럼 묶습니다.
+
 ## 히어로 영상
 
 히어로는 영상 한 편으로 만든 스크롤 장면입니다. 베일 클로즈업에서 카메라가 물러나 트랙터·베일러, 들판 전체로 넓어지고, 캡션이 BALE → MACHINE → FIELD → HARVEST 로 바뀝니다.

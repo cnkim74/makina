@@ -33,16 +33,19 @@
   gap: 6px;
 }
 
-.brand b {
-  font-family: var(--font-logo);
-  font-size: 22px;
+.lockup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   color: var(--fg);
-  margin-top: 4px;
 }
 
-.brand em {
-  font-style: normal;
-  color: var(--hay-gold-deep);
+.brand b {
+  font-family: var(--font-logo);
+  font-size: 16px;
+  letter-spacing: 0.4em;
+  color: var(--fg-2);
+  margin-top: 2px;
 }
 
 .tel {

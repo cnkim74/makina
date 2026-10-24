@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/auth";
 import { dbState, first } from "@/lib/db";
-import { LogoMark } from "@/components/placeholders";
+import { LogoMark, Wordmark } from "@/components/Logo";
 import { logoutAction } from "../actions";
 import { NavLinks } from "../_ui/client";
 import SetupGuide from "../_ui/SetupGuide";
@@ -37,10 +37,9 @@ export default async function PanelLayout({ children }: { children: React.ReactN
     <div className={a.shell}>
       <aside className={a.side}>
         <Link href="/admin" className={a.brand}>
-          <LogoMark size={28} />
-          <span>
-            성원마끼나 <small>관리</small>
-          </span>
+          <LogoMark size={22} />
+          <Wordmark height={15} title="MAKKINA 성원마끼나" />
+          <small>관리</small>
         </Link>
         <NavLinks items={items} />
         <div className={a.sideFoot}>

@@ -3,7 +3,7 @@
 import { footerGroups, legalLinks } from "@/data/site";
 import { useSiteData } from "./SiteData";
 import { phoneRange, SNS_PLATFORMS } from "@/lib/types";
-import { LogoMark } from "./placeholders";
+import { LogoMark, Wordmark } from "./Logo";
 import s from "./Footer.module.css";
 
 /** 애플식 푸터 — 연회색 바탕, 작은 글, 링크 묶음 */
@@ -18,10 +18,11 @@ export default function Footer() {
 
         <div className={s.cols}>
           <div className={s.brand}>
-            <LogoMark size={34} />
-            <b>
-              성원마<em>끼</em>나
-            </b>
+            <span className={s.lockup}>
+              <LogoMark size={34} />
+              <Wordmark height={22} title={`${site.nameEn} ${site.name}`} />
+            </span>
+            <b>{site.name}</b>
             <span>{site.tagline}</span>
             <a className={s.tel} href={site.phoneHref}>
               {site.phone}

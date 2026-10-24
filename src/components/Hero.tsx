@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { heroImages, heroSketchStory, type HeroLayerImage } from "@/data/content";
+import { Wordmark } from "./Logo";
 import { useSiteData } from "./SiteData";
 import { HeroField, HeroForeground, HeroSky, HeroTrace } from "./placeholders/HeroScene";
 import s from "./Hero.module.css";
@@ -256,8 +257,8 @@ export default function Hero() {
           <p className={s.eyebrow}>{site.tagline}</p>
           <h1 className={s.term}>
             <span className="sr-only">{site.name} </span>
-            <span aria-hidden="true">
-              MA<span className={s.kk}>KK</span>INA
+            <span className={s.word}>
+              <Wordmark height={100} />
             </span>
           </h1>
           <p className={s.gloss}>성원마끼나 · 조사료 작업기 · 경북 안동 서후면</p>

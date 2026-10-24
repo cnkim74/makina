@@ -25,9 +25,14 @@
   align-items: center;
   gap: 8px;
   padding: 6px 10px 18px;
-  font-family: var(--font-logo);
-  font-size: 19px;
-  font-weight: 700;
+  color: var(--fg);
+}
+
+.authLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg);
 }
 
 .brand small {

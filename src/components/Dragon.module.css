@@ -1,9 +1,14 @@
-/* 영문 워드마크는 Archivo Black (CLAUDE.md 서체 역할) */
+/* 제목은 DRAGON 워드마크 SVG (scripts/logo.mjs) */
 .title {
-  font-family: var(--font-brand);
-  font-size: clamp(56px, 10vw, 120px) !important;
-  letter-spacing: 0.02em;
-  line-height: 1 !important;
+  display: block;
+  width: clamp(260px, 44vw, 600px);
+  margin: 18px auto 0;
+  color: var(--fg);
+}
+
+.title svg {
+  width: 100%;
+  height: auto;
 }
 
 .label {
