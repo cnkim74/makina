@@ -61,6 +61,8 @@ export async function getPublicData(): Promise<PublicData> {
     }
   }
 
+  // SNS 를 하나도 등록하지 않았으면 회사 유튜브 채널을 기본으로 보여 준다
+  if (!sns.length) sns = [{ id: 0, platform: "youtube", label: "성원마끼나 유튜브", url: staticSite.youtubeHref }];
   const youtube = sns.find((s) => s.platform === "youtube");
   // 주소를 관리자에서 바꿨으면 지도·길찾기도 새 주소로 검색한다. 그대로면 카카오맵에 등록된 공장으로 바로 간다
   const sameAddress = contact.address === staticSite.address;
@@ -93,7 +95,7 @@ export async function getPublicData(): Promise<PublicData> {
         ? staticSite.naverMapHref
         : "https://map.naver.com/p/search/" + encodeURIComponent(searchAddress),
       mapEmbed: sameAddress ? staticSite.mapEmbed : mapEmbedSrc(contact.address),
-      youtubeHref: youtube?.url ?? "#videos",
+      youtubeHref: youtube?.url ?? staticSite.youtubeHref,
     },
     hero: { video: hero.mode === "video" ? hero.video : null, story: hero.story },
     videos,

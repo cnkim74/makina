@@ -87,7 +87,7 @@ export default async function Videos({ searchParams }: { searchParams: Promise<{
 
       <h2 style={{ margin: "28px 0 12px", fontSize: 20 }}>올린 영상 {rows.length}개</h2>
       {rows.length === 0 ? (
-        <p className={a.empty}>아직 올린 영상이 없습니다. 지금 홈페이지에는 예시 영상 카드가 보입니다.</p>
+        <p className={a.empty}>아직 올린 영상이 없습니다. 지금 홈페이지에는 성원마끼나 유튜브 채널의 대표 영상 12개가 기본으로 보입니다. 여기서 하나라도 올리면 올린 영상만 보입니다.</p>
       ) : (
         <div className={a.list}>
           {rows.map((r, i) => (

@@ -30,7 +30,8 @@ export const site = {
   naverMapHref: "https://map.naver.com/p/search/" + encodeURIComponent("경북 안동시 서후면 풍산태사로 2780"),
   /** 오시는 길 지도 (키 없이 쓰는 구글 지도 퍼가기) */
   mapEmbed: mapEmbedSrc("경북 안동시 서후면 풍산태사로 2780"),
-  youtubeHref: "#",
+  /** 성원마끼나 유튜브 채널 (@성원마끼나) */
+  youtubeHref: "https://www.youtube.com/@%EC%84%B1%EC%9B%90%EB%A7%88%EB%81%BC%EB%82%98",
 };
 
 export type NavLink = { label: string; href: string };

@@ -81,7 +81,12 @@ export default function Videos() {
   const key = norm(q.replace(/^#/, ""));
   const list = videos
     .filter((v) => !key || [v.title, v.caption, v.kind, ...v.tags].some((t) => norm(t).includes(key)))
-    .sort((a, b) => (sort === videoSorts[0].label ? b.date.localeCompare(a.date) : 0));
+    .sort((a, b) => {
+      // 조회수·좋아요가 없는 영상(관리자에서 올린 것)은 날짜순으로 둔다
+      if (sort === videoSorts[1].label && (a.views ?? 0) !== (b.views ?? 0)) return (b.views ?? 0) - (a.views ?? 0);
+      if (sort === videoSorts[2].label && (a.likes ?? 0) !== (b.likes ?? 0)) return (b.likes ?? 0) - (a.likes ?? 0);
+      return b.date.localeCompare(a.date);
+    });
 
   const channelExternal = /^https?:/.test(site.youtubeHref);
 
@@ -90,7 +95,7 @@ export default function Videos() {
       <div className="mod-in">
         <span className="lab-k">작업 영상</span>
         <h2 id="videos-title">현장에서 직접 보세요.</h2>
-        <p className="tag">안동 서후면 들판에서 찍은 실제 작업 장면과 사용법 영상입니다.</p>
+        <p className="tag">청송·무주·거창 들판에서 찍은 드래곤의 실제 작업 장면입니다. 누르면 사이트 안에서 바로 재생됩니다.</p>
 
         <form className={s.search} role="search" onSubmit={(e) => e.preventDefault()}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
