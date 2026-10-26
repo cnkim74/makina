@@ -7,12 +7,18 @@
 | `makkina-dragon-booklet-A4-20p-print.pdf` | 책자 20쪽 | 210×297mm | 216×303mm | 중철 |
 | `makkina-dragon-leaflet-4fold-print.pdf` | 리플렛 (앞·뒤 2쪽) | 420×210mm, 접으면 105×210mm | 426×216mm | 4단 병풍 접지, 접는 선 105·210·315mm |
 | `makkina-dragon-leaflet-3fold-print.pdf` | 리플렛 (앞·뒤 2쪽) | 297×210mm | 303×216mm | 3단 롤 접지, 바깥면 97·197mm / 안쪽면 100·200mm |
+| `makkina-dragon-xbanner-600x1800-print.pdf` | X배너 | 600×1800mm | 600×1800mm (도련 없음, 실제 크기) | 실사출력, 네 귀퉁이 아일렛 |
+
+X배너는 실제 크기로 만들었고 사진은 실제 크기 기준 약 90dpi(배너 출력에 충분)다. 네 귀퉁이 40mm 안에는 글자를 두지 않았다.
+
+반투명 그라데이션은 CMYK 변환 때 사라지므로, 사진 위 그라데이션은 사진에 미리 합쳐 넣었다(2026-10-26 수정본).
 
 추천 종이
 - 책자: 표지 랑데뷰 240g + 무광 코팅, 내지 랑데뷰 또는 스노우지 150g
 - 리플렛: 랑데뷰 또는 스노우지 200g, 무광 코팅
+- X배너: 실사출력 PET 배너(무광), 거치대 포함
 
 어두운 바탕이 넓으니 색 교정(시안 출력)을 한 번 받는다.
 
 원고는 DRAGON 제품소개서(2026.8)와 `src/data/` 기준. 가격은 농업기계목록집 2025년 7월 기준.
-미리보기: `booklet-preview-*.jpg`, `leaflet-preview-*.jpg`
+미리보기: `booklet-preview-*.jpg`, `leaflet-preview-*.jpg`, `leaflet-3fold-preview.jpg`, `xbanner-preview.jpg`
