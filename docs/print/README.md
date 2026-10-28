@@ -2,15 +2,15 @@
 
 인쇄소에 그대로 보내는 파일입니다. 모두 CMYK, 글자 아웃라인, 도련 사방 3mm.
 
-> **2026-10-28 교정판(인쇄 전 확인 필요)**: 고객 교정(회사 기존 로고, 60~150마력, 1,500~2,000rpm, 가격 삭제, DRAGON314 추가, 문구 수정)을 전 인쇄물에 반영했다.
-> DRAGON314 제원(작업 폭·적용 마력·PTO·무게)이 아직 없어 "확인 중"으로 표시돼 있고, 책자 표지 합성 사진과 314 사진을 받으면 바꾼다. 이 두 가지가 채워지기 전에는 인쇄하지 않는다.
+> **2026-10-28 2차 교정판**: 회사 기존 로고, 새 제원표(210·230·250·280·314), 가격 삭제, "드래곤" → "DRAGON" 영문 표기, "K-모우어" 문구를 전 인쇄물에 반영했다. X배너는 A안·D안 두 가지만 남겼다.
+> 아직 남은 것: 책자 표지 합성 사진(첫사진 합성.png), DRAGON 314 사진, DRAGON·"베면서 부순다" 글꼴(HS봄바람체 2.1). 받으면 바꾼다.
 
 | 파일 | 종류 | 완성 크기 | 파일 크기(도련 포함) | 가공 |
 |---|---|---|---|---|
 | `makkina-dragon-booklet-A4-20p-print.pdf` | 책자 20쪽 | 210×297mm | 216×303mm | 중철 |
 | `makkina-dragon-leaflet-4fold-print.pdf` | 리플렛 (앞·뒤 2쪽) | 420×210mm, 접으면 105×210mm | 426×216mm | 4단 병풍 접지, 접는 선 105·210·315mm |
 | `makkina-dragon-leaflet-3fold-print.pdf` | 리플렛 (앞·뒤 2쪽) | 297×210mm | 303×216mm | 3단 롤 접지, 바깥면 97·197mm / 안쪽면 100·200mm |
-| `makkina-dragon-xbanner-600x1800-a.pdf` ~ `-d.pdf` | X배너 시안 4개 (A 현장 사진 · B 제품 도면 · C 건초금 글자 · D 밭에서 축사까지) | 600×1800mm | 600×1800mm (도련 없음, 실제 크기) | 실사출력, 네 귀퉁이 아일렛 |
+| `makkina-dragon-xbanner-600x1800-a.pdf`, `-d.pdf` | X배너 2종 (A 현장 사진 · D 밭에서 축사까지) | 600×1800mm | 600×1800mm (도련 없음, 실제 크기) | 실사출력, 네 귀퉁이 아일렛 |
 | `makkina-hyunsumak-600x127cm-1of10.pdf` | 현수막 | 600×127cm | **1/10 축소** 600×127mm | 실사출력 현수막, 10배 확대 출력 |
 | `makkina-hyunsumak-300x127cm-1of10.pdf` | 현수막 | 300×127cm | **1/10 축소** 300×127mm | 실사출력 현수막, 10배 확대 출력 |
 
@@ -28,4 +28,4 @@ X배너는 실제 크기로 만들었고 사진은 실제 크기 기준 약 90dp
 어두운 바탕이 넓으니 색 교정(시안 출력)을 한 번 받는다.
 
 원고는 DRAGON 제품소개서(2026.8)와 `src/data/` 기준. 가격은 농업기계목록집 2025년 7월 기준.
-미리보기: `booklet-preview-*.jpg`, `leaflet-preview-*.jpg`, `leaflet-3fold-preview.jpg`, `xbanner-versions.jpg`(시안 비교), `xbanner-preview-a~d.jpg`
+미리보기: `booklet-preview-*.jpg`, `leaflet-preview-*.jpg`, `leaflet-3fold-preview.jpg`, `xbanner-versions.jpg`(A·D 비교), `xbanner-preview-a.jpg`·`-d.jpg`, `hyunsumak-*-preview.jpg`
