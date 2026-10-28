@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { heroImages, heroSketchStory, type HeroLayerImage } from "@/data/content";
-import { Wordmark } from "./Logo";
+import { CompanyLogo } from "./Logo";
 import { useSiteData } from "./SiteData";
 import { HeroField, HeroForeground, HeroSky, HeroTrace } from "./placeholders/HeroScene";
 import s from "./Hero.module.css";
@@ -258,10 +258,10 @@ export default function Hero() {
           <h1 className={s.term}>
             <span className="sr-only">{site.name} </span>
             <span className={s.word}>
-              <Wordmark height={100} />
+              <CompanyLogo height={150} tone="dark" />
             </span>
           </h1>
-          <p className={s.gloss}>성원마끼나 · 조사료 작업기 · 경북 안동 서후면</p>
+          <p className={s.gloss}>조사료 작업기 · 경북 안동 서후면</p>
           <p className={s.slogan}>{site.slogan}</p>
           <div className={`links on-dark ${s.plinks}`}>
             <a className="lnk" href="#dragon" tabIndex={headAway ? -1 : undefined}>

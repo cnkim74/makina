@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { navGroups, utilLinks } from "@/data/site";
 import { useSite } from "./SiteData";
-import { LogoMark, Wordmark } from "./Logo";
+import { CompanyLogo } from "./Logo";
 import { useHeroPast } from "./useHeroProgress";
 import s from "./Header.module.css";
 
@@ -96,8 +96,7 @@ export default function Header() {
         <span ref={hlRef} className={s.hl} aria-hidden="true" />
 
         <Link className={s.logo} href="/#top" aria-label={`${site.name} 처음으로`} {...hover}>
-          <LogoMark size={24} />
-          <Wordmark height={17} />
+          <CompanyLogo height={30} tone={onLight ? "light" : "dark"} />
         </Link>
 
         <nav className={s.links} aria-label="주 메뉴">

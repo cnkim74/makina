@@ -40,14 +40,6 @@
   color: var(--fg);
 }
 
-.brand b {
-  font-family: var(--font-logo);
-  font-size: 16px;
-  letter-spacing: 0.4em;
-  color: var(--fg-2);
-  margin-top: 2px;
-}
-
 .tel {
   font-size: 26px;
   font-weight: 800;

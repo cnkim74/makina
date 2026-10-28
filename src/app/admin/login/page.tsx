@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { currentUser } from "@/lib/auth";
 import { dbState } from "@/lib/db";
-import { LogoMark, Wordmark } from "@/components/Logo";
+import { CompanyLogo } from "@/components/Logo";
 import { LoginForm } from "../_ui/client";
 import SetupGuide from "../_ui/SetupGuide";
 import a from "../admin.module.css";
@@ -18,8 +18,7 @@ export default async function LoginPage() {
     <div className={a.authPage}>
       <div className={a.authCard}>
         <span className={a.authLogo}>
-          <LogoMark size={34} />
-          <Wordmark height={22} />
+          <CompanyLogo height={40} title="성원마끼나" />
         </span>
         <div>
           <h1>관리자 로그인</h1>

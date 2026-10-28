@@ -184,11 +184,11 @@
 .word {
   display: block;
   color: #fff;
-  width: clamp(300px, 52vw, 760px);
+  width: clamp(280px, 44vw, 640px);
   margin: 0 auto;
 }
 
-.word svg {
+.word img {
   width: 100%;
   height: auto;
 }
