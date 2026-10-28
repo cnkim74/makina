@@ -47,7 +47,7 @@ export default function HpFinder() {
             </ul>
           ) : (
             <p className={s.ask}>
-              드래곤은 50마력부터 씁니다. 작은 트랙터에 맞는 작업기는 전화로 안내해 드립니다.{" "}
+              드래곤은 60마력부터 씁니다. 작은 트랙터에 맞는 작업기는 전화로 안내해 드립니다.{" "}
               <a className="btn btn--cta" href={site.phoneHref}>
                 ☏ {site.phone}
               </a>

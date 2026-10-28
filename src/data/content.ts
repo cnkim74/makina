@@ -84,13 +84,13 @@ export const quickDoors: { kicker: string; title: string; copy: string; link: st
 
 /**
  * 주력 제품 DRAGON — 하이브리드 모우어 컨디셔너 (트랙터 3점 부착, 베면서 줄기를 파쇄한다).
- * 글과 사양은 회사 "DRAGON 제품소개서"(2026.8) 그대로. 고칠 때도 소개서를 기준으로 한다.
+ * 글과 사양은 회사 "DRAGON 제품소개서"(2026.8) 기준. 2026-10-28 고객 교정(60마력, 1,500~2,000rpm, 가격 삭제, DRAGON314 추가, 문구)을 반영했다.
  * 사진: 구글 드라이브 "성원마끼나 소스" + 소개서에서 잘라 낸 도면·작업 광경 → public/images/dragon/
  */
 export const dragon = {
   name: "DRAGON",
   label: "하이브리드 모우어 컨디셔너",
-  range: "50마력부터 150마력까지 선택적으로 사용",
+  range: "60마력부터 150마력까지 선택적으로 사용",
   catch: "베면서 부순다.",
   copy: "아래에서 치고 올라오는 칼날이 작물을 베면서 파쇄합니다. 빨리 마르고, 소가 남기지 않고 먹습니다.",
   heroImage: "/images/dragon/field-cut.webp",
@@ -109,7 +109,7 @@ export const dragon = {
     {
       step: "마른다",
       title: "빨리 마르니 일이 줄어듭니다.",
-      copy: "파쇄된 작물은 다른 컨디셔너보다 빨리 말라 작업 시간이 줄어듭니다. 엔진 1,500~1,800rpm, 중속 주행으로 빠르게 작업합니다.",
+      copy: "파쇄된 작물은 다른 컨디셔너보다 빨리 말라 작업 시간이 줄어듭니다. 엔진 1,500~2,000rpm, 중속 주행으로 빠르게 작업합니다.",
       image: "/images/dragon/forage-close.webp",
       alt: "잘게 파쇄되어 마른 조사료",
     },
@@ -123,7 +123,7 @@ export const dragon = {
   ],
   /** 소개서 "제품특징" — 도면은 소개서에서 잘라 냈다 */
   features: [
-    { name: "고정밀 밸런싱 축", copy: "H.M.C 바란싱 축의 고정밀 밸런싱으로 진동 없이 안정적으로 작업합니다.", image: "/images/dragon/feat-balance.webp" },
+    { name: "고정밀 밸런싱 샤프트", copy: "H.M.C 밸런싱 샤프트를 고정밀로 맞춰 진동 없이 안정적으로 작업합니다.", image: "/images/dragon/feat-balance.webp" },
     { name: "더블 조인트 구동", copy: "더블 조인트 구동형으로 PTO 동력을 100% 전달합니다.", image: "/images/dragon/feat-doublejoint.webp" },
     { name: "강력한 텐션 조절 장치", copy: "벨트가 미끄러지지 않는 작업을 보장합니다.", image: "/images/dragon/feat-tension.webp" },
     { name: "회전 타이어", copy: "바퀴가 돌아가 선회 작업이 원활합니다.", image: "/images/dragon/feat-wheel.webp" },
@@ -132,7 +132,7 @@ export const dragon = {
   ],
   /** 소개서 "사용 효과"에서 위 이야기에 없는 것 */
   more: [
-    "기존 제품보다 한 단계 높은 부품을 써서 수명과 내구성이 다릅니다.",
+    "부품 하나부터 다릅니다. 한 단계 위의 프리미엄 부품으로 차원이 다른 내구성과 수명을 자랑합니다.",
     "조사료 작업뿐 아니라 주변 환경 정화 작업에도 씁니다.",
     "질 좋은 사료는 축사 환경 개선과 바닥 상태 유지에 도움이 됩니다.",
   ],
@@ -140,8 +140,9 @@ export const dragon = {
   why: {
     title: "수입 예취기가 못 하던 일.",
     copy: [
-      "국내 예취기 시장은 수입 기계가 장악하고 있습니다. 하지만 우리 농지의 특성을 충분히 반영하지 못해, 쓰러진 작물은 수확조차 어렵고 좁은 땅에서 크게 키운 작물은 작업이 힘들거나 못 하는 경우가 많습니다.",
-      "드래곤은 예취와 건초 생산이라는 예취기 본연의 기능에 집중해 만들었습니다. 국내 환경의 특수성을 고려해, 예취 작업만큼은 수입 기계를 압도합니다.",
+      "국내 예취기 시장은 수입 기계가 장악하고 있습니다. 하지만 우리 농지의 특성을 충분히 반영하지 못해, 쓰러진 작물은 수확조차 어렵고 좁은 면적에서 크게 키운 작물은 작업이 힘들거나 아예 못 하는 경우가 많습니다.",
+      "화려한 디자인과 편의 기능은 눈길을 끌지만, 정작 예취기의 핵심인 수확 작업에서 어려움을 겪는 농가가 많습니다.",
+      "성원마끼나는 이 고충을 해결하기 위해 예취와 건초 생산이라는 본연의 기능에 집중해 DRAGON 시리즈를 개발했습니다. 독자적인 특허 기술(하이브리드 모우어 컨디셔너 메커니즘)을 적용하여 수입 기계가 놓친 국내 환경의 특수성을 극복했으며, 예취 성능과 작업 효율만큼은 수입 기계를 확실히 압도합니다.",
     ],
   },
   /** 소개서 "작업광경" */
@@ -173,15 +174,17 @@ export type Product = {
   catch: string;
   copy: string;
   specs?: ProductSpecs;
-  /** 농업기계목록집 가격 */
+  /** 농업기계목록집 가격 — 2026-10-28 교정으로 홈페이지·인쇄물에는 싣지 않는다 */
   price?: string;
+  /** 라인업 맨 끝에 한 줄 전체로 크게 보여 주는 플래그십 */
+  flagship?: boolean;
   isNew?: boolean;
   /** public/images 의 사진 경로. 없으면 자리표시 */
   image?: string;
 };
 
-/** 가격 출처 — 소개서의 농업기계목록집 기준 */
-export const priceNote = "가격은 농업기계목록집 2025년 7월 기준입니다. DRAGON210·230·280은 융자지원 한도 1,200만원.";
+/** 가격은 싣지 않는다(2026-10-28 교정). 융자 안내만 남긴다 */
+export const priceNote = "DRAGON210·230·280은 농기계 융자지원 한도 1,200만원.";
 
 /** 드래곤 라인업 — 소개서 "제품규격" */
 export const products: Product[] = [
@@ -190,10 +193,9 @@ export const products: Product[] = [
     name: "DRAGON 210",
     category: "mower",
     categoryLabel: "하이브리드 모우어 컨디셔너",
-    catch: "50마력부터.",
+    catch: "농가를 위한 알짜배기 파트너.",
     copy: "드래곤 가운데 가장 가볍습니다. 트리티케일·수단그라스 작업에 씁니다.",
-    specs: { pto: "540", hp: "50마력 이상", blades: "50개", weight: "650kg", width: "197cm" },
-    price: "2,250만원",
+    specs: { pto: "540", hp: "60마력 이상", blades: "50개", weight: "650kg", width: "197cm" },
     image: "/images/dragon/dr210.webp",
   },
   {
@@ -201,10 +203,9 @@ export const products: Product[] = [
     name: "DRAGON 230",
     category: "mower",
     categoryLabel: "하이브리드 모우어 컨디셔너",
-    catch: "더 넓게 한 번에.",
+    catch: "국민규격의 표준.",
     copy: "작업 폭 222cm, 칼날 52개로 베면서 파쇄합니다.",
     specs: { pto: "540", hp: "80마력 이상", blades: "52개", weight: "730kg", width: "222cm" },
-    price: "2,500만원",
     image: "/images/dragon/dr230.webp",
   },
   {
@@ -212,29 +213,37 @@ export const products: Product[] = [
     name: "DRAGON 250",
     category: "mower",
     categoryLabel: "하이브리드 모우어 컨디셔너",
-    catch: "같은 마력, 더 넓게.",
+    catch: "고성능 중형 작업의 대세.",
     copy: "80마력 트랙터로 작업 폭 247cm를 씁니다.",
     specs: { pto: "540", hp: "80마력 이상", blades: "56개", weight: "950kg", width: "247cm" },
-    price: "2,900만원",
   },
   {
     id: "dr280",
     name: "DRAGON 280",
     category: "mower",
     categoryLabel: "하이브리드 모우어 컨디셔너",
-    catch: "드래곤의 맏형.",
+    catch: "필드 위를 압도하는 강력함.",
     copy: "PTO 540·1000 겸용. 키 큰 수수(극동6호)도 거뜬히 벱니다.",
     specs: { pto: "540 / 1000", hp: "100마력 이상", blades: "60개", weight: "950kg", width: "272cm" },
-    price: "3,380만원",
     image: "/images/dragon/dr280.webp",
+  },
+  {
+    // 칼날 66개만 받았다. 작업 폭·적용 마력·PTO·무게는 받는 대로 specs 에 채운다 (추측해 넣지 않는다)
+    id: "dr314",
+    name: "DRAGON 314",
+    category: "mower",
+    categoryLabel: "하이브리드 모우어 컨디셔너",
+    catch: "압도적 규모, 플래그십 대형 작업의 완성.",
+    copy: "드래곤 라인업의 플래그십 대형 모델입니다. 칼날 66개. 120~150마력 트랙터에 맞춰 상담해 드립니다.",
+    flagship: true,
   },
 ];
 
 /** 드래곤 말고도 만드는 작업기 — 간단히만 소개한다 */
 export const otherMachines = [
-  { name: "비무꼬", label: "일체형 원형베일러", copy: "베고, 부수고, 묶는 일을 한 대가 끝냅니다." },
-  { name: "블랙홀", label: "드럼모우어", copy: "들어간 풀은 돌아 나오지 않습니다." },
-  { name: "모조리", label: "제초 파쇄기", copy: "리모컨 하나로 풀을 모조리 정리합니다." },
+  { name: "비무꼬", label: "일체형 원형베일러", copy: "베고, 부수고, 묶는 일을 한 대가 끝냅니다.", image: "/images/other/bimukko.webp" },
+  { name: "블랙홀", label: "드럼모우어", copy: "들어간 풀은 돌아 나오지 않습니다.", image: "/images/other/blackhole.webp" },
+  { name: "모조리", label: "제초 파쇄기", copy: "리모컨 하나로 풀을 모조리 정리합니다.", image: "/images/other/mojori.webp" },
 ];
 
 /** 조사료 작업 흐름. 1단계(베기)가 드래곤의 일이다 */
@@ -296,17 +305,13 @@ export type HpRange = {
   machines: string[];
 };
 
-/** 마력대별 드래곤 모델 — 소개서 적용마력(210: 50HP↑, 230·250: 80HP↑, 280: 100HP↑) */
+/** 마력대별 드래곤 모델 — 2026-10-28 고객 교정 기준 (210: 60마력↑, 314 는 120~150마력 구간) */
 export const hpRanges: HpRange[] = [
-  { id: "lt50", label: "50마력 미만", shortLabel: "50 미만", machines: [] },
-  { id: "50-79", label: "50 ~ 79마력", shortLabel: "50~79", machines: ["DRAGON 210"] },
-  { id: "80-99", label: "80 ~ 99마력", shortLabel: "80~99", machines: ["DRAGON 230", "DRAGON 250", "DRAGON 210"] },
-  {
-    id: "100-150",
-    label: "100 ~ 150마력",
-    shortLabel: "100~150",
-    machines: ["DRAGON 280", "DRAGON 250", "DRAGON 230", "DRAGON 210"],
-  },
+  { id: "lt60", label: "60마력 미만", shortLabel: "60 미만", machines: [] },
+  { id: "60-79", label: "60 ~ 79마력", shortLabel: "60~79", machines: ["DRAGON 210"] },
+  { id: "80-99", label: "80 ~ 99마력", shortLabel: "80~99", machines: ["DRAGON 210", "DRAGON 230"] },
+  { id: "100-119", label: "100 ~ 119마력", shortLabel: "100~119", machines: ["DRAGON 230", "DRAGON 250"] },
+  { id: "120-150", label: "120 ~ 150마력", shortLabel: "120~150", machines: ["DRAGON 250", "DRAGON 280", "DRAGON 314"] },
 ];
 
 export type Video = {

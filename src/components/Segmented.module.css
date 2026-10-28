@@ -112,3 +112,10 @@
     display: inline;
   }
 }
+
+/* 390px 폰에서 마력 찾기 다섯 칸이 가로 스크롤 없이 다 보이도록 */
+@media (max-width: 420px) {
+  .opt {
+    padding: 0 8px;
+  }
+}

@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { otherMachines, priceNote, products } from "@/data/content";
 import { openInquiry } from "@/lib/inquiry";
 import s from "./Products.module.css";
@@ -12,12 +13,12 @@ export default function Products() {
         <span className="lab-k">드래곤 라인업</span>
         <h2 id="products-title">내 밭에 맞는 드래곤.</h2>
         <p className="tag">
-          작업 폭 197cm부터 272cm까지, 트랙터 마력에 맞춰 고르세요. 안동 서후면 공장에서 직접 만들고 직접 고칩니다.
+          60마력부터 150마력까지 다섯 가지 모델. 트랙터 마력에 맞춰 고르세요. 안동 서후면에서 직접 만들고 직접 고칩니다.
         </p>
 
         <div className={s.grid}>
           {products.map((p) => (
-            <article key={p.id} className={`tile ${s.tile}`}>
+            <article key={p.id} className={`tile ${s.tile}${p.flagship ? ` ${s.flag}` : ""}`}>
               <div className={s.top}>
                 {p.isNew ? <span className={s.new}>NEW</span> : <span className={s.newSpace} aria-hidden="true" />}
                 <h3>{p.name}</h3>
@@ -32,7 +33,6 @@ export default function Products() {
                 ) : (
                   <p className={s.spec}>작업 폭 · 적정 마력 전화 안내</p>
                 )}
-                {p.price && <p className={s.price}>{p.price}</p>}
                 <div className={s.links}>
                   <a
                     className="lnk"
@@ -48,7 +48,6 @@ export default function Products() {
               </div>
               <div className={s.art}>
                 {p.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
                   <img src={p.image} alt={`${p.name} ${p.categoryLabel}`} loading="lazy" />
                 ) : (
                   <div className={s.ph} aria-label={`${p.name} 사진 준비 중`}>
@@ -72,19 +71,17 @@ export default function Products() {
                 <th scope="col">PTO</th>
                 <th scope="col">칼날 수</th>
                 <th scope="col">무게</th>
-                <th scope="col">가격</th>
               </tr>
             </thead>
             <tbody>
               {products.map((p) => (
                 <tr key={p.id}>
                   <th scope="row">{p.name}</th>
-                  <td>{p.specs?.width ?? "-"}</td>
-                  <td>{p.specs?.hp ?? "-"}</td>
-                  <td>{p.specs?.pto ?? "-"}</td>
-                  <td>{p.specs?.blades ?? "-"}</td>
-                  <td>{p.specs?.weight ?? "-"}</td>
-                  <td>{p.price ?? "문의"}</td>
+                  <td>{p.specs?.width ?? "문의"}</td>
+                  <td>{p.specs?.hp ?? "문의"}</td>
+                  <td>{p.specs?.pto ?? "문의"}</td>
+                  <td>{p.specs?.blades ?? (p.id === "dr314" ? "66개" : "문의")}</td>
+                  <td>{p.specs?.weight ?? "문의"}</td>
                 </tr>
               ))}
             </tbody>
@@ -97,6 +94,7 @@ export default function Products() {
           <ul>
             {otherMachines.map((m) => (
               <li key={m.name}>
+                <img className={s.otherImg} src={m.image} alt={`${m.name} ${m.label}`} loading="lazy" />
                 <b>{m.name}</b>
                 <span className={s.otherLabel}>{m.label}</span>
                 <p>{m.copy}</p>

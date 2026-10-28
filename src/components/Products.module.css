@@ -118,14 +118,6 @@
   background: var(--bg-alt);
 }
 
-.price {
-  margin-top: 6px;
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: -0.01em;
-  font-variant-numeric: tabular-nums;
-}
-
 /* 규격표 — 고령 사용자도 한눈에 비교 */
 .tableWrap {
   margin-top: var(--space-5);
@@ -227,6 +219,30 @@
   margin: 4px 0 6px;
 }
 
+/* 플래그십(DRAGON 314) — 줄 전체를 쓰고 글·사진을 옆으로 놓는다 */
+.flag {
+  grid-column: 1 / -1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 24px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.flag .art {
+  margin: 0;
+  height: 320px;
+}
+
+.otherImg {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
 /* 사진이 아직 없는 모델 */
 .ph {
   position: absolute;
@@ -283,6 +299,17 @@
   }
 
   .art {
+    height: 230px;
+  }
+
+  .flag {
+    grid-template-columns: 1fr;
+    padding-top: 26px;
+    padding-bottom: 0;
+  }
+
+  .flag .art {
+    margin: 0 -28px;
     height: 230px;
   }
 }
