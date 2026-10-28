@@ -17,7 +17,7 @@ import {
 } from "@/lib/auth";
 import { getBucket } from "@/lib/cf";
 import { all, clean, first, readyDb, run } from "@/lib/db";
-import { getSetting, setSetting } from "@/lib/settings";
+import { DEFAULT_HERO, getSetting, setSetting } from "@/lib/settings";
 import { SNS_PLATFORMS, type HeroCaption } from "@/lib/types";
 import { youtubeId, youtubeTitle } from "@/lib/youtube";
 
@@ -302,6 +302,7 @@ export async function saveHero(fd: FormData) {
   });
 
   await setSetting(d, "hero", {
+    rev: DEFAULT_HERO.rev,
     mode: fd.get("mode") === "sketch" ? "sketch" : "video",
     tagline: clean(fd.get("tagline"), 40) || cur.tagline,
     slogan: clean(fd.get("slogan"), 40) || cur.slogan,

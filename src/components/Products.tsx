@@ -5,13 +5,13 @@ import { otherMachines, priceNote, products } from "@/data/content";
 import { openInquiry } from "@/lib/inquiry";
 import s from "./Products.module.css";
 
-/** 드래곤 라인업 — 애플식 제품 타일. 글은 위, 사진은 아래 */
+/** DRAGON 라인업 — 애플식 제품 타일. 글은 위, 사진은 아래 */
 export default function Products() {
   return (
     <section className="mod mod--alt" id="products" aria-labelledby="products-title">
       <div className="mod-in">
-        <span className="lab-k">드래곤 라인업</span>
-        <h2 id="products-title">내 밭에 맞는 드래곤.</h2>
+        <span className="lab-k">DRAGON 라인업</span>
+        <h2 id="products-title">내 밭에 맞는 DRAGON.</h2>
         <p className="tag">
           60마력부터 150마력까지 다섯 가지 모델. 트랙터 마력에 맞춰 고르세요. 안동 서후면에서 직접 만들고 직접 고칩니다.
         </p>
@@ -62,7 +62,7 @@ export default function Products() {
 
         <div className={s.tableWrap}>
           <table className={s.table}>
-            <caption>드래곤 제품 규격</caption>
+            <caption>DRAGON 제품 규격</caption>
             <thead>
               <tr>
                 <th scope="col">모델</th>
@@ -80,7 +80,7 @@ export default function Products() {
                   <td>{p.specs?.width ?? "문의"}</td>
                   <td>{p.specs?.hp ?? "문의"}</td>
                   <td>{p.specs?.pto ?? "문의"}</td>
-                  <td>{p.specs?.blades ?? (p.id === "dr314" ? "66개" : "문의")}</td>
+                  <td>{p.specs?.blades ?? "문의"}</td>
                   <td>{p.specs?.weight ?? "문의"}</td>
                 </tr>
               ))}

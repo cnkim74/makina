@@ -9,7 +9,7 @@ export const site = {
   name: "성원마끼나",
   nameEn: "MAKKINA",
   tagline: "이름처럼 일하는 기계",
-  slogan: "베고, 모으고, 묶고, 감싸다.",
+  slogan: "우리 들판에서, 묵묵히 확실하게.",
   sloganSub: "조사료의 처음부터 끝까지, 안동에서 만든 기계가 함께합니다.",
   phone: "054-843-4000",
   phoneHref: "tel:0548434000",
@@ -41,9 +41,9 @@ export const navGroups: { title: string; links: NavLink[] }[] = [
   {
     title: "작업기",
     links: [
-      { label: "드래곤", href: "#dragon" },
+      { label: "DRAGON", href: "#dragon" },
       { label: "라인업", href: "#products" },
-      { label: "작업 흐름", href: "#workflow" },
+      { label: "급여 효과", href: "#feeding" },
       { label: "마력 찾기", href: "#hp-finder" },
     ],
   },
@@ -74,9 +74,9 @@ export const footerGroups: { title: string; links: NavLink[] }[] = [
   {
     title: "작업기",
     links: [
-      { label: "드래곤", href: "#dragon" },
-      { label: "드래곤 라인업", href: "#products" },
-      { label: "조사료 작업 흐름", href: "#workflow" },
+      { label: "DRAGON", href: "#dragon" },
+      { label: "DRAGON 라인업", href: "#products" },
+      { label: "급여 효과", href: "#feeding" },
       { label: "마력으로 찾기", href: "#hp-finder" },
       { label: "작업 영상", href: "#videos" },
     ],

@@ -26,12 +26,13 @@ export const DEFAULT_INTEGRATIONS: IntegrationSettings = {
 };
 
 export const DEFAULT_HERO: HeroSettings = {
+  rev: "2026-10-28",
   mode: defaultHeroVideo ? "video" : "sketch",
   video: defaultHeroVideo ?? {
-    desktop: { mp4: "/videos/hero-1600.mp4", webm: "/videos/hero-1600.webm" },
-    mobile: { mp4: "/videos/hero-960.mp4", webm: "/videos/hero-960.webm" },
-    poster: "/images/hero/hero-poster.webp",
-    still: "/images/hero/hero-still.webp",
+    desktop: { mp4: "/videos/hero-dragon-1600.mp4", webm: "/videos/hero-dragon-1600.webm" },
+    mobile: { mp4: "/videos/hero-dragon-960.mp4", webm: "/videos/hero-dragon-960.webm" },
+    poster: "/images/hero/hero-dragon-poster.webp",
+    still: "/images/hero/hero-dragon-still.webp",
     end: 0.9,
   },
   story: heroStory,
@@ -57,6 +58,8 @@ export async function getSetting<K extends keyof Groups>(db: D1Database | null, 
     const row = await first<{ value: string }>(db, "SELECT value FROM settings WHERE key = ?", key);
     if (!row) return DEFAULTS[key];
     const parsed = JSON.parse(row.value) as Partial<Groups[K]>;
+    // 히어로는 기본값 판(rev)이 바뀌면 예전에 저장한 영상·캡션·슬로건 대신 새 기본값을 쓴다. 관리자에서 다시 저장하면 그 값이 이긴다
+    if (key === "hero" && (parsed as Partial<HeroSettings>).rev !== DEFAULT_HERO.rev) return DEFAULTS[key];
     return { ...DEFAULTS[key], ...parsed };
   } catch {
     return DEFAULTS[key];

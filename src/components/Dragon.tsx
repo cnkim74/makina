@@ -18,10 +18,11 @@ export default function Dragon() {
           <span className="sr-only">{dragon.name}</span>
           <Wordmark word="dragon" height={100} />
         </h2>
+        <p className={s.kmower}>{dragon.kmower}</p>
         <p className={s.label}>{dragon.label}</p>
         <p className="tag">{dragon.copy}</p>
         <p className={s.range}>{dragon.range}</p>
-        <div className={s.models} aria-label="드래곤 모델">
+        <div className={s.models} aria-label="DRAGON 모델">
           {products.map((p) => (
             <a key={p.id} href="#products">
               {p.name.replace("DRAGON ", "")}
@@ -38,7 +39,7 @@ export default function Dragon() {
             <p className={s.catch}>{dragon.catch}</p>
             <div className={s.acts}>
               <a className="btn btn--cta" href={site.phoneHref}>
-                ☏ 드래곤 상담
+                ☏ DRAGON 상담
               </a>
               <a className="lnk" href="#products">
                 사양 · 가격 보기
@@ -46,7 +47,7 @@ export default function Dragon() {
               <a
                 className="lnk"
                 href="#inquiry"
-                onClick={() => openInquiry("구매 상담", "드래곤 상담을 원합니다.\n트랙터 마력: \n작업 면적: ")}
+                onClick={() => openInquiry("구매 상담", "DRAGON 상담을 원합니다.\n트랙터 마력: \n작업 면적: ")}
               >
                 문의 남기기
               </a>

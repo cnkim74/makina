@@ -150,7 +150,7 @@ export default function Inquiry() {
                 required
                 maxLength={2000}
                 rows={5}
-                placeholder="예: 60마력 트랙터에 맞는 드래곤 모델과 견적이 궁금합니다. 작업 면적은 약 2만 평입니다."
+                placeholder="예: 60마력 트랙터에 맞는 DRAGON 모델과 견적이 궁금합니다. 작업 면적은 약 2만 평입니다."
               />
             </label>
 

@@ -95,7 +95,7 @@ export default function Videos() {
       <div className="mod-in">
         <span className="lab-k">작업 영상</span>
         <h2 id="videos-title">현장에서 직접 보세요.</h2>
-        <p className="tag">청송·무주·거창 들판에서 찍은 드래곤의 실제 작업 장면입니다. 누르면 사이트 안에서 바로 재생됩니다.</p>
+        <p className="tag">청송·무주·거창 들판에서 찍은 DRAGON 의 실제 작업 장면입니다. 누르면 사이트 안에서 바로 재생됩니다.</p>
 
         <form className={s.search} role="search" onSubmit={(e) => e.preventDefault()}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -105,7 +105,7 @@ export default function Videos() {
           <input
             id="video-search"
             type="search"
-            placeholder="영상 검색 — 예: 네트 교체"
+            placeholder="영상 검색 — 예: 수단그라스"
             aria-label="영상 검색"
             value={q}
             onChange={(e) => setQ(e.target.value)}

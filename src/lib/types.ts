@@ -51,6 +51,8 @@ export type IntegrationSettings = {
 export type HeroCaption = { word: string; ko: string; from: number; to: number };
 
 export type HeroSettings = {
+  /** 기본값 판. DEFAULT_HERO.rev 와 다르면 저장된 값보다 새 기본값을 쓴다(교정판을 한 번에 반영하려고) */
+  rev?: string;
   /** video: 스크롤 영상 / sketch: SVG 자리표시 장면 */
   mode: "video" | "sketch";
   video: HeroVideo;

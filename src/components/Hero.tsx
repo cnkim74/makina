@@ -78,7 +78,7 @@ function pickMode(): Mode {
 
 /**
  * 히어로 — ZIPLAN식 스크롤 장면.
- * 영상이 있으면: 베일 클로즈업 → 카메라가 물러나며 트랙터·베일러 → 들판 전체 → 흰 바탕으로 녹아듦.
+ * 영상이 있으면: DRAGON 클로즈업 → 카메라가 물러나며 트랙터 → 수수밭 전체 → 흰 바탕으로 녹아듦.
  * 영상이 없으면: 새벽 들판 → 작업등(--lit) → 도면 선(--trace) → 베일로 다가감(--zoom).
  * 스크롤 값은 리렌더 없이 CSS 변수와 video.currentTime 으로만 흘려보내고, 캡션이 바뀔 때만 상태를 갱신한다.
  */
@@ -265,7 +265,7 @@ export default function Hero() {
           <p className={s.slogan}>{site.slogan}</p>
           <div className={`links on-dark ${s.plinks}`}>
             <a className="lnk" href="#dragon" tabIndex={headAway ? -1 : undefined}>
-              드래곤 보기
+              DRAGON 보기
             </a>
             <a className="lnk" href="#consumables" tabIndex={headAway ? -1 : undefined}>
               소모품 주문

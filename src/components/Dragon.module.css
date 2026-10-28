@@ -11,8 +11,16 @@
   height: auto;
 }
 
+.kmower {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
 .label {
-  margin-top: 8px;
+  margin-top: 4px;
   font-size: 22px;
   font-weight: 700;
 }

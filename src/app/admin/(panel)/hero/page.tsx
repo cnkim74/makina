@@ -39,7 +39,7 @@ export default async function Hero({ searchParams }: { searchParams: Promise<{ m
         <div className={a.guide}>
           <ol>
             <li>
-              <b>찍기</b> — 휴대폰을 가로로 들고, 베일러가 들판을 지나가는 장면을 <b>한 번에 10~20초</b> 천천히 따라가며 찍습니다.
+              <b>찍기</b> — 휴대폰을 가로로 들고, DRAGON 이 들판을 지나가는 장면을 <b>한 번에 10~20초</b> 천천히 따라가며 찍습니다.
               흔들림이 적을수록 스크롤이 부드럽습니다. 새벽·해 질 녘 빛이 브랜드 색과 가장 잘 맞습니다.
             </li>
             <li>

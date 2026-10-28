@@ -159,40 +159,42 @@ public/images/        제품 누끼·현장 사진 넣는 곳
 
 ## 히어로 영상
 
-히어로는 영상 한 편으로 만든 스크롤 장면입니다. 베일 클로즈업에서 카메라가 물러나 트랙터·베일러, 들판 전체로 넓어지고, 캡션이 BALE → MACHINE → FIELD → HARVEST 로 바뀝니다.
+히어로는 영상 한 편으로 만든 스크롤 장면입니다. 2026-10-28 교정으로 비무꼬 베일 영상 대신 **DRAGON 사진(수수밭 작업)**에서 카메라가 천천히 물러나는 8초 장면을 씁니다. 캡션은 MACHINE → FIELD → HARVEST.
 
 | 환경 | 재생 방식 | 파일 |
 | --- | --- | --- |
-| 데스크톱 | 스크롤이 곧 재생 헤드 (되감기 가능) | `public/videos/hero-1600.mp4` / `.webm` |
-| 휴대폰·태블릿 | 소리 없이 자동 반복 | `public/videos/hero-960.mp4` / `.webm` |
-| 움직임 줄이기 | 한 장면 | `public/images/hero/hero-still.webp` |
-| 영상이 뜨기 전 | 첫 장면 | `public/images/hero/hero-poster.webp` |
+| 데스크톱 | 스크롤이 곧 재생 헤드 (되감기 가능) | `public/videos/hero-dragon-1600.mp4` / `.webm` |
+| 휴대폰·태블릿 | 소리 없이 자동 반복 | `public/videos/hero-dragon-960.mp4` / `.webm` |
+| 움직임 줄이기 | 한 장면 | `public/images/hero/hero-dragon-still.webp` |
+| 영상이 뜨기 전 | 첫 장면 | `public/images/hero/hero-dragon-poster.webp` |
 
-- 원본(4K, 61MB)은 저장소에 넣지 않고 GitHub 릴리스 [`hero-video`](https://github.com/cnkim74/makina/releases/tag/hero-video)에 있습니다.
+- 예전 베일 영상 원본(4K)은 GitHub 릴리스 [`hero-video`](https://github.com/cnkim74/makina/releases/tag/hero-video)에 남아 있습니다.
 - 사파리는 mp4(H.264), 크롬·엣지·파이어폭스는 VP9 webm을 씁니다. 크롬은 webm 쪽이 스크롤 되감기가 안정적입니다.
 - 첫 장면 사진(poster)은 영상 위에 따로 덮었다가 실제 장면이 그려지면 걷어 냅니다. 크롬이 poster를 계속 보여 주는 문제를 피하려는 것입니다.
 - 컴퓨터의 "동작 줄이기(움직임 줄이기)" 설정이 켜져 있으면 브랜드 규칙대로 정지 장면 한 장만 보입니다. 맥은 시스템 설정 → 손쉬운 사용 → 디스플레이, 윈도우는 설정 → 접근성 → 시각 효과 → 애니메이션 효과.
-- 경로와 캡션 타이밍은 `src/data/content.ts`의 `heroVideo`, `heroStory`에서 바꿉니다. `heroVideo`를 `null`로 두면 SVG 자리표시 장면으로 돌아갑니다.
+- 경로와 캡션 타이밍은 `src/data/content.ts`의 `heroVideo`, `heroStory`, 슬로건은 `src/data/site.ts`에서 바꿉니다. `heroVideo`를 `null`로 두면 SVG 자리표시 장면으로 돌아갑니다.
+- 관리자 "히어로"에서 저장한 값이 있으면 그 값이 우선입니다. 다만 `src/lib/settings.ts`의 `DEFAULT_HERO.rev`를 바꾸면, 그 전에 저장한 값 대신 새 기본값이 한 번에 반영됩니다(교정판을 내보낼 때 씁니다).
 
-영상을 바꿀 때는 원본을 받아 아래처럼 다시 만듭니다. 데스크톱판은 스크롤로 앞뒤로 자유롭게 넘길 수 있도록 4프레임마다 키프레임을 넣습니다.
+사진 한 장으로 다시 만들 때는 16:9로 자른 뒤 기계에서 들판으로 물러나도록 만들고, 아래처럼 줄입니다. 데스크톱판은 스크롤로 되감을 수 있게 6프레임마다 키프레임을 넣습니다.
 
 ```bash
+# 사진 → 8초 장면 (기계 확대 1.85배 → 전체)
+ffmpeg -loop 1 -i photo.jpg -vf "crop=4000:2250:0:650,scale=8000:4500,zoompan=z='1.85-0.85*on/239':x='(iw-iw/zoom)*0.72':y='(ih-ih/zoom)*0.74':d=240:s=1920x1080:fps=30,format=yuv420p" -frames:v 240 -c:v libx264 -crf 14 source.mp4
 # 데스크톱 (스크롤 되감기용)
-ffmpeg -i source.mp4 -an -vf "scale=1600:900,format=yuv420p" -c:v libx264 -profile:v high -preset slow -crf 25 -g 4 -keyint_min 4 -bf 0 -sc_threshold 0 -movflags +faststart public/videos/hero-1600.mp4
-ffmpeg -i source.mp4 -an -vf "scale=1600:900,format=yuv420p" -c:v libvpx-vp9 -b:v 0 -crf 38 -g 4 -keyint_min 4 -row-mt 1 public/videos/hero-1600.webm
+ffmpeg -i source.mp4 -an -vf "scale=1600:900,fps=24,format=yuv420p" -c:v libx264 -profile:v high -preset slow -crf 31 -g 6 -keyint_min 6 -bf 0 -sc_threshold 0 -movflags +faststart public/videos/hero-dragon-1600.mp4
+ffmpeg -i source.mp4 -an -vf "scale=1600:900,fps=24,format=yuv420p" -c:v libvpx-vp9 -b:v 0 -crf 46 -g 6 -keyint_min 6 -row-mt 1 public/videos/hero-dragon-1600.webm
 # 모바일 (자동 반복)
-ffmpeg -i source.mp4 -an -vf "scale=960:540,format=yuv420p" -c:v libx264 -preset slow -crf 27 -g 48 -movflags +faststart public/videos/hero-960.mp4
-ffmpeg -i source.mp4 -an -vf "scale=960:540,format=yuv420p" -c:v libvpx-vp9 -b:v 0 -crf 40 -g 48 -row-mt 1 public/videos/hero-960.webm
+ffmpeg -i source.mp4 -an -vf "scale=960:540,fps=24,format=yuv420p" -c:v libx264 -preset slow -crf 30 -g 48 -movflags +faststart public/videos/hero-dragon-960.mp4
+ffmpeg -i source.mp4 -an -vf "scale=960:540,fps=24,format=yuv420p" -c:v libvpx-vp9 -b:v 0 -crf 44 -g 48 -row-mt 1 public/videos/hero-dragon-960.webm
 # 포스터·정지 장면
-ffmpeg -ss 0.25 -i source.mp4 -frames:v 1 -vf scale=1600:-2 public/images/hero/hero-poster.webp
-ffmpeg -ss 7.2  -i source.mp4 -frames:v 1 -vf scale=1600:-2 public/images/hero/hero-still.webp
+ffmpeg -ss 0 -i source.mp4 -frames:v 1 -vf scale=1600:-2 public/images/hero/hero-dragon-poster.webp
+ffmpeg -sseof -0.05 -i source.mp4 -frames:v 1 -vf scale=1600:-2 public/images/hero/hero-dragon-still.webp
 ```
 
 ## 교체가 필요한 자리표시
 
 - 작업 흐름 단계별 사진, 마력 찾기 띠 사진, 작업 영상 썸네일
 - DRAGON 250 제품 사진 → `public/images/dragon/` 에 넣고 `src/data/content.ts` 의 `image` 필드에 경로 지정
-- 비무꼬 · 블랙홀 · 모조리 사진 (지금은 글만)
 - 웹폰트 파일 → `public/fonts/` (없으면 CDN 사용)
 - 대표자, 사업자등록번호, 팩스, 카카오톡 채널 링크 → 관리자 “고객지원 · 연결” (기본값은 `src/data/site.ts`)
 - 유튜브·SNS 링크 → 관리자 “SNS”

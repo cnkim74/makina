@@ -1,10 +1,10 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { consumables } from "@/data/content";
 import { openInquiry } from "@/lib/inquiry";
 import { useSite } from "./SiteData";
-import { NetRoll, WrapRoll } from "./placeholders";
 import s from "./Consumables.module.css";
 
 export default function Consumables() {
@@ -20,12 +20,14 @@ export default function Consumables() {
       <div className="mod-in">
         <span className="lab-k">소모품</span>
         <h2 id="cons-title">멈추지 않게, 바로 보내 드립니다.</h2>
-        <p className="tag">수확철엔 네트 한 롤이 하루를 좌우합니다. 수량만 고르시면 됩니다.</p>
+        <p className="tag">수확철엔 칼날 하나, 벨트 하나가 하루를 좌우합니다. 수량만 고르시면 모델에 맞춰 보내 드립니다.</p>
 
         <div className={s.grid}>
           {consumables.map((c) => (
             <div key={c.id} className={`tile ${s.tile}`}>
-              <div className={s.art}>{c.id === "net" ? <NetRoll /> : <WrapRoll />}</div>
+              <div className={s.art}>
+                <img src={c.image} alt={`${c.name} 사진`} loading="lazy" />
+              </div>
               <h3>{c.name}</h3>
               <p className={s.spec}>{c.spec}</p>
               <div className={s.row}>
@@ -38,14 +40,14 @@ export default function Consumables() {
                     +
                   </button>
                 </div>
-                <span className={s.unit}>롤</span>
+                <span className={s.unit}>{c.unit}</span>
               </div>
               <a
                 className={`btn btn--dark ${s.order}`}
                 href={site.phoneHref}
-                aria-label={`${c.name} ${qty[c.id]}롤 전화로 주문`}
+                aria-label={`${c.name} ${qty[c.id]}${c.unit} 전화로 주문`}
               >
-                {qty[c.id]}롤 전화 주문
+                {qty[c.id]}{c.unit} 전화 주문
               </a>
             </div>
           ))}
@@ -65,7 +67,7 @@ export default function Consumables() {
               onClick={() =>
                 openInquiry(
                   "소모품 주문",
-                  `${consumables.map((c) => `${c.name} ${qty[c.id]}롤`).join(", ")} 주문합니다.\n받으실 주소: `,
+                  `${consumables.map((c) => `${c.name} ${qty[c.id]}${c.unit}`).join(", ")} 주문합니다.\nDRAGON 모델: \n받으실 주소: `,
                 )
               }
             >

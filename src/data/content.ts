@@ -2,7 +2,8 @@
 
 /**
  * 히어로 영상. 스크롤에 맞춰 장면이 움직인다(데스크톱).
- * 원본 4K 영상은 저장소가 아니라 GitHub 릴리스 `hero-video` 에 있다. 다시 만드는 법은 README "히어로 영상".
+ * 2026-10-28 교정: 비무꼬 베일 영상 → DRAGON 사진(수수밭 작업)에서 천천히 물러나는 8초 장면으로 바꿨다.
+ * 만드는 법은 README "히어로 영상"(DRAGON 사진으로 만들기).
  * null 이면 SVG 자리표시 장면(heroImages / HeroScene)을 쓴다.
  */
 export type HeroSource = { mp4: string; webm: string };
@@ -20,22 +21,21 @@ export type HeroVideo = {
 };
 
 export const heroVideo: HeroVideo | null = {
-  desktop: { mp4: "/videos/hero-1600.mp4", webm: "/videos/hero-1600.webm" },
-  mobile: { mp4: "/videos/hero-960.mp4", webm: "/videos/hero-960.webm" },
-  poster: "/images/hero/hero-poster.webp",
-  still: "/images/hero/hero-still.webp",
+  desktop: { mp4: "/videos/hero-dragon-1600.mp4", webm: "/videos/hero-dragon-1600.webm" },
+  mobile: { mp4: "/videos/hero-dragon-960.mp4", webm: "/videos/hero-dragon-960.webm" },
+  poster: "/images/hero/hero-dragon-poster.webp",
+  still: "/images/hero/hero-dragon-still.webp",
   end: 0.9,
 };
 
 /**
- * 히어로 캡션. 영상의 카메라가 베일 한 덩이에서 물러나 들판 전체를 내려다볼 때까지.
+ * 히어로 캡션. 카메라가 DRAGON 에서 물러나 수수밭 전체를 보여 줄 때까지.
  * from/to 는 히어로 구간 스크롤 진행률(0~1)에서 이 캡션이 보이는 범위.
  */
 export const heroStory = [
-  { word: "BALE", ko: "한 덩이, 단단하게", from: 0.05, to: 0.22 },
-  { word: "MACHINE", ko: "이름처럼 일하는 기계", from: 0.22, to: 0.42 },
-  { word: "FIELD", ko: "남김없이 베고, 고르게 모으고", from: 0.42, to: 0.64 },
-  { word: "HARVEST", ko: "줄지어 선 오늘의 수확", from: 0.64, to: 0.9 },
+  { word: "MACHINE", ko: "이름처럼 일하는 기계", from: 0.05, to: 0.33 },
+  { word: "FIELD", ko: "국내 환경에 최적화된 압도적 성능", from: 0.33, to: 0.61 },
+  { word: "HARVEST", ko: "줄지어 선 오늘의 수확", from: 0.61, to: 0.9 },
 ];
 
 /** 영상이 없을 때 SVG 자리표시 장면용 캡션 */
@@ -60,7 +60,7 @@ export const quickDoors: { kicker: string; title: string; copy: string; link: st
   {
     kicker: "BUY",
     title: "작업기 구매 상담",
-    copy: "트랙터 마력과 작업 면적만 알려 주시면 맞는 드래곤 모델과 지원사업을 안내해 드립니다.",
+    copy: "트랙터 마력과 작업 면적만 알려 주시면 맞는 DRAGON 모델과 지원사업을 안내해 드립니다.",
     link: "구매 상담 남기기",
     href: "#inquiry",
     inquiry: "구매 상담",
@@ -68,7 +68,7 @@ export const quickDoors: { kicker: string; title: string; copy: string; link: st
   {
     kicker: "ORDER",
     title: "소모품 빠른 주문",
-    copy: "네트·랩 필름은 평일 오후 3시 이전 주문하시면 다음 날 받으실 수 있습니다.",
+    copy: "칼날·전용벨트는 평일 오후 3시 이전 주문하시면 다음 날 받으실 수 있습니다.",
     link: "소모품 주문하기",
     href: "#consumables",
   },
@@ -90,11 +90,13 @@ export const quickDoors: { kicker: string; title: string; copy: string; link: st
 export const dragon = {
   name: "DRAGON",
   label: "하이브리드 모우어 컨디셔너",
+  /** 2026-10-28 교정: "K-모우어" 라는 말을 넣는다 */
+  kmower: "우리 들판을 위한 K-모우어",
   range: "60마력부터 150마력까지 선택적으로 사용",
   catch: "베면서 부순다.",
   copy: "아래에서 치고 올라오는 칼날이 작물을 베면서 파쇄합니다. 빨리 마르고, 소가 남기지 않고 먹습니다.",
   heroImage: "/images/dragon/field-cut.webp",
-  heroAlt: "트랙터에 단 드래곤이 키 큰 수수밭을 베는 모습",
+  heroAlt: "트랙터에 단 DRAGON 이 키 큰 수수밭을 베는 모습",
   render: "/images/dragon/dr280.webp",
   renderAlt: "DRAGON 280 하이브리드 모우어 컨디셔너",
   /** 밭에서 축사까지 — 소개서 "사용 효과"·"급여효과" */
@@ -118,7 +120,7 @@ export const dragon = {
       title: "소가 남기지 않습니다.",
       copy: "굵은 줄기도 파쇄되어 기호성이 좋아지고, 남기는 것이 없어 축사 청소가 수월합니다. 냄새가 적어 맨손 급여도 할 만큼 질이 좋아집니다.",
       image: "/images/dragon/barn-feed.webp",
-      alt: "축사에서 한우들이 드래곤으로 만든 조사료를 먹는 모습",
+      alt: "축사에서 한우들이 DRAGON 으로 만든 조사료를 먹는 모습",
     },
   ],
   /** 소개서 "제품특징" — 도면은 소개서에서 잘라 냈다 */
@@ -186,7 +188,7 @@ export type Product = {
 /** 가격은 싣지 않는다(2026-10-28 교정). 융자 안내만 남긴다 */
 export const priceNote = "DRAGON210·230·280은 농기계 융자지원 한도 1,200만원.";
 
-/** 드래곤 라인업 — 소개서 "제품규격" */
+/** DRAGON 라인업 — 2026-10-28 수정사항 제원표 (단위: 작업 폭 cm, 무게 kg) */
 export const products: Product[] = [
   {
     id: "dr210",
@@ -194,8 +196,8 @@ export const products: Product[] = [
     category: "mower",
     categoryLabel: "하이브리드 모우어 컨디셔너",
     catch: "농가를 위한 알짜배기 파트너.",
-    copy: "드래곤 가운데 가장 가볍습니다. 트리티케일·수단그라스 작업에 씁니다.",
-    specs: { pto: "540", hp: "60마력 이상", blades: "50개", weight: "650kg", width: "197cm" },
+    copy: "DRAGON 가운데 가장 가볍습니다. 트리티케일·수단그라스 작업에 씁니다.",
+    specs: { pto: "540", hp: "60마력 이상", blades: "44개", weight: "825kg", width: "209cm" },
     image: "/images/dragon/dr210.webp",
   },
   {
@@ -204,8 +206,8 @@ export const products: Product[] = [
     category: "mower",
     categoryLabel: "하이브리드 모우어 컨디셔너",
     catch: "국민규격의 표준.",
-    copy: "작업 폭 222cm, 칼날 52개로 베면서 파쇄합니다.",
-    specs: { pto: "540", hp: "80마력 이상", blades: "52개", weight: "730kg", width: "222cm" },
+    copy: "작업 폭 228cm, 칼날 48개로 베면서 파쇄합니다.",
+    specs: { pto: "540", hp: "80마력 이상", blades: "48개", weight: "870kg", width: "228cm" },
     image: "/images/dragon/dr230.webp",
   },
   {
@@ -214,8 +216,8 @@ export const products: Product[] = [
     category: "mower",
     categoryLabel: "하이브리드 모우어 컨디셔너",
     catch: "고성능 중형 작업의 대세.",
-    copy: "80마력 트랙터로 작업 폭 247cm를 씁니다.",
-    specs: { pto: "540", hp: "80마력 이상", blades: "56개", weight: "950kg", width: "247cm" },
+    copy: "작업 폭 247cm, PTO 540·1000 겸용. 100마력 트랙터에 맞습니다.",
+    specs: { pto: "540 / 1000", hp: "100마력 이상", blades: "52개", weight: "955kg", width: "247cm" },
   },
   {
     id: "dr280",
@@ -224,79 +226,44 @@ export const products: Product[] = [
     categoryLabel: "하이브리드 모우어 컨디셔너",
     catch: "필드 위를 압도하는 강력함.",
     copy: "PTO 540·1000 겸용. 키 큰 수수(극동6호)도 거뜬히 벱니다.",
-    specs: { pto: "540 / 1000", hp: "100마력 이상", blades: "60개", weight: "950kg", width: "272cm" },
+    specs: { pto: "540 / 1000", hp: "120마력 이상", blades: "58개", weight: "1,050kg", width: "276cm" },
     image: "/images/dragon/dr280.webp",
   },
   {
-    // 칼날 66개만 받았다. 작업 폭·적용 마력·PTO·무게는 받는 대로 specs 에 채운다 (추측해 넣지 않는다)
     id: "dr314",
     name: "DRAGON 314",
     category: "mower",
     categoryLabel: "하이브리드 모우어 컨디셔너",
     catch: "압도적 규모, 플래그십 대형 작업의 완성.",
-    copy: "드래곤 라인업의 플래그십 대형 모델입니다. 칼날 66개. 120~150마력 트랙터에 맞춰 상담해 드립니다.",
+    copy: "DRAGON 라인업의 플래그십 대형 모델입니다. 작업 폭 314cm, 칼날 66개로 넓은 들판을 한 번에 끝냅니다.",
+    specs: { pto: "540 / 1000", hp: "120마력 이상", blades: "66개", weight: "1,250kg", width: "314cm" },
     flagship: true,
   },
 ];
 
-/** 드래곤 말고도 만드는 작업기 — 간단히만 소개한다 */
+/** DRAGON 말고도 만드는 작업기 — 간단히만 소개한다 */
 export const otherMachines = [
   { name: "비무꼬", label: "일체형 원형베일러", copy: "베고, 부수고, 묶는 일을 한 대가 끝냅니다.", image: "/images/other/bimukko.webp" },
   { name: "블랙홀", label: "드럼모우어", copy: "들어간 풀은 돌아 나오지 않습니다.", image: "/images/other/blackhole.webp" },
   { name: "모조리", label: "제초 파쇄기", copy: "리모컨 하나로 풀을 모조리 정리합니다.", image: "/images/other/mojori.webp" },
 ];
 
-/** 조사료 작업 흐름. 1단계(베기)가 드래곤의 일이다 */
-export const workflow = [
-  {
-    step: 1,
-    title: "베기",
-    desc: "베면서 부숩니다",
-    detail: "드래곤의 로터가 풀을 베는 동시에 줄기를 두드려 부숩니다. 부순 풀은 빨리 마르고 소가 먹기 좋아집니다.",
-    machine: "DRAGON 하이브리드 모어 컨디셔너",
-    href: "#dragon",
-    tone: "#56603d",
-    image: "/images/dragon/field-cut.webp",
-  },
-  {
-    step: 2,
-    title: "모으기",
-    desc: "고르게 모읍니다",
-    detail: "벤 풀을 뒤집어 말리고, 베일러가 먹기 좋은 한 줄로 모읍니다.",
-    machine: "레이크 · 집초기",
-    href: "#support",
-    tone: "#6b6a43",
-    image: "/images/dragon/field-rows.webp",
-  },
-  {
-    step: 3,
-    title: "묶기",
-    desc: "단단히 묶습니다",
-    detail: "모은 풀을 둥글게 감아 네트로 단단히 묶습니다.",
-    machine: "비무꼬 일체형 원형베일러",
-    href: "#support",
-    tone: "#7c6a3c",
-  },
-  {
-    step: 4,
-    title: "감싸기",
-    desc: "오래 지킵니다",
-    detail: "랩 필름으로 빈틈없이 감싸 공기를 막습니다. 겨울까지 사료가 상하지 않습니다.",
-    machine: "베일 래퍼",
-    href: "#support",
-    tone: "#5f6670",
-    image: "/images/dragon/bale-open.webp",
-  },
-  {
-    step: 5,
-    title: "소모품",
-    desc: "멈추지 않게",
-    detail: "네트와 랩이 떨어지면 작업이 멈춥니다. 평일 오후 3시 전 주문은 다음 날 도착합니다.",
-    machine: "네트 · 랩 필름",
-    href: "#consumables",
-    tone: "#8a7d5a",
-  },
-] as { step: number; title: string; desc: string; detail: string; machine: string; href: string; tone: string; image?: string }[];
+/** 축사에서 차이가 납니다 — 소개서 "급여효과" (2026-10-28 교정으로 "작업 흐름" 자리를 대신한다) */
+export const feeding = {
+  title: "축사에서 차이가 납니다.",
+  copy: "파쇄된 조사료는 빨리 건초가 되고, 소가 남기지 않습니다. 냄새가 적어 맨손으로 급여할 수 있을 만큼 질이 좋아집니다.",
+  image: "/images/dragon/forage-smell.webp",
+  imageAlt: "축사에서 DRAGON 으로 만든 조사료를 살펴보는 농가",
+  side: "/images/dragon/barn-calf.webp",
+  sideAlt: "조사료를 먹는 한우",
+  effects: [
+    { title: "급여가 편합니다", copy: "작물이 파쇄된 뒤 베일로 만들어져, 급여할 때 쉽게 풀립니다." },
+    { title: "남기지 않습니다", copy: "굵은 작물도 파쇄되어 기호성이 좋아지고, 소가 남기는 것이 없어 청소와 뒷정리가 수월합니다." },
+    { title: "냄새가 적습니다", copy: "빠르게 건초가 되어 베일 특유의 나쁜 냄새가 줄고, 맨손으로 급여할 만큼 질이 좋아집니다." },
+    { title: "축사가 깨끗합니다", copy: "질 좋은 사료를 먹이면 축사 환경이 좋아지고 바닥 상태를 유지하는 데 도움이 됩니다." },
+    { title: "키우는 보람", copy: "사육 성장이 좋아져 축산 경영의 보람이 커집니다." },
+  ],
+};
 
 export type HpRange = {
   id: string;
@@ -305,7 +272,7 @@ export type HpRange = {
   machines: string[];
 };
 
-/** 마력대별 드래곤 모델 — 2026-10-28 고객 교정 기준 (210: 60마력↑, 314 는 120~150마력 구간) */
+/** 마력대별 DRAGON 모델 — 2026-10-28 수정사항 (60마력 미만은 문의) */
 export const hpRanges: HpRange[] = [
   { id: "lt60", label: "60마력 미만", shortLabel: "60 미만", machines: [] },
   { id: "60-79", label: "60 ~ 79마력", shortLabel: "60~79", machines: ["DRAGON 210"] },
@@ -343,7 +310,7 @@ export const videos: Video[] = [
     caption: "DRAGON250\n{트리티케일} 작업",
     kind: "작업 영상",
     date: "2026.06.29",
-    tags: ["드래곤", "DRAGON250", "트리티케일"],
+    tags: ["DRAGON", "DRAGON250", "트리티케일"],
     tone: "#5f6a44",
     views: 847,
     likes: 7,
@@ -355,7 +322,7 @@ export const videos: Video[] = [
     caption: "DRAGON250\n{호밀} 작업",
     kind: "작업 영상",
     date: "2026.06.29",
-    tags: ["드래곤", "DRAGON250", "호밀"],
+    tags: ["DRAGON", "DRAGON250", "호밀"],
     tone: "#7c7a52",
     views: 320,
     likes: 5,
@@ -367,7 +334,7 @@ export const videos: Video[] = [
     caption: "2025 익산\n{농업기계박람회}",
     kind: "행사",
     date: "2025.11.20",
-    tags: ["박람회", "드래곤"],
+    tags: ["박람회", "DRAGON"],
     tone: "#8a7d5a",
     views: 495,
     likes: 7,
@@ -379,7 +346,7 @@ export const videos: Video[] = [
     caption: "경북 청송\n{수단그라스} 작업",
     kind: "작업 영상",
     date: "2025.11.06",
-    tags: ["드래곤", "DRAGON230", "수단그라스"],
+    tags: ["DRAGON", "DRAGON230", "수단그라스"],
     tone: "#56603d",
     views: 1325,
     likes: 11,
@@ -391,7 +358,7 @@ export const videos: Video[] = [
     caption: "전북 무주\n{수단그라스} 작업",
     kind: "작업 영상",
     date: "2025.11.06",
-    tags: ["드래곤", "DRAGON280", "수단그라스"],
+    tags: ["DRAGON", "DRAGON280", "수단그라스"],
     tone: "#6b6a43",
     views: 501,
     likes: 8,
@@ -403,7 +370,7 @@ export const videos: Video[] = [
     caption: "경남 거창\n{수단그라스} 작업",
     kind: "작업 영상",
     date: "2025.11.05",
-    tags: ["드래곤", "DRAGON280", "수단그라스"],
+    tags: ["DRAGON", "DRAGON280", "수단그라스"],
     tone: "#7c6a3c",
     views: 871,
     likes: 7,
@@ -411,11 +378,11 @@ export const videos: Video[] = [
   {
     id: "yt-LUsEx4Elmak",
     youtubeId: "LUsEx4Elmak",
-    title: "드래곤 시리즈를 소개합니다",
-    caption: "드래곤 시리즈를\n{소개합니다}",
+    title: "DRAGON 시리즈를 소개합니다",
+    caption: "DRAGON 시리즈를\n{소개합니다}",
     kind: "제품 소개",
     date: "2024.11.22",
-    tags: ["드래곤", "제품소개"],
+    tags: ["DRAGON", "제품소개"],
     tone: "#5f6a44",
     views: 2480,
     likes: 12,
@@ -427,7 +394,7 @@ export const videos: Video[] = [
     caption: "DRAGON280\n{극동6호} 수수",
     kind: "작업 영상",
     date: "2024.11.22",
-    tags: ["드래곤", "DRAGON280", "극동6호", "수단그라스"],
+    tags: ["DRAGON", "DRAGON280", "극동6호", "수단그라스"],
     tone: "#7c7a52",
     views: 2887,
     likes: 15,
@@ -439,7 +406,7 @@ export const videos: Video[] = [
     caption: "DRAGON230\n{수단그라스} 작업",
     kind: "작업 영상",
     date: "2024.11.22",
-    tags: ["드래곤", "DRAGON230", "수단그라스"],
+    tags: ["DRAGON", "DRAGON230", "수단그라스"],
     tone: "#8a7d5a",
     views: 2770,
     likes: 13,
@@ -451,7 +418,7 @@ export const videos: Video[] = [
     caption: "DRAGON210\n봄 {호밀} 작업",
     kind: "작업 영상",
     date: "2024.05.23",
-    tags: ["드래곤", "DRAGON210", "호밀"],
+    tags: ["DRAGON", "DRAGON210", "호밀"],
     tone: "#56603d",
     views: 1229,
     likes: 6,
@@ -482,7 +449,7 @@ export const videos: Video[] = [
   },
 ];
 
-export const videoTags = ["#드래곤", "#수단그라스", "#호밀", "#트리티케일", "#극동6호", "#비무꼬"];
+export const videoTags = ["#DRAGON", "#수단그라스", "#호밀", "#트리티케일", "#극동6호", "#비무꼬"];
 export const videoSorts = [
   { label: "최신순", short: "최신순" },
   { label: "조회수 높은 순", short: "조회수순" },
@@ -490,27 +457,33 @@ export const videoSorts = [
 ];
 
 export type Consumable = {
-  id: "net" | "wrap";
+  id: "blade" | "belt";
   name: string;
   spec: string;
-  specShort: string;
+  /** 단위 (개·줄) */
+  unit: string;
   defaultQty: number;
+  /** 실제 사진이 오기 전에는 DRAGON 부품 사진으로 대신한다 */
+  image: string;
 };
 
+/** 소모품 — 2026-10-28 교정: 네트·랩 대신 DRAGON 파쇄 칼날·전용 벨트 */
 export const consumables: Consumable[] = [
   {
-    id: "net",
-    name: "베일 네트",
-    spec: "폭 1.23m · 길이 3,000m · 1롤",
-    specShort: "1.23m × 3,000m · 1롤",
-    defaultQty: 2,
+    id: "blade",
+    name: "파쇄 칼날",
+    spec: "DRAGON 전 모델 · 모델별로 맞춰 보내 드립니다",
+    unit: "개",
+    defaultQty: 10,
+    image: "/images/dragon/part-flail.webp",
   },
   {
-    id: "wrap",
-    name: "베일 랩 필름",
-    spec: "폭 750mm · 길이 1,500m · 1롤",
-    specShort: "750mm × 1,500m · 1롤",
-    defaultQty: 10,
+    id: "belt",
+    name: "전용 벨트",
+    spec: "DRAGON 동력 전달용 · 모델별로 맞춰 보내 드립니다",
+    unit: "개",
+    defaultQty: 2,
+    image: "/images/dragon/feat-tension.webp",
   },
 ];
 
@@ -518,6 +491,6 @@ export const supportItems = [
   { title: "작업기를\n구매하고 싶어요", sub: "구매 상담 · 견적 · 지원사업 안내", short: "작업기를 구매하고 싶어요" },
   { title: "사용법과 점검\n방법을 알고 싶어요", sub: "사용 설명서 · 점검 영상", short: "사용법·점검 방법을 알고 싶어요" },
   { title: "작업기에\n이상이 있어요", sub: "A/S 접수 · 출장 정비", short: "작업기에 이상이 있어요" },
-  { title: "네트·랩을\n주문하고 싶어요", sub: "소모품 주문 · 배송 조회", short: "네트·랩을 주문하고 싶어요" },
+  { title: "칼날·벨트를\n주문하고 싶어요", sub: "소모품 주문 · 배송 조회", short: "칼날·벨트를 주문하고 싶어요" },
   { title: "공장에\n직접 가보고 싶어요", sub: "오시는 길 · 시연 예약", short: "공장에 직접 가보고 싶어요" },
 ];

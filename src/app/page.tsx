@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import QuickDoors from "@/components/QuickDoors";
 import Dragon from "@/components/Dragon";
-import WorkFlow from "@/components/WorkFlow";
+import Feeding from "@/components/Feeding";
 import Products from "@/components/Products";
 import HpFinder from "@/components/HpFinder";
 import Videos from "@/components/Videos";
@@ -22,7 +22,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * 메인 — 흰 바탕과 연회색 바탕 모듈이 번갈아 온다.
- * 히어로(어둠) → 바로 가기 → 드래곤(회색) → 작업 흐름 → 드래곤 라인업(회색) → 마력 찾기(어둠) → 영상 → 소모품(회색)
+ * 히어로(어둠) → 바로 가기 → DRAGON(회색) → 급여 효과 → DRAGON 라인업(회색) → 마력 찾기(어둠) → 영상 → 소모품(회색)
  * → 고객지원 → 문의 남기기(회색) → 오시는 길
  */
 export default async function HomePage() {
@@ -35,7 +35,7 @@ export default async function HomePage() {
         <Hero />
         <QuickDoors />
         <Dragon />
-        <WorkFlow />
+        <Feeding />
         <Products />
         <HpFinder />
         <Videos />

@@ -72,7 +72,7 @@ export default async function Videos({ searchParams }: { searchParams: Promise<{
               <span>
                 해시태그 <small>쉼표로 구분</small>
               </span>
-              <input name="tags" placeholder="드래곤, 수확철" />
+              <input name="tags" placeholder="DRAGON, 수확철" />
             </label>
             <label className={a.field}>
               <span>날짜</span>
