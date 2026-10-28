@@ -37,8 +37,10 @@
 }
 
 .tile h3 {
-  font-size: 28px;
-  letter-spacing: -0.02em;
+  font-family: var(--font-dragon);
+  font-weight: 400;
+  font-size: 30px;
+  letter-spacing: 0.02em;
 }
 
 .cat {

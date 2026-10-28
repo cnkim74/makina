@@ -45,8 +45,8 @@
 - 리퀴드 글래스: 떠 있는 알약 내비, 세그먼트 컨트롤(`Segmented`), 플로팅 캡슐, 모바일 도크에만 `.glass` 를 쓴다. 히어로 위에서는 `.glass--dark`. 본문 카드에는 쓰지 않는다.
 - 히어로: 스크롤로 움직이는 영상(`heroVideo`, src/data/content.ts). 데스크톱은 스크롤이 재생 헤드, 터치 기기는 자동 반복, 움직임 줄이기는 한 장면. 끝에서 흰 바탕으로 녹아든다. 원본 영상은 GitHub 릴리스 `hero-video`에 두고 저장소에는 웹용으로 줄인 파일만 넣는다(README "히어로 영상").
 - 타일·카드: 모서리 `--radius-tile` 22px / `--radius-card` 18px. 그림자는 hover 때만.
-- 서체: 본문·제목 프리텐다드, 히어로 캡션 Archivo Black, 국문 로고 지마켓 산스, 슬로건·영상 자막·배지만 카페24 동동.
-- 로고(2026-10-28 교정): 회사 기존 로고(삼색 심볼 + 붓글씨 "성원마끼나")를 홈페이지·인쇄물 모두에 쓴다. 파일은 `public/brand/sungwon-logo.webp`(밝은 바탕)·`sungwon-logo-white.webp`(어두운 바탕), 화면에서는 `src/components/Logo.tsx` 의 `CompanyLogo` 를 쓴다. 파비콘은 심볼만 잘라 `src/app/icon.png`·`apple-icon.png`·`favicon.ico` 로 둔다. 예전 「발톱」 안(`scripts/logo.mjs`)은 DRAGON 워드마크를 만드는 데만 쓴다.
+- 서체: 본문·제목 프리텐다드, 히어로 캡션 Archivo Black, 국문 로고 지마켓 산스, 슬로건·영상 자막·배지만 카페24 동동. DRAGON 제품명과 "베면서 부순다."는 HS봄바람체(`--font-dragon`, 2026-10-28 교정, 무료·상업 사용 가능). 웹에는 쓰는 글자만 남긴 `public/fonts/HSBombaram-sub.woff2` 를 두고, DRAGON 워드마크는 글꼴 윤곽(`src/components/dragon-word.ts`, `scripts/dragon-word.py`)이다.
+- 로고(2026-10-28 교정): 회사 기존 로고(삼색 심볼 + 붓글씨 "성원마끼나")를 홈페이지·인쇄물 모두에 쓴다. 파일은 `public/brand/sungwon-logo.webp`(밝은 바탕)·`sungwon-logo-white.webp`(어두운 바탕), 화면에서는 `src/components/Logo.tsx` 의 `CompanyLogo` 를 쓴다. 파비콘은 심볼만 잘라 `src/app/icon.png`·`apple-icon.png`·`favicon.ico` 로 둔다. 예전 「발톱」 안(`scripts/logo.mjs`)은 화면에서 쓰지 않는다.
 
 ## 계속 지켜야 할 브랜드 규칙
 

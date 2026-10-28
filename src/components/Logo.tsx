@@ -1,8 +1,10 @@
-import { DRAGON_WORD, MARK, WORDMARK } from "./logo-paths";
+import { DRAGON_WORD } from "./dragon-word";
+import { MARK, WORDMARK } from "./logo-paths";
 
 /*
  * 회사 로고는 CompanyLogo(삼색 심볼 + 붓글씨 성원마끼나, 2026-10-28 교정으로 홈페이지·인쇄물 공통).
- * LogoMark·Wordmark 는 scripts/logo.mjs 가 만든 logo-paths.ts 의 도형이다. 지금 화면에서는 DRAGON 워드마크만 쓴다.
+ * LogoMark·MAKKINA 워드마크는 scripts/logo.mjs 가 만든 logo-paths.ts 의 도형이다(지금 화면에서는 쓰지 않는다).
+ * DRAGON 워드마크는 HS봄바람체 윤곽(dragon-word.ts, scripts/dragon-word.py)이다.
  */
 
 const COMPANY_LOGO = { w: 1767, h: 394 };

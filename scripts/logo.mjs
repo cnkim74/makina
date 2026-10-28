@@ -137,7 +137,6 @@ fs.writeFileSync(path.join(out, "makkina-logo-reverse.svg"), lockup(GOLD, CREAM)
 fs.writeFileSync(path.join(out, "makkina-logo-black.svg"), lockup("#000000", "#000000"));
 fs.writeFileSync(path.join(out, "makkina-logo-white.svg"), lockup("#FFFFFF", "#FFFFFF"));
 fs.writeFileSync(path.join(out, "makkina-wordmark.svg"), svg(makkina.w, 100, `<path d="${makkina.d}" fill="${SOIL}"/>`, "MAKKINA"));
-fs.writeFileSync(path.join(out, "dragon-wordmark.svg"), svg(dragon.w, 100, `<path d="${dragon.d}" fill="${SOIL}"/>`, "DRAGON"));
 
 // 브라우저 탭 아이콘: 흙먹 둥근 타일 위 금색 발톱 (밝은·어두운 탭 모두에서 보인다)
 const tile = (size) => {

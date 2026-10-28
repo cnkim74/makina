@@ -58,6 +58,8 @@
   --font-logo: "GmarketSans", "Gmarket Sans", "Pretendard", "Noto Sans KR", sans-serif;
   /* 목소리: 슬로건·영상 자막·배지에만 */
   --font-accent: "Cafe24Dongdong", "Cafe24 Dongdong", "Pretendard", "Noto Sans KR", sans-serif;
+  /* DRAGON: 제품명·"베면서 부순다."에만 (HS봄바람체, 2026-10-28 교정) */
+  --font-dragon: "HSBombaram", "Pretendard", "Noto Sans KR", serif;
 
   /* ── 간격 (8px 그리드) ── */
   --space-1: 8px;

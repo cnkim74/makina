@@ -155,6 +155,8 @@ public/images/        제품 누끼·현장 사진 넣는 곳
 
 배포된 사이트에서는 `사이트주소/brand/makkina-logo.png` 처럼 바로 내려받을 수 있습니다.
 
+DRAGON 워드마크(`dragon-wordmark.svg`, `src/components/dragon-word.ts`)는 HS봄바람체 글자 윤곽입니다. 글꼴 파일을 받아 `python3 scripts/dragon-word.py <글꼴 파일>` 로 다시 만듭니다(fonttools 필요).
+
 모양을 고칠 때는 `scripts/logo.mjs` 만 고치고 `node scripts/logo.mjs` 를 실행합니다(사이트용 경로 데이터와 SVG 가 다시 만들어집니다). PNG·ICO 는 SVG 를 원하는 크기로 저장한 뒤 `convert icon-16.png icon-32.png icon-48.png src/app/favicon.ico` 처럼 묶습니다.
 
 ## 히어로 영상

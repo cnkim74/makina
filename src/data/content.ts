@@ -154,6 +154,17 @@ export const dragon = {
     { image: "/images/dragon/work-sorghum-1.webp", caption: "DRAGON280 · 극동6호" },
     { image: "/images/dragon/work-sorghum-2.webp", caption: "DRAGON280 · 극동6호" },
   ],
+  /** 현장 사진 — 구글 드라이브 "261026" 폴더(2026-10-26). 모델이 확인되지 않은 사진은 작물만 적는다 */
+  field: [
+    { image: "/images/dragon/site-sudan-rows.webp", caption: "수단그라스", alt: "수단그라스를 베고 지나간 자리에 가지런히 놓인 줄" },
+    { image: "/images/dragon/site-sudan-close.webp", caption: "수단그라스", alt: "키 큰 수단그라스를 베는 DRAGON 가까이" },
+    { image: "/images/dragon/site-triticale.webp", caption: "트리티케일", alt: "트리티케일 밭에서 작업하는 DRAGON" },
+    { image: "/images/dragon/site-rye.webp", caption: "라이그라스", alt: "라이그라스 밭에서 작업하는 DRAGON" },
+    { image: "/images/dragon/site-sudan-blue.webp", caption: "수단그라스", alt: "쓰러진 수단그라스를 베는 DRAGON" },
+    { image: "/images/dragon/site-sudan-red.webp", caption: "수단그라스", alt: "수단그라스 밭 가장자리를 베는 DRAGON" },
+    { image: "/images/dragon/site-sudan-green.webp", caption: "수단그라스", alt: "산 아래 수단그라스 밭에서 작업하는 DRAGON" },
+    { image: "/images/dragon/site-sudan-wide.webp", caption: "수단그라스", alt: "넓은 수단그라스 밭을 베어 나가는 트랙터" },
+  ],
 };
 
 export type ProductCategory = "mower";

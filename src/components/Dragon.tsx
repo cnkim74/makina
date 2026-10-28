@@ -42,7 +42,7 @@ export default function Dragon() {
                 ☏ DRAGON 상담
               </a>
               <a className="lnk" href="#products">
-                사양 · 가격 보기
+                사양 보기
               </a>
               <a
                 className="lnk"
@@ -81,6 +81,16 @@ export default function Dragon() {
                 <b>{f.name}</b>
                 {f.copy}
               </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <h3 className={s.subhead}>현장에서.</h3>
+        <div className={s.fieldGrid}>
+          {dragon.field.map((g) => (
+            <figure key={g.image}>
+              <img src={g.image} alt={g.alt} loading="lazy" />
+              <figcaption>{g.caption}</figcaption>
             </figure>
           ))}
         </div>

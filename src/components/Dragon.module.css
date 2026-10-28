@@ -1,4 +1,4 @@
-/* 제목은 DRAGON 워드마크 SVG (scripts/logo.mjs) */
+/* 제목은 DRAGON 워드마크 SVG (HS봄바람체 윤곽, dragon-word.ts) */
 .title {
   display: block;
   width: clamp(260px, 44vw, 600px);
@@ -101,8 +101,8 @@
 }
 
 .catch {
-  font-family: var(--font-accent);
-  font-size: 34px;
+  font-family: var(--font-dragon);
+  font-size: 40px;
   line-height: 1.2;
 }
 
@@ -266,6 +266,15 @@
   gap: 12px;
 }
 
+/* 현장 사진 — 네 칸 두 줄 (모바일 두 칸) */
+.fieldGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.fieldGrid figure,
 .gallery figure {
   margin: 0;
   position: relative;
@@ -275,12 +284,14 @@
   background: var(--stage);
 }
 
+.fieldGrid img,
 .gallery img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+.fieldGrid figcaption,
 .gallery figcaption {
   position: absolute;
   left: 10px;
@@ -320,7 +331,7 @@
   }
 
   .catch {
-    font-size: 28px;
+    font-size: 32px;
   }
 
   .acts :global(.btn) {
@@ -345,6 +356,12 @@
 
   .subhead {
     margin-top: var(--space-5);
+  }
+
+  .fieldGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 20px;
   }
 
   .features {
