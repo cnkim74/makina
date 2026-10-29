@@ -5,6 +5,7 @@
 > **2026-10-28 2차 교정판**: 회사 기존 로고, 새 제원표(210·230·250·280·314), 가격 삭제, "드래곤" → "DRAGON" 영문 표기, "K-모우어" 문구를 전 인쇄물에 반영했다. X배너는 A안·D안 두 가지만 남겼다.
 > **2026-10-28 3차**: DRAGON 글자와 "베면서 부순다."를 HS봄바람체로 바꿨다(지금은 2.0 파일, 2.1을 받으면 다시 뽑는다). 책자 14~15쪽 작업 현장을 2026-10-26 현장 사진(구글 드라이브 "261026")으로 바꿨다.
 > **2026-10-29**: 4단 병풍 리플렛을 396×250mm(98·100·100·98)로 다시 짰다. 접는 선 확인용 `leaflet-4fold-folds.jpg`(빨간 점선 = 접는 선, 파란 점선 = 재단선).
+> **2026-10-29**: A4 양면 전단 추가(4단 리플렛 원고 기준). 재단선 판·TrimBox 포함, 이미지 300ppi 이상.
 > 아직 남은 것: 책자 표지 합성 사진(첫사진 합성.png), DRAGON 250·314 사진, 소모품(칼날·전용벨트) 사진. 6MB가 넘어 드라이브 연결로는 받지 못했다.
 
 | 파일 | 종류 | 완성 크기 | 파일 크기(도련 포함) | 가공 |
@@ -12,6 +13,7 @@
 | `makkina-dragon-booklet-A4-20p-print.pdf` | 책자 20쪽 | 210×297mm | 216×303mm | 중철 |
 | `makkina-dragon-leaflet-4fold-print.pdf` | 리플렛 (앞·뒤 2쪽) | **396×250mm**, 접으면 100×250mm | 402×256mm | 4단 병풍 접지. 판 너비 98 · 100 · 100 · 98mm, 접는 선 98 · 198 · 298mm (두 면 같음) |
 | `makkina-dragon-leaflet-4fold-print-cropmarks.pdf` | 위 리플렛 + 재단선·접지선 표시 | 396×250mm | 426×280mm (사방 여백 12mm) | 실선 = 재단선, 점선 = 접는 선. 재단선에서 3mm 떨어져 그렸다(도련 안으로 들어오지 않음) |
+| `makkina-dragon-flyer-A4-print.pdf` · `-cropmarks.pdf` | A4 전단 (앞·뒤 2쪽) | 210×297mm | 216×303mm (재단선 판 240×327mm) | 양면 인쇄, 접지 없음. 앞면 = 표지·세 장면·상담, 뒷면 = 제원표·마력별 추천·현장 사진·제품 특징 |
 | `makkina-dragon-leaflet-3fold-print.pdf` | 리플렛 (앞·뒤 2쪽) | 297×210mm | 303×216mm | 3단 롤 접지, 바깥면 97·197mm / 안쪽면 100·200mm |
 | `makkina-dragon-xbanner-600x1800-a.pdf`, `-d.pdf` | X배너 2종 (A 현장 사진 · D 밭에서 축사까지) | 600×1800mm | 600×1800mm (도련 없음, 실제 크기) | 실사출력, 네 귀퉁이 아일렛 |
 | `makkina-hyunsumak-600x127cm-1of10.pdf` | 현수막 | 600×127cm | **1/10 축소** 600×127mm | 실사출력 현수막, 10배 확대 출력 |
@@ -28,9 +30,10 @@ X배너는 실제 크기로 만들었고 사진은 실제 크기 기준 약 90dp
 추천 종이
 - 책자: 표지 랑데뷰 240g + 무광 코팅, 내지 랑데뷰 또는 스노우지 150g
 - 리플렛: 랑데뷰 또는 스노우지 200g, 무광 코팅
+- A4 전단: 아트지 또는 스노우지 150~180g (대량 배포면 아트지 150g)
 - X배너: 실사출력 PET 배너(무광), 거치대 포함
 
 어두운 바탕이 넓으니 색 교정(시안 출력)을 한 번 받는다.
 
 원고는 DRAGON 제품소개서(2026.8), 2026-10-28 교정, `src/data/` 기준. 가격은 싣지 않는다.
-미리보기: `booklet-preview-*.jpg`, `leaflet-preview-*.jpg`, `leaflet-4fold-folds.jpg`(접는 선), `leaflet-3fold-preview.jpg`, `xbanner-versions.jpg`(A·D 비교), `xbanner-preview-a.jpg`·`-d.jpg`, `hyunsumak-*-preview.jpg`
+미리보기: `booklet-preview-*.jpg`, `flyer-A4-preview-front.jpg`·`-back.jpg`, `leaflet-preview-*.jpg`, `leaflet-4fold-folds.jpg`(접는 선), `leaflet-3fold-preview.jpg`, `xbanner-versions.jpg`(A·D 비교), `xbanner-preview-a.jpg`·`-d.jpg`, `hyunsumak-*-preview.jpg`
