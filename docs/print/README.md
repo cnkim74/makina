@@ -13,7 +13,8 @@
 | `makkina-dragon-booklet-A4-20p-print.pdf` | 책자 20쪽 | 210×297mm | 216×303mm | 중철 |
 | `makkina-dragon-leaflet-4fold-print.pdf` | 리플렛 (앞·뒤 2쪽) | **396×250mm**, 접으면 100×250mm | 402×256mm | 4단 병풍 접지. 판 너비 98 · 100 · 100 · 98mm, 접는 선 98 · 198 · 298mm (두 면 같음) |
 | `makkina-dragon-leaflet-4fold-print-cropmarks.pdf` | 위 리플렛 + 재단선·접지선 표시 | 396×250mm | 426×280mm (사방 여백 12mm) | 실선 = 재단선, 점선 = 접는 선. 재단선에서 3mm 떨어져 그렸다(도련 안으로 들어오지 않음) |
-| `makkina-dragon-flyer-A4-print.pdf` · `-cropmarks.pdf` | A4 전단 (앞·뒤 2쪽) | 210×297mm | 216×303mm (재단선 판 240×327mm) | 양면 인쇄, 접지 없음. 앞면 = 표지·세 장면·상담, 뒷면 = 제원표·마력별 추천·현장 사진·제품 특징 |
+| `makkina-dragon-flyer-A4-b-print.pdf` · `-cropmarks.pdf` | A4 전단 B안 (앞면 표지 사진만 다름) | 210×297mm | 216×303mm (재단선 판 240×327mm) | 앞면 = 수수밭에 선 DRAGON 사진(2000×1493, 약 235ppi). 뒷면은 A안과 같다 |
+| `makkina-dragon-flyer-A4-print.pdf` · `-cropmarks.pdf` | A4 전단 A안 (앞·뒤 2쪽) | 210×297mm | 216×303mm (재단선 판 240×327mm) | 양면 인쇄, 접지 없음. 앞면 = 표지·세 장면·상담, 뒷면 = 제원표·마력별 추천·현장 사진·제품 특징 |
 | `makkina-dragon-leaflet-3fold-print.pdf` | 리플렛 (앞·뒤 2쪽) | 297×210mm | 303×216mm | 3단 롤 접지, 바깥면 97·197mm / 안쪽면 100·200mm |
 | `makkina-dragon-xbanner-600x1800-a.pdf`, `-d.pdf` | X배너 2종 (A 현장 사진 · D 밭에서 축사까지) | 600×1800mm | 600×1800mm (도련 없음, 실제 크기) | 실사출력, 네 귀퉁이 아일렛 |
 | `makkina-hyunsumak-600x127cm-1of10.pdf` | 현수막 | 600×127cm | **1/10 축소** 600×127mm | 실사출력 현수막, 10배 확대 출력 |
@@ -36,4 +37,4 @@ X배너는 실제 크기로 만들었고 사진은 실제 크기 기준 약 90dp
 어두운 바탕이 넓으니 색 교정(시안 출력)을 한 번 받는다.
 
 원고는 DRAGON 제품소개서(2026.8), 2026-10-28 교정, `src/data/` 기준. 가격은 싣지 않는다.
-미리보기: `booklet-preview-*.jpg`, `flyer-A4-preview-front.jpg`·`-back.jpg`, `leaflet-preview-*.jpg`, `leaflet-4fold-folds.jpg`(접는 선), `leaflet-3fold-preview.jpg`, `xbanner-versions.jpg`(A·D 비교), `xbanner-preview-a.jpg`·`-d.jpg`, `hyunsumak-*-preview.jpg`
+미리보기: `booklet-preview-*.jpg`, `flyer-A4-preview-front.jpg`·`-back.jpg`, `flyer-A4-b-preview-front.jpg`(B안 앞면), `leaflet-preview-*.jpg`, `leaflet-4fold-folds.jpg`(접는 선), `leaflet-3fold-preview.jpg`, `xbanner-versions.jpg`(A·D 비교), `xbanner-preview-a.jpg`·`-d.jpg`, `hyunsumak-*-preview.jpg`
