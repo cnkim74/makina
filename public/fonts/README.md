@@ -8,6 +8,6 @@
 | `GmarketSansBold.woff2` (또는 `.woff`) | 지마켓 산스 Bold | 지마켓 공식 배포 (무료, 상업 사용 가능) |
 | `Cafe24Dongdong.woff2` (또는 `.woff`) | 카페24 동동 | 카페24 폰트 (무료, 상업 사용 가능) |
 | `PretendardVariable.woff2` | 프리텐다드 가변 | https://github.com/orioncactus/pretendard (OFL) |
-| `HSBombaram-sub.woff2` (저장소에 있음) | HS봄바람체 2.0 부분 글꼴 — 영문·숫자와 "베면서 부순다" 등 쓰는 글자만 | 산돌구름 무료 글꼴 (상업 사용 가능, 글꼴 파일 판매만 금지) |
+| `HSBombaram-sub.woff2` (저장소에 있음) | HS봄바람체 2.1 부분 글꼴 — 영문·숫자와 "베면서 부순다" 등 쓰는 글자만 | 산돌구름 무료 글꼴 (상업 사용 가능, 글꼴 파일 판매만 금지) |
 
 참조 위치: `src/styles/fonts.css`
