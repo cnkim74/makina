@@ -39,3 +39,11 @@ X배너는 실제 크기로 만들었고 사진은 실제 크기 기준 약 90dp
 
 원고는 DRAGON 제품소개서(2026.8), 2026-10-28 교정, `src/data/` 기준. 가격은 싣지 않는다.
 미리보기: `booklet-preview-*.jpg`, `flyer-A4-preview-front.jpg`·`-back.jpg`, `flyer-A4-b-preview-front.jpg`(B안 앞면), `leaflet-preview-*.jpg`, `leaflet-4fold-folds.jpg`(접는 선), `leaflet-3fold-preview.jpg`, `xbanner-versions.jpg`(A·D 비교), `xbanner-preview-a.jpg`·`-d.jpg`, `hyunsumak-*-preview.jpg`
+
+## 한 번에 받기 (zip)
+
+종류별 폴더로 정리하고 안내문(00_안내_먼저읽기.txt)을 넣었다. GitHub 한 파일 100MB 제한 때문에 셋으로 나눴다.
+
+- `zip/makkina-print-20261029-1-flyer.zip` — A4 전단 A·B안
+- `zip/makkina-print-20261029-2-leaflet-booklet.zip` — 4단·3단 리플렛, 책자
+- `zip/makkina-print-20261029-3-banner.zip` — X배너 A·D안, 현수막
