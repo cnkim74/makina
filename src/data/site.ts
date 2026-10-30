@@ -104,4 +104,5 @@ export const footerGroups: { title: string; links: NavLink[] }[] = [
 export const legalLinks: NavLink[] = [
   { label: "개인정보처리방침", href: "#privacy" },
   { label: "이용약관", href: "#terms" },
+  { label: "관리자", href: "/admin" },
 ];
