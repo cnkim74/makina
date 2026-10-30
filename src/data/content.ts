@@ -106,7 +106,7 @@ export const dragon = {
       title: "쓰러진 작물도 막힘없이.",
       copy: "아래에서 치고 올라오는 칼날이 작물을 파쇄하며 내보내, 축에 감기거나 막히지 않습니다. 쓰러진 작물 예취에 가장 알맞습니다.",
       image: "/images/dragon/work-sudan-2.webp",
-      alt: "DRAGON210 으로 수단그라스를 베는 모습",
+      alt: "DRAGON230 으로 수단그라스를 베는 모습",
     },
     {
       step: "마른다",
@@ -150,7 +150,7 @@ export const dragon = {
   /** 소개서 "작업광경" */
   gallery: [
     { image: "/images/dragon/work-triticale-1.webp", caption: "DRAGON210 · 트리티케일" },
-    { image: "/images/dragon/work-sudan-1.webp", caption: "DRAGON210 · 수단그라스" },
+    { image: "/images/dragon/work-sudan-1.webp", caption: "DRAGON230 · 수단그라스" },
     { image: "/images/dragon/work-sorghum-1.webp", caption: "DRAGON280 · 극동6호" },
     { image: "/images/dragon/work-sorghum-2.webp", caption: "DRAGON280 · 극동6호" },
   ],
