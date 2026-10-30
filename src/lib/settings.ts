@@ -34,13 +34,13 @@ export const DEFAULT_LANDING: LandingSettings = {
 export const DEFAULT_PRICEBOOK: { items: PriceItem[] } = { items: [] };
 
 export const DEFAULT_HERO: HeroSettings = {
-  rev: "2026-10-28",
+  rev: "2026-10-30",
   mode: defaultHeroVideo ? "video" : "sketch",
   video: defaultHeroVideo ?? {
-    desktop: { mp4: "/videos/hero-dragon-1600.mp4", webm: "/videos/hero-dragon-1600.webm" },
-    mobile: { mp4: "/videos/hero-dragon-960.mp4", webm: "/videos/hero-dragon-960.webm" },
-    poster: "/images/hero/hero-dragon-poster.webp",
-    still: "/images/hero/hero-dragon-still.webp",
+    desktop: { mp4: "/videos/hero-1600.mp4", webm: "/videos/hero-1600.webm" },
+    mobile: { mp4: "/videos/hero-960.mp4", webm: "/videos/hero-960.webm" },
+    poster: "/images/hero/hero-poster.webp",
+    still: "/images/hero/hero-still.webp",
     end: 0.9,
   },
   story: heroStory,

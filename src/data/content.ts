@@ -2,8 +2,8 @@
 
 /**
  * 히어로 영상. 스크롤에 맞춰 장면이 움직인다(데스크톱).
- * 2026-10-28 교정: 비무꼬 베일 영상 → DRAGON 사진(수수밭 작업)에서 천천히 물러나는 8초 장면으로 바꿨다.
- * 만드는 법은 README "히어로 영상"(DRAGON 사진으로 만들기).
+ * 원본 4K 영상은 저장소가 아니라 GitHub 릴리스 `hero-video` 에 있다. 다시 만드는 법은 README "히어로 영상".
+ * (2026-10-28 에 DRAGON 사진 장면으로 바꿨다가, 2026-10-30 요청으로 원래 영상으로 되돌렸다)
  * null 이면 SVG 자리표시 장면(heroImages / HeroScene)을 쓴다.
  */
 export type HeroSource = { mp4: string; webm: string };
@@ -21,21 +21,22 @@ export type HeroVideo = {
 };
 
 export const heroVideo: HeroVideo | null = {
-  desktop: { mp4: "/videos/hero-dragon-1600.mp4", webm: "/videos/hero-dragon-1600.webm" },
-  mobile: { mp4: "/videos/hero-dragon-960.mp4", webm: "/videos/hero-dragon-960.webm" },
-  poster: "/images/hero/hero-dragon-poster.webp",
-  still: "/images/hero/hero-dragon-still.webp",
+  desktop: { mp4: "/videos/hero-1600.mp4", webm: "/videos/hero-1600.webm" },
+  mobile: { mp4: "/videos/hero-960.mp4", webm: "/videos/hero-960.webm" },
+  poster: "/images/hero/hero-poster.webp",
+  still: "/images/hero/hero-still.webp",
   end: 0.9,
 };
 
 /**
- * 히어로 캡션. 카메라가 DRAGON 에서 물러나 수수밭 전체를 보여 줄 때까지.
+ * 히어로 캡션. 영상의 카메라가 베일 한 덩이에서 물러나 들판 전체를 내려다볼 때까지.
  * from/to 는 히어로 구간 스크롤 진행률(0~1)에서 이 캡션이 보이는 범위.
  */
 export const heroStory = [
-  { word: "MACHINE", ko: "이름처럼 일하는 기계", from: 0.05, to: 0.33 },
-  { word: "FIELD", ko: "국내 환경에 최적화된 압도적 성능", from: 0.33, to: 0.61 },
-  { word: "HARVEST", ko: "줄지어 선 오늘의 수확", from: 0.61, to: 0.9 },
+  { word: "BALE", ko: "한 덩이, 단단하게", from: 0.05, to: 0.22 },
+  { word: "MACHINE", ko: "이름처럼 일하는 기계", from: 0.22, to: 0.42 },
+  { word: "FIELD", ko: "남김없이 베고, 고르게 모으고", from: 0.42, to: 0.64 },
+  { word: "HARVEST", ko: "줄지어 선 오늘의 수확", from: 0.64, to: 0.9 },
 ];
 
 /** 영상이 없을 때 SVG 자리표시 장면용 캡션 */
