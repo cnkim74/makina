@@ -115,7 +115,29 @@ export default function Hero() {
     const apple = /Apple/.test(navigator.vendor);
     const webm = v.canPlayType('video/webm; codecs="vp9"') !== "";
     const mp4 = v.canPlayType('video/mp4; codecs="avc1.640028"') !== "";
-    v.src = (webm && !apple) || !mp4 ? src.webm : src.mp4;
+    const url = (webm && !apple) || !mp4 ? src.webm : src.mp4;
+
+    // scrub: Cloudflare 정적 파일은 Range(206)를 주지 않아, 크롬이 영상 시점을 옮기지 못하고 첫 장면에 멈춘다.
+    // 영상을 통째로 받아 blob 주소로 넣으면 서버와 상관없이 어디로든 되감을 수 있다.
+    let blobUrl = "";
+    let cancelled = false;
+    if (mode === "scrub") {
+      fetch(url)
+        .then((r) => (r.ok ? r.blob() : Promise.reject(new Error(String(r.status)))))
+        .then((b) => {
+          if (cancelled) return;
+          blobUrl = URL.createObjectURL(b);
+          v.src = blobUrl;
+          v.load();
+        })
+        .catch(() => {
+          if (cancelled) return;
+          v.src = url;
+          v.load();
+        });
+    } else {
+      v.src = url;
+    }
 
     // 크롬은 한 번도 재생하지 않은 영상의 시점을 옮겨도 poster 를 계속 보여 줄 수 있다.
     // 그래서 poster 속성 대신 위에 덮은 사진을, 실제 장면이 그려지면 걷어 낸다.
@@ -130,10 +152,10 @@ export default function Hero() {
       v.play().catch(() => {
         /* 자동 재생이 막히면 포스터가 그대로 보인다 */
       });
-    } else {
-      v.load();
     }
     return () => {
+      cancelled = true;
+      if (blobUrl) URL.revokeObjectURL(blobUrl);
       v.removeEventListener("loadeddata", shown);
       v.removeEventListener("seeked", shown);
       v.removeEventListener("playing", shown);
