@@ -29,7 +29,7 @@ const items = [
 ];
 const P = [];
 P.push(`<section class="pg dk"><div style="position:absolute;left:0;top:0;bottom:0;width:12mm;background:${C.gold}"></div>
-<div style="position:absolute;left:32mm;top:18mm;font-size:8pt;font-weight:700;letter-spacing:0.32em;color:${C.gold}">PHOTO MOCKUPS 2026</div>
+<div style="position:absolute;left:32mm;top:18mm;font-size:8pt;font-weight:700;letter-spacing:0.32em;color:${C.gold}">10 실사 적용 예</div>
 <div style="position:absolute;left:32mm;top:70mm">${lock(36, C.gold, C.cream)}</div>
 <div style="position:absolute;left:32mm;top:122mm;font-size:24pt;font-weight:300;letter-spacing:-0.04em;line-height:1.25">실제 자리에서 본<br><b style="font-weight:800">발톱.</b></div>
 <div style="position:absolute;left:32mm;bottom:16mm;right:24mm;font-size:7.6pt;line-height:1.7;color:${C.mutedDark}">로고 시안 4 「발톱」 실사 적용 예시 · 사옥 간판, 지주 간판, 탑차, 명함, 레터헤드·봉투, 작업복·모자, 박람회 부스, 판촉물<br>장면은 AI로 만든 사진이고, 로고는 실제 로고 도형(logo-paths)을 원근에 맞춰 합성했습니다. 실제 시공·인쇄 결과와 다를 수 있습니다.</div></section>`);

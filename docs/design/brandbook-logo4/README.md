@@ -33,6 +33,12 @@ A4 가로 12쪽.
 - 명판의 제조번호·마력·작업 폭·무게 칸은 비워 두었다(받지 않은 사양은 넣지 않는다).
 - 다시 만들 때: `node apps.mjs <logo-paths.ts> <Pretendard 폴더> <이미지 폴더> <출력 html>`. 이미지 폴더에는 `flyer-cover-clear.jpg`, `site-314-yard.jpg`, `dragon-render.jpg`, `booth-machine.png`(표지 합성 사진을 배경 없이 잘라 낸 것)가 있어야 한다.
 
+## 합본 (브랜드북 + 실사 적용 예시, 21쪽)
+
+- `makkina-brandbook-logo4-full-screen.pdf`: 화면용
+- `makkina-brandbook-logo4-full-print-CMYK.pdf`: 인쇄용
+- 쪽 구성: 브랜드북 1–11쪽 → "10 실사 적용 예" 9쪽 → 뒤표지. 차례에 "10 실사 적용 예"를 더했다.
+
 ## 실사 적용 예시 (2026-10-30 추가)
 
 `makkina-photo-mockups-logo4.pdf`: 표지와 실사 8장이 든 9쪽 책자. 낱장 사진은 `photo/*.jpg` (사옥 간판, 지주 간판, 1톤 탑차, 명함, 레터헤드·봉투, 작업복·모자, 박람회 부스, 판촉물)이다.
