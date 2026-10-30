@@ -46,6 +46,27 @@ export type IntegrationSettings = {
   channelTalkKey: string;
   /** 새 문의가 오면 알릴 웹훅 주소 (슬랙·디스코드 등). 사이트에는 노출하지 않는다 */
   inquiryWebhook: string;
+  /** GA4 속성 ID (숫자). 관리자 "접속 정보"에서 GA 보고서를 불러올 때 쓴다. 서비스 계정 키는 Workers 비밀 값에 둔다 */
+  gaPropertyId: string;
+};
+
+/** 메인 페이지 섹션. hero 는 언제나 맨 위라 목록에 없다 */
+export const LANDING_SECTIONS = [
+  { id: "quick", label: "바로 가기 (분류 버튼)" },
+  { id: "dragon", label: "DRAGON 소개" },
+  { id: "feeding", label: "급여 효과" },
+  { id: "products", label: "DRAGON 라인업 · 다른 작업기" },
+  { id: "hpfinder", label: "마력으로 찾기" },
+  { id: "videos", label: "작업 영상 (유튜브)" },
+  { id: "consumables", label: "소모품" },
+  { id: "support", label: "고객지원" },
+  { id: "inquiry", label: "문의 남기기" },
+  { id: "directions", label: "오시는 길" },
+] as const;
+export type LandingSectionId = (typeof LANDING_SECTIONS)[number]["id"];
+
+export type LandingSettings = {
+  sections: { id: LandingSectionId; visible: boolean }[];
 };
 
 export type HeroCaption = { word: string; ko: string; from: number; to: number };
@@ -71,6 +92,7 @@ export type PublicData = {
   videos: Video[];
   sns: SnsLink[];
   integrations: { gaId: string; channelTalkKey: string };
+  landing: LandingSettings;
 };
 
 export const SNS_PLATFORMS: { id: SnsPlatform; label: string }[] = [

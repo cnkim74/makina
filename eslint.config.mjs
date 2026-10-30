@@ -16,6 +16,8 @@ const eslintConfig = defineConfig([
     ".open-next/**",
     ".wrangler/**",
     "cloudflare-env.d.ts",
+    // 인쇄물·브랜드북을 만드는 보관용 스크립트 (사이트 코드가 아님)
+    "docs/**",
   ]),
 ]);
 

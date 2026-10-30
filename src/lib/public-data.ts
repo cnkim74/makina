@@ -25,10 +25,11 @@ type VideoRow = {
 export async function getPublicData(): Promise<PublicData> {
   const db = await readyDb();
 
-  const [contact, integrations, hero] = await Promise.all([
+  const [contact, integrations, hero, landing] = await Promise.all([
     getSetting(db, "contact"),
     getSetting(db, "integrations"),
     getSetting(db, "hero"),
+    getSetting(db, "landing"),
   ]);
 
   let videos: Video[] = staticVideos;
@@ -101,6 +102,7 @@ export async function getPublicData(): Promise<PublicData> {
     videos,
     sns,
     integrations: { gaId: integrations.gaId, channelTalkKey: integrations.channelTalkKey },
+    landing,
   };
 }
 

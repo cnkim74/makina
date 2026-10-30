@@ -48,6 +48,9 @@ export interface R2Bucket {
 export interface AppEnv {
   DB?: D1Database;
   MEDIA?: R2Bucket;
+  /** GA4 보고서용 서비스 계정 (wrangler secret put 으로 넣는 비밀 값. 저장소·DB 에 두지 않는다) */
+  GA_SA_EMAIL?: string;
+  GA_SA_KEY?: string;
 }
 
 /** Cloudflare 환경. `next build` 처럼 바인딩이 없는 곳에서는 null */

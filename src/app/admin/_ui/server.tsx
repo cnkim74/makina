@@ -85,3 +85,58 @@ function niceMax(v: number) {
   const m = v / p;
   return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p;
 }
+
+/** 이름표가 있는 막대 (월별 매출 등). value 는 원 단위면 fmt 로 줄여 보여 준다 */
+export function LabeledBars({
+  data,
+  label,
+  fmt = (v: number) => String(v),
+}: {
+  data: { key: string; label: string; v: number }[];
+  label: string;
+  fmt?: (v: number) => string;
+}) {
+  const W = 720;
+  const H = 210;
+  const padL = 56;
+  const padB = 24;
+  const padT = 14;
+  const max = Math.max(1, ...data.map((d) => d.v));
+  const nice = niceMax(max);
+  const bw = (W - padL) / Math.max(1, data.length);
+  const y = (v: number) => padT + (H - padT - padB) * (1 - v / nice);
+  return (
+    <svg className={a.chart} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${label} 막대 그래프`}>
+      {[0, nice / 2, nice].map((t) => (
+        <g key={t}>
+          <line className={a.gridLine} x1={padL} x2={W} y1={y(t)} y2={y(t)} />
+          <text x={padL - 6} y={y(t) + 4} textAnchor="end">
+            {fmt(t)}
+          </text>
+        </g>
+      ))}
+      {data.map((d, i) => {
+        const x = padL + i * bw + bw * 0.18;
+        const w = bw * 0.64;
+        const h = Math.max(0, y(0) - y(d.v));
+        return (
+          <g key={d.key}>
+            <rect className={a.bar} x={x} y={y(d.v)} width={w} height={h} rx={Math.min(4, w / 2)}>
+              <title>{`${d.label} · ${label} ${fmt(d.v)}`}</title>
+            </rect>
+            <text x={x + w / 2} y={H - 6} textAnchor="middle">
+              {d.label}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+/** 금액 줄여 쓰기: 12,300,000 → "1,230만" */
+export function manwon(v: number) {
+  if (Math.abs(v) >= 1e8) return `${(v / 1e8).toFixed(v % 1e8 ? 1 : 0)}억`;
+  if (Math.abs(v) >= 1e4) return `${Math.round(v / 1e4).toLocaleString("ko-KR")}만`;
+  return Math.round(v).toLocaleString("ko-KR");
+}

@@ -9,11 +9,19 @@ import a from "../admin.module.css";
 
 /* 관리자 화면의 작은 클라이언트 조각들 */
 
-export function NavLinks({ items }: { items: { href: string; label: string; badge?: number }[] }) {
+type NavItem = { href: string; label: string; badge?: number } | { group: string };
+
+export function NavLinks({ items }: { items: NavItem[] }) {
   const path = usePathname();
   return (
     <nav className={a.nav} aria-label="관리 메뉴">
       {items.map((it) => {
+        if ("group" in it)
+          return (
+            <span key={`g-${it.group}`} className={a.navGroup}>
+              {it.group}
+            </span>
+          );
         const on = it.href === "/admin" ? path === "/admin" : path.startsWith(it.href);
         return (
           <Link key={it.href} href={it.href} className={`${a.navLink} ${on ? a.navOn : ""}`} aria-current={on ? "page" : undefined}>

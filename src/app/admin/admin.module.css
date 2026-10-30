@@ -702,6 +702,294 @@
   line-height: 1.6;
 }
 
+/* ───────────── 메뉴 묶음 ───────────── */
+
+.navGroup {
+  margin: 14px 12px 4px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--fg-2);
+}
+
+/* ───────────── 영업 관리: 표·합계·검색 ───────────── */
+
+.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.itemsTable td {
+  padding: 6px 8px;
+  vertical-align: middle;
+}
+
+.itemsTable .input {
+  min-height: 44px;
+  padding: 8px 10px;
+}
+
+.sumBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--bg-alt);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sumBox span {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sumTotal {
+  font-size: 18px;
+}
+
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.search .field {
+  min-width: 180px;
+}
+
+.rowLink {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 6px 12px;
+  font-size: 16px;
+}
+
+.kv dt {
+  color: var(--fg-2);
+}
+
+/* 목표 대비 막대 */
+.meter {
+  position: relative;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--bg-alt);
+  overflow: hidden;
+}
+
+.meter > i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 999px;
+  background: var(--hay-gold);
+}
+
+/* 명함 */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.nameCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cardImgs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.cardImgs img {
+  width: 100%;
+  aspect-ratio: 9 / 5;
+  object-fit: cover;
+  border-radius: 8px;
+  background: var(--bg-alt);
+}
+
+/* ───────────── 견적서·계약서 인쇄 (A4 세로) ───────────── */
+
+.printBar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 12px;
+  background: var(--bg-alt);
+}
+
+.doc {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 16px auto 40px;
+  padding: 16mm 15mm;
+  background: #fff;
+  color: #111;
+  font-size: 10.5pt;
+  line-height: 1.55;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+.doc h1 {
+  text-align: center;
+  font-size: 24pt;
+  letter-spacing: 0.6em;
+  margin: 6mm 0 8mm;
+}
+
+.docHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8mm;
+  margin-bottom: 6mm;
+}
+
+.docTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10pt;
+}
+
+.docTable th,
+.docTable td {
+  border: 0.3mm solid #444;
+  padding: 2mm 2.5mm;
+  text-align: left;
+  vertical-align: top;
+}
+
+.docTable th {
+  background: #f1efe9;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.docTotal {
+  font-size: 13pt;
+  font-weight: 800;
+}
+
+.docSign {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8mm;
+  margin-top: 10mm;
+}
+
+.docSign > div {
+  border: 0.3mm solid #444;
+  padding: 4mm;
+  min-height: 34mm;
+}
+
+.stamp {
+  display: inline-block;
+  width: 16mm;
+  height: 16mm;
+  margin-left: 4mm;
+  border: 0.3mm dashed #999;
+  border-radius: 50%;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 16mm;
+  font-size: 8pt;
+  color: #999;
+}
+
+.clauses {
+  margin-top: 4mm;
+  font-size: 9.5pt;
+  list-style: none;
+  padding: 0;
+}
+
+.clauses li {
+  margin: 0 0 1.6mm;
+  padding-left: 5mm;
+  text-indent: -5mm;
+}
+
+/* 계약서는 한 장에 들어가도록 촘촘하게 */
+.docTight {
+  padding: 10mm 13mm;
+  font-size: 9.5pt;
+  line-height: 1.45;
+}
+
+.docTight h1 {
+  font-size: 18pt;
+  margin: 1mm 0 4mm;
+}
+
+.docTight .docTable {
+  font-size: 9pt;
+}
+
+.docTight .docTable th,
+.docTight .docTable td {
+  padding: 1mm 2mm;
+}
+
+.docTight .clauses {
+  font-size: 9pt;
+}
+
+.docTight .clauses li {
+  margin-bottom: 1.1mm;
+}
+
+.docTight .docSign {
+  margin-top: 5mm;
+}
+
+.docTight .docSign > div {
+  min-height: 0;
+  padding: 3mm;
+}
+
+.docTight .stamp {
+  width: 12mm;
+  height: 12mm;
+  line-height: 12mm;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  .printBar {
+    display: none;
+  }
+
+  .doc {
+    margin: 0;
+    min-height: 0;
+    box-shadow: none;
+  }
+}
+
 @media (max-width: 1100px) {
   .cols4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -749,7 +1037,8 @@
     gap: 6px;
   }
 
-  .sideFoot {
+  .sideFoot,
+  .navGroup {
     display: none;
   }
 

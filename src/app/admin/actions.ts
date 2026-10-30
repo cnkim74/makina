@@ -387,6 +387,11 @@ export async function saveIntegrations(fd: FormData) {
     if (w && !/^https:\/\//.test(w)) back(from, "알림 주소는 https:// 로 시작해야 합니다.");
     next.inquiryWebhook = w;
   }
+  if (fd.has("gaPropertyId")) {
+    const p = clean(fd.get("gaPropertyId"), 20).replace(/^properties\//, "");
+    if (p && !/^\d{6,12}$/.test(p)) back(from, "GA4 속성 ID는 숫자입니다. 예: 412345678");
+    next.gaPropertyId = p;
+  }
   await setSetting(d, "integrations", next);
   back(from, "연결 설정을 저장했습니다.");
 }

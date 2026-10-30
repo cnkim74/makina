@@ -21,15 +21,30 @@ export default async function PanelLayout({ children }: { children: React.ReactN
     first<{ n: number }>(st.db, "SELECT COUNT(*) AS n FROM users WHERE status = 'pending'"),
   ]);
 
+  const isAdmin = user.role !== "editor";
   const items = [
-    { href: "/admin", label: "한눈에 보기" },
+    { href: "/admin", label: "대시보드" },
+    { group: "영업" },
     { href: "/admin/inquiries", label: "문의", badge: inq?.n ?? 0 },
+    { href: "/admin/customers", label: "회원(고객) 관리" },
+    { href: "/admin/quotes", label: "견적서" },
+    { href: "/admin/contracts", label: "계약서" },
+    ...(isAdmin
+      ? [
+          { href: "/admin/sales", label: "매출 관리" },
+          { href: "/admin/performance", label: "실적 관리" },
+        ]
+      : []),
+    { href: "/admin/cards", label: "네임카드" },
+    { group: "홈페이지" },
+    { href: "/admin/landing", label: "랜딩페이지" },
+    { href: "/admin/hero", label: "히어로 영상" },
     { href: "/admin/videos", label: "유튜브 영상" },
     { href: "/admin/sns", label: "SNS" },
-    { href: "/admin/hero", label: "히어로" },
+    { href: "/admin/analytics", label: "접속 정보" },
+    { group: "설정" },
     { href: "/admin/support", label: "고객지원 · 연결" },
-    { href: "/admin/analytics", label: "분석" },
-    ...(user.role !== "editor" ? [{ href: "/admin/users", label: "회원", badge: pending?.n ?? 0 }] : []),
+    ...(isAdmin ? [{ href: "/admin/users", label: "직원 계정", badge: pending?.n ?? 0 }] : []),
     { href: "/admin/account", label: "내 계정" },
   ];
 

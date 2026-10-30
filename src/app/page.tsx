@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import QuickDoors from "@/components/QuickDoors";
@@ -16,6 +17,21 @@ import MobileDock from "@/components/MobileDock";
 import SiteAnalytics from "@/components/SiteAnalytics";
 import { SiteDataProvider } from "@/components/SiteData";
 import { getPublicData } from "@/lib/public-data";
+import type { LandingSectionId } from "@/lib/types";
+
+/** 관리자 "랜딩페이지"에서 켜고 끄고 순서를 바꾸는 섹션 */
+const SECTIONS: Record<LandingSectionId, () => React.ReactNode> = {
+  quick: () => <QuickDoors />,
+  dragon: () => <Dragon />,
+  feeding: () => <Feeding />,
+  products: () => <Products />,
+  hpfinder: () => <HpFinder />,
+  videos: () => <Videos />,
+  consumables: () => <Consumables />,
+  support: () => <Support />,
+  inquiry: () => <Inquiry />,
+  directions: () => <Directions />,
+};
 
 // 관리자 화면에서 고친 내용이 바로 보이도록 요청마다 그린다
 export const dynamic = "force-dynamic";
@@ -33,16 +49,11 @@ export default async function HomePage() {
       <Header />
       <main>
         <Hero />
-        <QuickDoors />
-        <Dragon />
-        <Feeding />
-        <Products />
-        <HpFinder />
-        <Videos />
-        <Consumables />
-        <Support />
-        <Inquiry />
-        <Directions />
+        {data.landing.sections
+          .filter((s) => s.visible)
+          .map((s) => (
+            <Fragment key={s.id}>{SECTIONS[s.id]()}</Fragment>
+          ))}
       </main>
       <Footer />
       <FloatingButtons />

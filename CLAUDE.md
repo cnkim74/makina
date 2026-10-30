@@ -28,6 +28,8 @@
 - `wrangler.jsonc` 최상위 바인딩이 운영 D1 `makina-db`·R2 `makina-media` 다. 로컬은 `env.dev` 를 쓴다(`npm run dev` 가 `NEXT_DEV_WRANGLER_ENV=dev` 로 실행). 운영 DB를 건드리는 명령(`--remote`)은 사용자 확인 없이 실행하지 않는다.
 - 표가 하나도 없으면 `dbState()` 가 `src/lib/schema.generated.ts`(migrations 에서 자동 생성, 직접 고치지 않음)로 만든다. D1이 없어도 홈페이지는 `src/data/` 기본값으로 떠야 한다. 공개 화면 데이터는 `src/lib/public-data.ts` → `SiteDataProvider` → `useSite()`/`useSiteData()` 로 받는다.
 - 연락처·연동 키·히어로 설정은 D1 `settings` 테이블(JSON)에 둔다. 비밀 값을 코드나 저장소에 넣지 않는다.
+- 영업 관리(고객·견적·계약·매출·목표·명함)는 `migrations/0002_business.sql`, 서버 동작은 `src/app/admin/biz-actions.ts`, 계산·상태 이름은 `src/lib/biz.ts`. 금액은 원 단위 정수. 견적서·계약서 인쇄는 `src/app/admin/print/`. 명함 사진은 R2 `cards/` 에 두고 공개 `/media` 로 내보내지 않는다.
+- GA4 보고서는 `src/lib/ga.ts`. 서비스 계정 키는 Workers 비밀 값(`GA_SA_EMAIL`, `GA_SA_KEY`)에만 두고 DB·저장소에 넣지 않는다.
 - 관리자 화면은 사내용이라 `src/app/admin/admin.module.css` 한 파일을 쓴다. 공개 화면 규칙(리퀴드 글래스·모듈 문법)은 적용하지 않지만 토큰과 접근성 규칙은 지킨다.
 
 ## 작업 전에 읽을 것

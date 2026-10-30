@@ -3,7 +3,7 @@
 import { createContext, useContext } from "react";
 import { heroStory, heroVideo, videos } from "@/data/content";
 import { site } from "@/data/site";
-import type { PublicData } from "@/lib/types";
+import { LANDING_SECTIONS, type PublicData } from "@/lib/types";
 
 /** DB 가 없을 때와 같은 기본값 (src/data) */
 const FALLBACK: PublicData = {
@@ -12,6 +12,7 @@ const FALLBACK: PublicData = {
   videos,
   sns: [],
   integrations: { gaId: "", channelTalkKey: "" },
+  landing: { sections: LANDING_SECTIONS.map((s) => ({ id: s.id, visible: true })) },
 };
 
 const Ctx = createContext<PublicData>(FALLBACK);
