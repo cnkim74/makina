@@ -78,7 +78,9 @@ h1 b { font-weight: 800; }
 table { border-collapse: collapse; }
 `;
 
-const folio = (n, t) => `<div class="folio"><span>MAKKINA BRAND BOOK · 로고 시안 4 「발톱」</span><span>${t} · ${String(n).padStart(2, "0")}</span></div>`;
+// FOLIO_OFFSET: 책자판(앞에 속표지 1쪽을 끼움)에서 쪽 번호를 밀 때
+const FO = Number(process.env.FOLIO_OFFSET || 0);
+const folio = (n, t) => `<div class="folio"><span>MAKKINA BRAND BOOK · 로고 시안 4 「발톱」</span><span>${t} · ${String(n + FO).padStart(2, "0")}</span></div>`;
 const page = (n, cls, body, t = "") => `<section class="pg ${cls}">${body}${n > 1 && n < 12 ? folio(n, t) : ""}</section>`;
 const P = [];
 

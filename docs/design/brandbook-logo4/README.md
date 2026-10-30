@@ -33,6 +33,18 @@ A4 가로 12쪽.
 - 명판의 제조번호·마력·작업 폭·무게 칸은 비워 두었다(받지 않은 사양은 넣지 않는다).
 - 다시 만들 때: `node apps.mjs <logo-paths.ts> <Pretendard 폴더> <이미지 폴더> <출력 html>`. 이미지 폴더에는 `flyer-cover-clear.jpg`, `site-314-yard.jpg`, `dragon-render.jpg`, `booth-machine.png`(표지 합성 사진을 배경 없이 잘라 낸 것)가 있어야 한다.
 
+## A4 책자 인쇄용 (24쪽 중철, 2026-10-30)
+
+- `makkina-brandbook-logo4-A4booklet-24p-print.pdf`: 도련 3mm 포함(303×216mm). TrimBox·BleedBox가 들어 있다.
+- `makkina-brandbook-logo4-A4booklet-24p-cropmarks.pdf`: 재단선 판(327×240mm).
+- `a4booklet-spreads.jpg`: 펼침면 미리보기.
+- 재단 297×210mm(A4 가로), 24쪽, 중철. 짧은 변(210mm)을 묶는다. 펼치면 594×210mm.
+- 쪽 순서: 1 표지 · 2 속표지(빈 쪽) · 3–12 브랜드북 · 13–21 실사 적용 예 · 22 메모 · 23 빈 쪽 · 24 뒤표지.
+  브랜드북 쪽 번호는 책자 쪽에 맞췄다(`FOLIO_OFFSET=1`).
+- 도련: 쪽 가장자리 1px 줄을 3mm로 늘려 채웠다(`photo/scripts/bleed.py`). CMYK, 글자는 모두 아웃라인.
+- 추천 종이: 표지 랑데뷰 240g 무광 코팅, 내지 스노우지 또는 랑데뷰 150g.
+- 실사 사진은 가로 1536px라서 A4에서 약 145ppi다. 인쇄로 보기에는 충분하지만 아주 가까이 보면 부드럽다.
+
 ## 합본 (브랜드북 + 실사 적용 예시, 21쪽)
 
 - `makkina-brandbook-logo4-full-screen.pdf`: 화면용
