@@ -1,0 +1,27 @@
+.mod {
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
+}
+
+.book {
+  margin-top: var(--space-4);
+}
+
+.links {
+  margin-top: 8px;
+}
+
+.cta {
+  margin-top: var(--space-3);
+}
+
+@media (max-width: 900px) {
+  .mod {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .cta :global(.btn) {
+    width: 100%;
+  }
+}

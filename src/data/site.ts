@@ -67,7 +67,7 @@ export const navGroups: { title: string; links: NavLink[] }[] = [
 export const utilLinks: NavLink[] = [
   { label: "회사소개", href: "#about" },
   { label: "대리점 안내", href: "#dealers" },
-  { label: "카탈로그 다운로드", href: "#catalog" },
+  { label: "온라인 카탈로그", href: "/catalog" },
   { label: "채용", href: "#careers" },
 ];
 
@@ -97,7 +97,7 @@ export const footerGroups: { title: string; links: NavLink[] }[] = [
     links: [
       { label: "회사소개", href: "#about" },
       { label: "대리점 안내", href: "#dealers" },
-      { label: "카탈로그 다운로드", href: "#catalog" },
+      { label: "온라인 카탈로그", href: "/catalog" },
       { label: "채용", href: "#careers" },
     ],
   },

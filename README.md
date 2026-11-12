@@ -89,6 +89,18 @@ npx wrangler secret put FB_APP_SECRET       # 페이스북 페이지 게시
 
 로컬에서 시험할 때는 같은 이름을 `.dev.vars` 에 넣습니다(저장소에 올리지 않음).
 
+### 온라인 카탈로그 (`/catalog`)
+
+박람회 책자(A4 20쪽)를 책장 넘기듯 보는 이북입니다(`react-pageflip`). 넓은 화면은 펼침면, 휴대폰은 한 쪽씩. 메인 “DRAGON 라인업”, 메뉴, 푸터에서 들어갑니다.
+
+- 쪽 그림: `public/catalog/dragon-2026/p01~p20.webp`(1405×1987)·`t01~t20.webp`(썸네일), 내려받기 PDF: `public/catalog/makkina-dragon-catalog-2026.pdf`(RGB 가벼운 판). 정보는 `src/data/content.ts` 의 `catalog`.
+- 책자를 고치면 인쇄 PDF 에서 도련 3mm 를 잘라 다시 만듭니다:
+
+```bash
+pdftoppm -r 170 -x 20 -y 20 -W 1405 -H 1987 -png docs/print/makkina-dragon-booklet-A4-20p-print.pdf p   # p-01.png …
+# → webp(품질 80) 와 썸네일(240px), JPEG 로 묶은 PDF 로 저장
+```
+
 ### 처음 한 번: D1·R2 만들기
 
 1. Cloudflare 대시보드 → Storage & Databases → **D1** → Create → 이름 `makina-db` → 만든 뒤 **Database ID** 복사

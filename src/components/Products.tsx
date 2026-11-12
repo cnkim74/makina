@@ -15,6 +15,11 @@ export default function Products() {
         <p className="tag">
           60마력부터 150마력까지 다섯 가지 모델. 트랙터 마력에 맞춰 고르세요. 안동 서후면에서 직접 만들고 직접 고칩니다.
         </p>
+        <div className="links">
+          <a className="lnk" href="/catalog">
+            온라인 카탈로그 보기
+          </a>
+        </div>
 
         <div className={s.grid}>
           {products.map((p) => (

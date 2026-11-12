@@ -506,3 +506,20 @@ export const supportItems = [
   { title: "칼날·벨트를\n주문하고 싶어요", sub: "소모품 주문 · 배송 조회", short: "칼날·벨트를 주문하고 싶어요" },
   { title: "공장에\n직접 가보고 싶어요", sub: "오시는 길 · 시연 예약", short: "공장에 직접 가보고 싶어요" },
 ];
+
+/**
+ * 온라인 카탈로그(이북) — 박람회 책자(A4 20쪽, docs/print/makkina-dragon-booklet-A4-20p-print.pdf)를
+ * 도련을 잘라 웹용 그림으로 바꾼 것. 책자를 고치면 public/catalog/ 의 그림과 PDF 도 다시 만든다(README "온라인 카탈로그").
+ */
+export const catalog = {
+  title: "DRAGON 제품 카탈로그",
+  edition: "2026. 10.",
+  pages: 20,
+  /** 쪽 그림 1405×1987 (A4 비율) */
+  width: 1405,
+  height: 1987,
+  page: (n: number) => `/catalog/dragon-2026/p${String(n).padStart(2, "0")}.webp`,
+  thumb: (n: number) => `/catalog/dragon-2026/t${String(n).padStart(2, "0")}.webp`,
+  /** 내려받기용 화면 PDF (RGB, 가벼운 판) */
+  pdf: "/catalog/makkina-dragon-catalog-2026.pdf",
+};
