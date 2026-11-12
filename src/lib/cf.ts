@@ -55,10 +55,12 @@ export interface AppEnv {
   ANTHROPIC_API_KEY?: string;
   /** 페이스북 앱 시크릿 (페이지 연결·게시). 페이지 토큰 암호화 열쇠로도 쓴다 */
   FB_APP_SECRET?: string;
+  /** 유튜브 Data API 키 (선택). 없으면 채널 RSS 로 최근 영상만 읽는다 */
+  YOUTUBE_API_KEY?: string;
 }
 
 /** Workers 비밀 값 → 없으면 process.env (로컬 .dev.vars / .env) */
-export async function secretOf(name: "ANTHROPIC_API_KEY" | "FB_APP_SECRET" | "GA_SA_EMAIL" | "GA_SA_KEY"): Promise<string> {
+export async function secretOf(name: "ANTHROPIC_API_KEY" | "FB_APP_SECRET" | "GA_SA_EMAIL" | "GA_SA_KEY" | "YOUTUBE_API_KEY"): Promise<string> {
   const env = await getEnv();
   return env?.[name] || process.env[name] || "";
 }

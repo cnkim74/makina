@@ -5,7 +5,8 @@ import { postDate } from "@/lib/blog";
 import { listPosts } from "@/lib/blog-server";
 import { hasAiKey } from "@/lib/blog-ai";
 import { getSetting } from "@/lib/settings";
-import { aiDraftPost } from "../../blog-actions";
+import { channelStats, hasYoutubeKey, YT_ANGLES, type YtStats } from "@/lib/youtube-stats";
+import { aiDraftPost, aiYoutubePost } from "../../blog-actions";
 import { AiSubmit } from "../../_ui/blog-client";
 import { Flash, PageHead } from "../../_ui/server";
 import a from "../../admin.module.css";
@@ -14,11 +15,13 @@ export default async function BlogAdmin({ searchParams }: { searchParams: Promis
   await requireUser();
   const sp = await searchParams;
   const db = (await readyDb())!;
-  const [posts, ai, social, videos] = await Promise.all([
+  const [posts, ai, social, videos, ytKey, yt] = await Promise.all([
     listPosts(db),
     hasAiKey(),
     getSetting(db, "social"),
     all<{ youtube_id: string; title: string }>(db, "SELECT youtube_id, title FROM videos WHERE visible = 1 ORDER BY sort, id DESC LIMIT 100"),
+    hasYoutubeKey(),
+    channelStats().catch((e: unknown): YtStats | string => (e instanceof Error ? e.message : "유튜브 채널 정보를 읽지 못했습니다.")),
   ]);
   const published = posts.filter((p) => p.status === "published").length;
 
@@ -99,6 +102,90 @@ export default async function BlogAdmin({ searchParams }: { searchParams: Promis
             AI 키가 아직 없습니다. <Link href="/admin/blog/settings">AI · SNS 연결 설정</Link>의 안내대로 키를 넣으면 이 칸이 열립니다. 그 전에도 “새 글
             쓰기”로 직접 쓸 수 있습니다.
           </p>
+        )}
+      </section>
+
+      <section className={a.card} style={{ marginTop: 16 }}>
+        <h2>유튜브 실적으로 재미있는 글 쓰기</h2>
+        <p className={a.sub}>
+          성원마끼나 유튜브 채널의 실제 조회수·좋아요{ytKey ? "·댓글을" : "를"} 읽어 AI 가 글 초안을 씁니다. 숫자는 지어내지 않고, 가장 많이 본 영상을 글에
+          붙입니다.{" "}
+          {ytKey
+            ? "유튜브 API 키가 있어 채널 전체 영상·구독자·댓글까지 읽습니다."
+            : "지금은 키 없이 최근 영상 15개만 읽습니다. 유튜브 API 키(YOUTUBE_API_KEY)를 넣으면 전체 영상·구독자·댓글까지 읽고 “댓글로 물어보신 것”도 쓸 수 있습니다."}
+        </p>
+        {typeof yt === "string" ? (
+          <p className={`${a.flash} ${a.flashWarn}`}>{yt}</p>
+        ) : (
+          <>
+            {(yt.subscribers != null || yt.totalViews != null) && (
+              <p className={a.muted}>
+                {yt.subscribers != null && `구독자 ${yt.subscribers.toLocaleString("ko-KR")}명 · `}
+                {yt.totalViews != null && `누적 조회 ${yt.totalViews.toLocaleString("ko-KR")}회 · 영상 ${(yt.videoCount ?? 0).toLocaleString("ko-KR")}개`}
+              </p>
+            )}
+            <div className={a.tableWrap} style={{ margin: "12px 0" }}>
+              <table className={a.table}>
+                <thead>
+                  <tr>
+                    <th className={a.num}>순위</th>
+                    <th>영상</th>
+                    <th className={a.num}>조회</th>
+                    <th className={a.num}>좋아요</th>
+                    {yt.source === "api" && <th className={a.num}>댓글</th>}
+                    <th>올린 날</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {yt.videos.slice(0, 5).map((v, i) => (
+                    <tr key={v.id}>
+                      <td className={a.num}>{i + 1}</td>
+                      <td>
+                        <a href={v.url} target="_blank" rel="noopener noreferrer">
+                          {v.title} ↗
+                        </a>
+                      </td>
+                      <td className={a.num}>{v.views.toLocaleString("ko-KR")}</td>
+                      <td className={a.num}>{v.likes.toLocaleString("ko-KR")}</td>
+                      {yt.source === "api" && <td className={a.num}>{(v.comments ?? 0).toLocaleString("ko-KR")}</td>}
+                      <td>{v.published.slice(0, 10)}</td>
+                    </tr>
+                  ))}
+                  {yt.videos.length === 0 && (
+                    <tr>
+                      <td colSpan={6} className={a.muted}>
+                        채널에서 영상을 찾지 못했습니다.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+            {ai ? (
+              <form action={aiYoutubePost} className={a.form}>
+                <fieldset className={a.angles}>
+                  <legend>어떤 글로 쓸까요?</legend>
+                  {YT_ANGLES.map((g, i) => {
+                    const off = g.needsKey && !ytKey;
+                    return (
+                      <label key={g.id} className={a.check} style={{ opacity: off ? 0.5 : 1 }}>
+                        <input type="radio" name="angle" value={g.id} defaultChecked={i === 0} disabled={off} />
+                        <span>
+                          <b>{g.label}</b> — {g.desc}
+                          {off ? " (유튜브 API 키 필요)" : ""}
+                        </span>
+                      </label>
+                    );
+                  })}
+                </fieldset>
+                <div className={a.actions}>
+                  <AiSubmit label="유튜브 실적으로 초안 쓰기" />
+                </div>
+              </form>
+            ) : (
+              <p className={a.muted}>AI 키를 넣으면 이 표로 글 초안을 쓸 수 있습니다.</p>
+            )}
+          </>
         )}
       </section>
 

@@ -81,10 +81,14 @@ cnbizpartners.com 인사이트 블로그와 같은 방식입니다. 공개 화�
 - **AI 초안**: Claude(`claude-opus-5-5`)가 홈페이지에 있는 제품 사실만으로 글·FAQ·표지·페이스북 소개 글을 씁니다. 가격·경쟁사 이름은 쓰지 않습니다. 초안은 “작성 중”으로 저장되고, 사람이 읽고 고친 뒤 발행합니다. 키는 Workers 비밀 값 `ANTHROPIC_API_KEY`.
 - **페이스북 페이지**: 관리자 → 블로그 → AI · SNS 연결 설정에서 앱 ID 를 넣고 연결합니다. 앱 시크릿은 Workers 비밀 값 `FB_APP_SECRET`. 페이지 토큰은 그 시크릿에서 만든 열쇠로 암호화해 D1 에 둡니다. “발행하면 페이스북에도 올리기”를 켜면 처음 발행할 때 링크 게시물로 올라갑니다.
 - 글마다 페이스북·X·밴드 공유와 링크 복사(카톡) 버튼이 붙습니다.
+- **유튜브 실적으로 글 쓰기**: 관리자 → 블로그의 “유튜브 실적으로 재미있는 글 쓰기”. 성원마끼나 채널(`site.youtubeChannelId`)의 실제 조회수·좋아요를 읽어 표로 보여 주고, 고른 형식(인기 영상 TOP 3 · 1등 영상 장면 해설 · 숫자로 본 우리 채널 · 댓글로 물어보신 것)으로 AI 초안을 씁니다. 가장 많이 본 영상이 글에 붙습니다(`src/lib/youtube-stats.ts`).
+  - 키가 없으면 채널 RSS 로 **최근 영상 15개**만 읽습니다.
+  - Workers 비밀 값 `YOUTUBE_API_KEY`(구글 클라우드 → YouTube Data API v3 사용 설정 → 사용자 인증 정보 → API 키)를 넣으면 전체 영상·구독자·누적 조회수·댓글까지 읽고 “댓글로 물어보신 것”이 열립니다.
 
 ```bash
 npx wrangler secret put ANTHROPIC_API_KEY   # AI 초안
 npx wrangler secret put FB_APP_SECRET       # 페이스북 페이지 게시
+npx wrangler secret put YOUTUBE_API_KEY     # (선택) 유튜브 채널 전체 실적·댓글
 ```
 
 로컬에서 시험할 때는 같은 이름을 `.dev.vars` 에 넣습니다(저장소에 올리지 않음).

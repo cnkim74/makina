@@ -7,12 +7,12 @@ import a from "../admin.module.css";
 /* 블로그 관리 화면의 클라이언트 조각 */
 
 /** AI 초안 버튼 — 기다리는 동안 안내 */
-export function AiSubmit() {
+export function AiSubmit({ label = "AI 로 초안 쓰기" }: { label?: string }) {
   const { pending } = useFormStatus();
   return (
     <>
       <button type="submit" className={a.btn} disabled={pending}>
-        {pending ? "AI 가 글을 쓰는 중… (1~2분)" : "AI 로 초안 쓰기"}
+        {pending ? "AI 가 글을 쓰는 중… (1~2분)" : label}
       </button>
       {pending && <p className={a.muted}>창을 닫지 말고 기다려 주세요. 다 쓰면 편집 화면이 열립니다.</p>}
     </>

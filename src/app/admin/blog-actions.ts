@@ -12,6 +12,7 @@ import { pendingPages, postLinkToPage, savePage } from "@/lib/facebook";
 import { getSetting, setSetting } from "@/lib/settings";
 import { kstToday } from "@/lib/time";
 import { youtubeId } from "@/lib/youtube";
+import { YT_ANGLES, angleTopic, channelStats, hasYoutubeKey, statsFacts, type YtAngle } from "@/lib/youtube-stats";
 
 /* 블로그 서버 동작: 글 저장·발행·삭제, AI 초안, 페이스북 게시, AI·SNS 설정 */
 
@@ -170,6 +171,12 @@ export async function aiDraftPost(fd: FormData) {
   } catch (e) {
     back("/admin/blog", e instanceof Error ? e.message : "AI 초안 작성에 실패했습니다.");
   }
+  const id = await saveAiDraft(d, draft, video?.youtube_id ?? "", user.name);
+  back(`/admin/blog/${id}`, "AI 초안을 만들었습니다. 사실과 다른 곳이 없는지 읽고 고친 뒤 발행해 주세요.");
+}
+
+/** AI 초안을 “작성 중”으로 저장하고 글 번호를 돌려준다 */
+async function saveAiDraft(d: Awaited<ReturnType<typeof db>>, draft: Awaited<ReturnType<typeof writeDraft>>, youtube: string, by: string) {
   const slug = await uniqueSlug(d, draft.slug, 0);
   const r = await run(
     d,
@@ -183,10 +190,32 @@ export async function aiDraftPost(fd: FormData) {
     JSON.stringify(draft.tags),
     JSON.stringify(draft.faq),
     JSON.stringify(cleanCover(draft.cover)),
-    video?.youtube_id ?? "",
-    user.name,
+    youtube,
+    by,
   );
-  back(`/admin/blog/${r.meta.last_row_id}`, "AI 초안을 만들었습니다. 사실과 다른 곳이 없는지 읽고 고친 뒤 발행해 주세요.");
+  return Number(r.meta.last_row_id);
+}
+
+/** 유튜브 채널 실적(조회수·좋아요·댓글)을 바탕으로 AI 가 재미있는 글 초안을 쓴다 */
+export async function aiYoutubePost(fd: FormData) {
+  const user = await requireUser("editor");
+  const d = await db();
+  const angle = (YT_ANGLES.find((a) => a.id === fd.get("angle"))?.id ?? "top") as YtAngle;
+  if (angle === "comments" && !(await hasYoutubeKey())) back("/admin/blog", "“댓글로 물어보신 것”은 유튜브 API 키(YOUTUBE_API_KEY)가 있어야 합니다.");
+  const settings = await getSetting(d, "blog");
+  const recent = await all<{ title: string }>(d, "SELECT title FROM blog_posts ORDER BY id DESC LIMIT 20");
+  let draft;
+  let top = "";
+  try {
+    const st = await channelStats();
+    if (!st.videos.length) throw new Error("채널에서 영상을 찾지 못했습니다.");
+    top = st.videos[0].id;
+    draft = await writeDraft({ topic: angleTopic(angle, st), facts: statsFacts(st), recentTitles: recent.map((r) => r.title), settings, video: st.videos[0].title });
+  } catch (e) {
+    back("/admin/blog", e instanceof Error ? e.message : "유튜브 실적 초안 작성에 실패했습니다.");
+  }
+  const id = await saveAiDraft(d, draft, top, user.name);
+  back(`/admin/blog/${id}`, "유튜브 실적으로 AI 초안을 만들었습니다. 숫자와 영상 설명이 맞는지 읽고 고친 뒤 발행해 주세요.");
 }
 
 /* ───────────── AI · SNS 설정 ───────────── */

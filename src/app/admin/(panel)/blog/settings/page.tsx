@@ -4,6 +4,7 @@ import { hasRole, requireUser } from "@/lib/auth";
 import { readyDb } from "@/lib/db";
 import { secretOf } from "@/lib/cf";
 import { hasAiKey } from "@/lib/blog-ai";
+import { hasYoutubeKey } from "@/lib/youtube-stats";
 import { fbRedirect, pendingPages } from "@/lib/facebook";
 import { getSetting } from "@/lib/settings";
 import { kstMinute } from "@/lib/time";
@@ -19,11 +20,12 @@ export default async function BlogSettingsPage({ searchParams }: { searchParams:
   const isAdmin = hasRole(user, "admin");
   const h = await headers();
   const origin = `${h.get("x-forwarded-proto") ?? "https"}://${h.get("x-forwarded-host") ?? h.get("host")}`;
-  const [ai, blog, social, fbSecret] = await Promise.all([
+  const [ai, blog, social, fbSecret, ytKey] = await Promise.all([
     hasAiKey(),
     getSetting(db, "blog"),
     getSetting(db, "social"),
     secretOf("FB_APP_SECRET"),
+    hasYoutubeKey(),
   ]);
   const pending = social.fbPending ? await pendingPages(db) : [];
 
@@ -74,6 +76,29 @@ export default async function BlogSettingsPage({ searchParams }: { searchParams:
               <Submit>저장</Submit>
             </div>
           </form>
+        )}
+      </section>
+
+      <section className={a.card} style={{ marginTop: 16 }}>
+        <h2>유튜브 실적 읽기 (선택)</h2>
+        <p className={a.sub}>
+          상태: <b>{ytKey ? "API 키 연결됨 — 전체 영상·구독자·댓글" : "키 없음 — 최근 영상 15개의 조회수·좋아요만"}</b>. 블로그 목록의 “유튜브 실적으로 재미있는 글 쓰기”가 이
+          숫자를 씁니다.
+        </p>
+        {!ytKey && (
+          <ol className={a.steps}>
+            <li>
+              <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener noreferrer">
+                구글 클라우드 콘솔
+              </a>
+              에서 <b>YouTube Data API v3</b> 를 “사용 설정”합니다(GA4 보고서에 쓴 프로젝트를 써도 됩니다).
+            </li>
+            <li>API 및 서비스 → 사용자 인증 정보 → 사용자 인증 정보 만들기 → <b>API 키</b>. 키 제한에서 “YouTube Data API v3”만 고르면 안전합니다.</li>
+            <li>
+              Cloudflare 대시보드 → Workers &amp; Pages → makina → Settings → Variables and Secrets 에서 <code>YOUTUBE_API_KEY</code> 를 <b>Secret</b> 으로
+              추가합니다. 무료 할당량으로 충분합니다.
+            </li>
+          </ol>
         )}
       </section>
 

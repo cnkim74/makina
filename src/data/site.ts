@@ -32,6 +32,8 @@ export const site = {
   mapEmbed: mapEmbedSrc("경북 안동시 서후면 풍산태사로 2780"),
   /** 성원마끼나 유튜브 채널 (@성원마끼나) */
   youtubeHref: "https://www.youtube.com/@%EC%84%B1%EC%9B%90%EB%A7%88%EB%81%BC%EB%82%98",
+  /** 유튜브 채널 ID (공개 값) — 블로그 “유튜브 실적” 초안이 읽는다 */
+  youtubeChannelId: "UCnLzvVBdD9EeQ4k-z3SWShw",
 };
 
 export type NavLink = { label: string; href: string };
