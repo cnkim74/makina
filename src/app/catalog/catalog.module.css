@@ -1,6 +1,8 @@
 .mod {
   padding-top: var(--space-5);
   padding-bottom: var(--space-5);
+  /* 책 무대가 본문 폭보다 넓다 — 스크롤바 폭만큼 넘쳐도 가로 스크롤이 생기지 않게 */
+  overflow-x: clip;
 }
 
 .book {

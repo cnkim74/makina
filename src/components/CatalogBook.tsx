@@ -35,22 +35,17 @@ export default function CatalogBook() {
   const [reduced, setReduced] = useState(false);
   const N = catalog.pages;
 
-  // 화면 크기에 맞춰 한 쪽 크기 정하기 (높이는 화면 안에 들어오게)
+  // 무대 폭(= 위 가로 메뉴 폭)을 꽉 채우게 한 쪽 크기를 정한다. 넓으면 펼침면, 좁으면 한 쪽
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     const fit = () => {
       const W = el.clientWidth;
-      const maxH = Math.max(320, window.innerHeight - 220);
       const portrait = W < 760;
       const ratio = catalog.height / catalog.width;
-      let w = Math.floor(portrait ? W : W / 2);
-      let h = Math.floor(w * ratio);
-      if (h > maxH && !portrait) {
-        h = Math.floor(maxH);
-        w = Math.floor(h / ratio);
-      }
+      const w = Math.floor(portrait ? W : W / 2);
+      const h = Math.floor(w * ratio);
       setBox((b) => (b && b.w === w && b.h === h && b.portrait === portrait ? b : { w, h, portrait }));
     };
     fit();

@@ -6,9 +6,9 @@
   gap: 20px;
 }
 
+/* 책 무대는 본문 폭(1200)을 벗어나 위 가로 메뉴와 같은 폭(최대 1320, 양옆 12px)으로 넓힌다 */
 .stage {
-  width: 100%;
-  max-width: 1280px;
+  width: min(calc(100vw - 24px), 1320px);
   min-height: 320px;
   display: flex;
   justify-content: center;
@@ -77,8 +77,7 @@
 .thumbs {
   display: flex;
   gap: 10px;
-  width: 100%;
-  max-width: 1200px;
+  width: min(calc(100vw - 24px), 1320px);
   padding: 6px 4px 12px;
   overflow-x: auto;
   scrollbar-width: thin;
