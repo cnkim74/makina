@@ -130,10 +130,6 @@ export default function Header() {
           <span className={s.catShort}>카탈로그</span>
         </Link>
 
-        <a className={s.tel} href={site.phoneHref} {...hover}>
-          ☏ {site.phone}
-        </a>
-
         <button
           type="button"
           className={s.menuBtn}

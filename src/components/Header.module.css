@@ -184,26 +184,6 @@
   display: none;
 }
 
-.tel {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  height: 48px;
-  padding: 0 20px;
-  border-radius: 24px;
-  background: var(--signal-orange);
-  color: #fff;
-  font-size: 17px;
-  font-weight: 700;
-  white-space: nowrap;
-  transition: background-color 0.25s;
-}
-
-.tel:hover {
-  background: var(--signal-orange-deep);
-}
-
 .menuBtn {
   position: relative;
   z-index: 1;
@@ -283,13 +263,8 @@
   width: 100%;
 }
 
-/* 좁아지면 전화 버튼부터 접고(전화는 오른쪽 아래 떠 있는 버튼에도 있다), 카탈로그는 끝까지 남긴다 */
-@media (max-width: 1340px) {
-  .tel {
-    display: none;
-  }
-}
-
+/* 좁아지면 메뉴 글을 ≡ 안으로 접는다. 카탈로그 버튼은 끝까지 남긴다.
+   전화 상담은 위 막대에 두지 않고 오른쪽 아래 떠 있는 버튼·모바일 도크·펼친 메뉴에 둔다 */
 @media (max-width: 1120px) {
   .links {
     display: none;
