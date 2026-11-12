@@ -114,6 +114,12 @@ export async function getSetting<K extends keyof Groups>(db: D1Database | null, 
     const parsed = JSON.parse(row.value) as Partial<Groups[K]>;
     // 히어로는 기본값 판(rev)이 바뀌면 예전에 저장한 영상·캡션·슬로건 대신 새 기본값을 쓴다. 관리자에서 다시 저장하면 그 값이 이긴다
     if (key === "hero" && (parsed as Partial<HeroSettings>).rev !== DEFAULT_HERO.rev) return DEFAULTS[key];
+    // 예전에 자리표시 값(000-…)으로 저장된 사업자번호·팩스는 실제 값(src/data/site.ts)으로 바꿔 보여 준다
+    if (key === "contact") {
+      const c = parsed as Partial<ContactSettings>;
+      if (!c.bizNo || /^0{3}-0{2}-0{5}$/.test(c.bizNo)) delete c.bizNo;
+      if (!c.fax || /-000-0000$/.test(c.fax)) delete c.fax;
+    }
     const merged = { ...DEFAULTS[key], ...parsed } as Groups[K];
     return key === "landing" ? (normalizeLanding(merged as LandingSettings) as Groups[K]) : merged;
   } catch {
