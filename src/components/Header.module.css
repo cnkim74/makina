@@ -10,7 +10,7 @@
 
 .in {
   pointer-events: auto;
-  max-width: 1160px;
+  max-width: 1320px;
   margin: 0 auto;
   height: 60px;
   border-radius: 30px;
@@ -101,7 +101,7 @@
   display: inline-flex;
   align-items: center;
   height: 48px;
-  padding: 0 13px;
+  padding: 0 11px;
   border-radius: 24px;
   font-size: 16px;
   font-weight: 500;
@@ -139,6 +139,49 @@
 
 .sp {
   flex: 1;
+}
+
+/* 카탈로그 보기 — 건초금 알약, 글자는 흙검정 (어두운·밝은 유리 모두에서 잘 보인다) */
+.cat {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 48px;
+  margin-right: 4px;
+  padding: 0 18px 0 15px;
+  border-radius: 24px;
+  background: var(--hay-gold);
+  color: var(--soil-black);
+  font-size: 17px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color 0.25s;
+}
+
+.cat:hover {
+  background: var(--hay-gold-deep);
+}
+
+.cat:focus-visible {
+  outline: 3px solid var(--soil-black);
+  outline-offset: 2px;
+}
+
+.catIcon {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  flex: none;
+}
+
+.catShort {
+  display: none;
 }
 
 .tel {
@@ -185,7 +228,7 @@
 /* 펼친 메뉴 — 유리 판 */
 .menu {
   pointer-events: auto;
-  max-width: 1160px;
+  max-width: 1320px;
   margin: 8px auto 0;
   border-radius: 26px;
   padding: 20px 22px 22px;
@@ -240,13 +283,14 @@
   width: 100%;
 }
 
-@media (max-width: 1200px) {
+/* 좁아지면 전화 버튼부터 접고(전화는 오른쪽 아래 떠 있는 버튼에도 있다), 카탈로그는 끝까지 남긴다 */
+@media (max-width: 1340px) {
   .tel {
     display: none;
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1120px) {
   .links {
     display: none;
   }
@@ -265,6 +309,20 @@
 
   .logo b {
     font-size: 19px;
+  }
+
+  .cat {
+    padding: 0 14px 0 12px;
+    font-size: 16px;
+    gap: 6px;
+  }
+
+  .catLong {
+    display: none;
+  }
+
+  .catShort {
+    display: inline;
   }
 
   .menu {

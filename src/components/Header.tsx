@@ -121,6 +121,15 @@ export default function Header() {
 
         <span className={s.sp} />
 
+        <Link className={s.cat} href="/catalog" aria-label="DRAGON 온라인 카탈로그 보기">
+          <svg className={s.catIcon} viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 5.5C5.5 4 9 4 12 6c3-2 6.5-2 9-.5V19c-2.5-1.5-6-1.5-9 .5-3-2-6.5-2-9-.5z" />
+            <path d="M12 6v13.5" />
+          </svg>
+          <span className={s.catLong}>카탈로그 보기</span>
+          <span className={s.catShort}>카탈로그</span>
+        </Link>
+
         <a className={s.tel} href={site.phoneHref} {...hover}>
           ☏ {site.phone}
         </a>
