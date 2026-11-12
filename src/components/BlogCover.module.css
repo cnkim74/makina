@@ -1,0 +1,168 @@
+/* 블로그 표지 카드 — 1200×630 비율. 카드 크기에 맞춰 글자도 커지고 작아진다(cqw) */
+.cover {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 1200 / 630;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-tile);
+  isolation: isolate;
+}
+
+.in {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 6cqw 6.5cqw 5cqw;
+  text-align: left;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1.6cqw;
+  font-family: var(--font-brand);
+  font-size: 2.8cqw;
+  letter-spacing: -0.02em;
+}
+
+.brand small {
+  font-family: var(--font-body);
+  font-size: 1.6cqw;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+}
+
+.mid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.8cqw;
+}
+
+.kw {
+  font-size: 2.3cqw;
+  font-weight: 800;
+}
+
+.title {
+  font-size: 5.6cqw;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  word-break: keep-all;
+  text-wrap: balance;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.long .title {
+  font-size: 4.6cqw;
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.8cqw;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+/* 흙먹 — 기본 */
+.soil {
+  background: radial-gradient(120% 140% at 100% 0%, #3a3125 0%, var(--soil-black) 55%);
+  color: var(--straw-cream);
+}
+
+.soil .brand small,
+.soil .kw {
+  color: var(--hay-gold);
+}
+
+.soil::after {
+  content: "";
+  position: absolute;
+  right: -8cqw;
+  bottom: -18cqw;
+  width: 46cqw;
+  height: 46cqw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 165, 38, 0.28), transparent 65%);
+  z-index: -1;
+}
+
+/* 볏짚 — 밝은 정보형 */
+.cream {
+  background: var(--straw-cream);
+  color: var(--soil-black);
+}
+
+.cream::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 1.5cqw;
+  background: var(--hay-gold);
+}
+
+.cream .brand small,
+.cream .kw {
+  color: var(--accent);
+}
+
+/* 건초금 — 금색 위 글자는 언제나 흙먹 */
+.gold {
+  background: linear-gradient(135deg, var(--hay-gold) 0%, var(--hay-gold-deep) 100%);
+  color: var(--soil-black);
+}
+
+/* 키워드 강조 */
+.keyword {
+  background: var(--soil-black);
+  color: var(--straw-cream);
+}
+
+.keyword .kw {
+  font-size: 7cqw;
+  line-height: 1.05;
+  color: var(--hay-gold);
+  letter-spacing: -0.03em;
+}
+
+.keyword .title {
+  font-size: 3.4cqw;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+/* 사진 */
+.photo {
+  color: #fff;
+  background: var(--soil-black);
+}
+
+.photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(12, 10, 8, 0.86) 0%, rgba(12, 10, 8, 0.35) 60%, rgba(12, 10, 8, 0.2) 100%);
+  z-index: -1;
+}
+
+.photo .brand small,
+.photo .kw {
+  color: var(--hay-gold);
+}

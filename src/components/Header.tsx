@@ -6,6 +6,7 @@ import { navGroups, utilLinks } from "@/data/site";
 import { useSite } from "./SiteData";
 import { CompanyLogo } from "./Logo";
 import { useHeroPast } from "./useHeroProgress";
+import { useHref } from "./useHref";
 import s from "./Header.module.css";
 
 const SECTION_IDS = navGroups.flatMap((g) => g.links.map((l) => l.href.slice(1)));
@@ -18,6 +19,7 @@ const SECTION_IDS = navGroups.flatMap((g) => g.links.map((l) => l.href.slice(1))
  */
 export default function Header() {
   const site = useSite();
+  const to = useHref();
   const [open, setOpen] = useState(false);
   // 히어로 장면 위에서는 어두운 유리, 장면이 흰 바탕으로 녹아들면 밝은 유리
   const onLight = useHeroPast(0.9);
@@ -106,7 +108,7 @@ export default function Header() {
                 <a
                   key={l.href}
                   className={s.nl}
-                  href={l.href}
+                  href={to(l.href)}
                   aria-current={current === l.href.slice(1) ? "true" : undefined}
                   {...hover}
                 >
@@ -143,7 +145,7 @@ export default function Header() {
             <div key={g.title} className={s.menuGroup}>
               <h4>{g.title}</h4>
               {g.links.map((l) => (
-                <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+                <a key={l.href} href={to(l.href)} onClick={() => setOpen(false)}>
                   {l.label}
                 </a>
               ))}
@@ -151,7 +153,7 @@ export default function Header() {
           ))}
           <div className={s.menuUtil}>
             {utilLinks.map((l) => (
-              <a key={l.label} href={l.href} onClick={() => setOpen(false)}>
+              <a key={l.label} href={to(l.href)} onClick={() => setOpen(false)}>
                 {l.label}
               </a>
             ))}

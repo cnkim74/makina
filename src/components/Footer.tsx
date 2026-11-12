@@ -4,11 +4,13 @@ import { footerGroups, legalLinks } from "@/data/site";
 import { useSiteData } from "./SiteData";
 import { phoneRange, SNS_PLATFORMS } from "@/lib/types";
 import { CompanyLogo } from "./Logo";
+import { useHref } from "./useHref";
 import s from "./Footer.module.css";
 
 /** 애플식 푸터 — 연회색 바탕, 작은 글, 링크 묶음 */
 export default function Footer() {
   const { site, sns } = useSiteData();
+  const to = useHref();
   return (
     <footer className={s.foot}>
       <div className={s.in}>
@@ -41,7 +43,7 @@ export default function Footer() {
             <nav key={g.title} className={s.col} aria-label={g.title}>
               <h4>{g.title}</h4>
               {g.links.map((l) => (
-                <a key={l.label} href={l.href}>
+                <a key={l.label} href={to(l.href)}>
                   {l.label}
                 </a>
               ))}
@@ -57,7 +59,7 @@ export default function Footer() {
           </address>
           <div className={s.legal}>
             {legalLinks.map((l) => (
-              <a key={l.label} href={l.href}>
+              <a key={l.label} href={to(l.href)}>
                 {l.label}
               </a>
             ))}

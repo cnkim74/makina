@@ -4,9 +4,17 @@ import { site as staticSite } from "@/data/site";
 import type { D1Database } from "./cf";
 import { first, run } from "./db";
 import type { PriceItem } from "./biz";
-import { LANDING_SECTIONS, type ContactSettings, type HeroSettings, type IntegrationSettings, type LandingSettings } from "./types";
+import {
+  LANDING_SECTIONS,
+  type BlogSettings,
+  type ContactSettings,
+  type HeroSettings,
+  type IntegrationSettings,
+  type LandingSettings,
+  type SocialSettings,
+} from "./types";
 
-/* 설정은 settings 테이블에 그룹별 JSON 으로 저장한다: contact / integrations / hero / landing / pricebook */
+/* 설정은 settings 테이블에 그룹별 JSON 으로 저장한다: contact / integrations / hero / landing / pricebook / social / blog */
 
 export const DEFAULT_CONTACT: ContactSettings = {
   phone: staticSite.phone,
@@ -33,6 +41,27 @@ export const DEFAULT_LANDING: LandingSettings = {
 
 export const DEFAULT_PRICEBOOK: { items: PriceItem[] } = { items: [] };
 
+export const DEFAULT_SOCIAL: SocialSettings = {
+  fbAppId: "",
+  fbPageId: "",
+  fbPageName: "",
+  fbPageToken: "",
+  fbAutoPost: false,
+  fbConnectedAt: "",
+  fbPending: "",
+};
+
+export const DEFAULT_BLOG: BlogSettings = {
+  topics: [
+    "DRAGON 하이브리드 모우어 컨디셔너 사용법·정비",
+    "조사료(수단그라스·호밀·옥수수) 수확 시기와 작업 요령",
+    "트랙터 마력에 맞는 작업기 고르기",
+    "축산 농가 조사료 품질·급여 효과",
+    "농기계 지원사업·융자 신청 안내",
+  ].join("\n"),
+  guide: "",
+};
+
 export const DEFAULT_HERO: HeroSettings = {
   rev: "2026-10-30",
   mode: defaultHeroVideo ? "video" : "sketch",
@@ -54,6 +83,8 @@ type Groups = {
   hero: HeroSettings;
   landing: LandingSettings;
   pricebook: { items: PriceItem[] };
+  social: SocialSettings;
+  blog: BlogSettings;
 };
 
 const DEFAULTS: Groups = {
@@ -62,6 +93,8 @@ const DEFAULTS: Groups = {
   hero: DEFAULT_HERO,
   landing: DEFAULT_LANDING,
   pricebook: DEFAULT_PRICEBOOK,
+  social: DEFAULT_SOCIAL,
+  blog: DEFAULT_BLOG,
 };
 
 /** 저장된 섹션 목록에 새로 생긴 섹션을 뒤에 붙이고, 없어진 섹션은 뺀다 */

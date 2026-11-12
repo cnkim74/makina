@@ -52,6 +52,7 @@ export const navGroups: { title: string; links: NavLink[] }[] = [
     links: [
       { label: "소모품", href: "#consumables" },
       { label: "작업 영상", href: "#videos" },
+      { label: "블로그", href: "/blog" },
     ],
   },
   {
@@ -79,6 +80,7 @@ export const footerGroups: { title: string; links: NavLink[] }[] = [
       { label: "급여 효과", href: "#feeding" },
       { label: "마력으로 찾기", href: "#hp-finder" },
       { label: "작업 영상", href: "#videos" },
+      { label: "블로그", href: "/blog" },
     ],
   },
   {

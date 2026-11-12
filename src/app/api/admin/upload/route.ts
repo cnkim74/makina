@@ -14,7 +14,7 @@ const TYPES: Record<string, string> = {
 // 히어로 영상은 1600px·무음으로 줄이면 보통 10~20MB 다.
 const MAX = 50 * 1024 * 1024;
 
-/** 관리자 "히어로" 화면의 파일 올리기 → R2 */
+/** 관리자 "히어로"·"블로그" 화면의 파일 올리기 → R2 */
 export async function POST(req: Request) {
   const user = await currentUser();
   if (!user || !hasRole(user, "editor")) return Response.json({ error: "로그인이 필요합니다." }, { status: 401 });
@@ -26,10 +26,13 @@ export async function POST(req: Request) {
   }
 
   let file: File | null = null;
+  // 블로그 화면에서 올린 사진은 uploads/ 아래에 둔다 (히어로 파일 목록과 섞이지 않게)
+  let dir = "hero";
   try {
     const fd = await req.formData();
     const f = fd.get("file");
     file = f instanceof File ? f : null;
+    if (fd.get("dir") === "blog") dir = "uploads";
   } catch {
     /* 아래에서 처리 */
   }
@@ -46,7 +49,7 @@ export async function POST(req: Request) {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "")
       .slice(0, 40) || "file";
-  const key = `hero/${Date.now().toString(36)}-${base}.${ext}`;
+  const key = `${dir}/${dir === "uploads" ? "blog-" : ""}${Date.now().toString(36)}-${base}.${ext}`;
 
   // R2 는 길이를 아는 본문만 받는다 (스트림은 길이를 몰라 거절됨)
   await bucket.put(key, await file.arrayBuffer(), {

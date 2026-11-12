@@ -86,6 +86,28 @@ export type SnsPlatform = "youtube" | "instagram" | "blog" | "facebook" | "kakao
 
 export type SnsLink = { id: number; platform: SnsPlatform; label: string; url: string };
 
+/** SNS 연결 (페이스북 페이지 게시). 페이지 토큰은 암호화해 둔다 — 앱 시크릿은 Workers 비밀 값 FB_APP_SECRET */
+export type SocialSettings = {
+  fbAppId: string;
+  fbPageId: string;
+  fbPageName: string;
+  /** AES-GCM 으로 감싼 페이지 액세스 토큰 (src/lib/secret.ts) */
+  fbPageToken: string;
+  /** 블로그 글을 발행하면 페이스북 페이지에도 바로 올린다 */
+  fbAutoPost: boolean;
+  fbConnectedAt: string;
+  /** 연결 직후 고를 페이지가 여럿일 때 잠시 담아 둔다 (암호화한 JSON) */
+  fbPending: string;
+};
+
+/** 블로그 AI 글쓰기 설정 */
+export type BlogSettings = {
+  /** AI 가 고를 주제 방향 (한 줄에 하나) */
+  topics: string;
+  /** 말투·금지어 등 추가 지시 */
+  guide: string;
+};
+
 export type PublicData = {
   site: SiteInfo;
   hero: { video: HeroVideo | null; story: HeroCaption[] };

@@ -8,7 +8,7 @@ export type DbState =
   | { ok: false; reason: "no-binding" | "no-schema"; detail?: string };
 
 // 가장 나중에 추가한 마이그레이션의 표. 이 표까지 있으면 스키마가 최신이다
-const LATEST_TABLE = "name_cards";
+const LATEST_TABLE = "blog_posts";
 
 async function hasSchema(db: D1Database) {
   const r = await db

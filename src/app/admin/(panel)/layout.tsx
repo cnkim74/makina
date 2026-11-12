@@ -38,6 +38,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
     { href: "/admin/cards", label: "네임카드" },
     { group: "홈페이지" },
     { href: "/admin/landing", label: "랜딩페이지" },
+    { href: "/admin/blog", label: "블로그" },
     { href: "/admin/hero", label: "히어로 영상" },
     { href: "/admin/videos", label: "유튜브 영상" },
     { href: "/admin/sns", label: "SNS" },

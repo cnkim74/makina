@@ -1,5 +1,5 @@
 // 자동 생성 파일 — 고치지 마세요. `node scripts/gen-schema.mjs` (빌드·개발 서버 시작 때 자동 실행)
-// 원본: migrations/0001_init.sql, migrations/0002_business.sql
+// 원본: migrations/0001_init.sql, migrations/0002_business.sql, migrations/0003_blog.sql
 export const SCHEMA_STATEMENTS: readonly string[] = [
   "CREATE TABLE IF NOT EXISTS users ( id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL UNIQUE, name TEXT NOT NULL, password_hash TEXT NOT NULL, password_salt TEXT NOT NULL, role TEXT NOT NULL DEFAULT 'editor' CHECK (role IN ('owner', 'admin', 'editor')), status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'active', 'disabled')), created_at TEXT NOT NULL DEFAULT (datetime('now')), last_login_at TEXT )",
   "CREATE TABLE IF NOT EXISTS sessions ( id TEXT PRIMARY KEY, user_id INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE, expires_at TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT (datetime('now')) )",
@@ -29,5 +29,7 @@ export const SCHEMA_STATEMENTS: readonly string[] = [
   "CREATE INDEX IF NOT EXISTS idx_sales_customer ON sales (customer_id)",
   "CREATE TABLE IF NOT EXISTS targets ( year INTEGER NOT NULL, item TEXT NOT NULL, qty INTEGER NOT NULL DEFAULT 0, amount INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (year, item) )",
   "CREATE TABLE IF NOT EXISTS name_cards ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, company TEXT NOT NULL DEFAULT '', title TEXT NOT NULL DEFAULT '', phone TEXT NOT NULL DEFAULT '', mobile TEXT NOT NULL DEFAULT '', email TEXT NOT NULL DEFAULT '', address TEXT NOT NULL DEFAULT '', tags TEXT NOT NULL DEFAULT '', memo TEXT NOT NULL DEFAULT '', met_on TEXT NOT NULL DEFAULT '', front_key TEXT NOT NULL DEFAULT '', back_key TEXT NOT NULL DEFAULT '', created_at TEXT NOT NULL DEFAULT (datetime('now')), updated_at TEXT NOT NULL DEFAULT (datetime('now')) )",
-  "CREATE INDEX IF NOT EXISTS idx_name_cards_name ON name_cards (name)"
+  "CREATE INDEX IF NOT EXISTS idx_name_cards_name ON name_cards (name)",
+  "CREATE TABLE IF NOT EXISTS blog_posts ( id INTEGER PRIMARY KEY AUTOINCREMENT, slug TEXT NOT NULL UNIQUE, title TEXT NOT NULL, summary TEXT NOT NULL DEFAULT '', body TEXT NOT NULL DEFAULT '', keyword TEXT NOT NULL DEFAULT '', tags TEXT NOT NULL DEFAULT '[]', faq TEXT NOT NULL DEFAULT '[]', cover TEXT NOT NULL DEFAULT '{}', youtube_id TEXT NOT NULL DEFAULT '', status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'published')), source TEXT NOT NULL DEFAULT 'manual', published_at TEXT, views INTEGER NOT NULL DEFAULT 0, fb_post_id TEXT NOT NULL DEFAULT '', fb_permalink TEXT NOT NULL DEFAULT '', created_by TEXT NOT NULL DEFAULT '', created_at TEXT NOT NULL DEFAULT (datetime('now')), updated_at TEXT NOT NULL DEFAULT (datetime('now')) )",
+  "CREATE INDEX IF NOT EXISTS idx_blog_status ON blog_posts (status, published_at)"
 ];

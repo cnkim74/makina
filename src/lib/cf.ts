@@ -51,6 +51,16 @@ export interface AppEnv {
   /** GA4 보고서용 서비스 계정 (wrangler secret put 으로 넣는 비밀 값. 저장소·DB 에 두지 않는다) */
   GA_SA_EMAIL?: string;
   GA_SA_KEY?: string;
+  /** 블로그 AI 글쓰기 (Claude API 키) */
+  ANTHROPIC_API_KEY?: string;
+  /** 페이스북 앱 시크릿 (페이지 연결·게시). 페이지 토큰 암호화 열쇠로도 쓴다 */
+  FB_APP_SECRET?: string;
+}
+
+/** Workers 비밀 값 → 없으면 process.env (로컬 .dev.vars / .env) */
+export async function secretOf(name: "ANTHROPIC_API_KEY" | "FB_APP_SECRET" | "GA_SA_EMAIL" | "GA_SA_KEY"): Promise<string> {
+  const env = await getEnv();
+  return env?.[name] || process.env[name] || "";
 }
 
 /** Cloudflare 환경. `next build` 처럼 바인딩이 없는 곳에서는 null */
